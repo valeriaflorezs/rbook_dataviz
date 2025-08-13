@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Analisis de la variable residual.sugar | Wine_quality</title>
-  <meta name="description" content="Chapter 6 Analisis de la variable residual.sugar | Wine_quality" />
+  <title>Chapter 6 Analisis de la variable residual.sugar | EDA: Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="Chapter 6 Analisis de la variable residual.sugar | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Analisis de la variable residual.sugar | Wine_quality" />
+  <meta property="og:title" content="Chapter 6 Analisis de la variable residual.sugar | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Analisis de la variable residual.sugar | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 6 Analisis de la variable residual.sugar | EDA: Factores que Influyen en la Calidad del Vino" />
   
   
   
@@ -140,13 +140,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="2" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>2</b> Variable objetivo</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
-<li class="chapter" data-level="2.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="2.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="2.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#variable-objetivo"><i class="fa fa-check"></i><b>1.1</b> Variable objetivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos.html"><a href="primeros-pasos.html"><i class="fa fa-check"></i><b>2</b> Primeros Pasos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos.html"><a href="primeros-pasos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos.html"><a href="primeros-pasos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos.html"><a href="primeros-pasos.html#crear-función-para-realizar-resumen-de-las-variables"><i class="fa fa-check"></i><b>2.5</b> Crear función para realizar resumen de las variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>3</b> Analisis de la variable fixed.acidity</a>
 <ul>
@@ -202,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>13.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="análisis-de-la-calidad.html"><a href="análisis-de-la-calidad.html"><i class="fa fa-check"></i><b>14</b> Análisis de la Calidad</a></li>
+<li class="chapter" data-level="14" data-path="análisis-de-la-variable-quality.html"><a href="análisis-de-la-variable-quality.html"><i class="fa fa-check"></i><b>14</b> Análisis de la variable quality</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -215,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wine_quality</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EDA: Factores que Influyen en la Calidad del Vino</a>
           </h1>
         </div>
 
@@ -225,16 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analisis-de-la-variable-residual.sugar" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Analisis de la variable residual.sugar<a href="analisis-de-la-variable-residual.html#analisis-de-la-variable-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="analisis-de-la-variable-residual.html#cb46-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb46-2"><a href="analisis-de-la-variable-residual.html#cb46-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(residual.sugar),</span>
-<span id="cb46-3"><a href="analisis-de-la-variable-residual.html#cb46-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(residual.sugar),</span>
-<span id="cb46-4"><a href="analisis-de-la-variable-residual.html#cb46-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(residual.sugar),</span>
-<span id="cb46-5"><a href="analisis-de-la-variable-residual.html#cb46-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(residual.sugar),</span>
-<span id="cb46-6"><a href="analisis-de-la-variable-residual.html#cb46-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(residual.sugar),</span>
-<span id="cb46-7"><a href="analisis-de-la-variable-residual.html#cb46-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(residual.sugar),</span>
-<span id="cb46-8"><a href="analisis-de-la-variable-residual.html#cb46-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(residual.sugar),</span>
-<span id="cb46-9"><a href="analisis-de-la-variable-residual.html#cb46-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(residual.sugar, <span class="fl">0.25</span>),</span>
-<span id="cb46-10"><a href="analisis-de-la-variable-residual.html#cb46-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(residual.sugar, <span class="fl">0.75</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="analisis-de-la-variable-residual.html#cb47-1" tabindex="-1"></a><span class="fu">resumen_variable</span>(datos,<span class="st">&quot;residual.sugar&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 9
 ##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
 ##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -242,19 +237,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La variable residual.sugar, que en este contexto corresponde a la cantidad de azúcar residual presente en el vino (es decir, los azúcares que no se han fermentado completamente), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 2,54 g/L (DS = 1,41 g/L), donde el 50% de los valores se encuentran por debajo de 2,2 g/L, mientras que el 25% más bajo está por debajo de 1,9 g/L y el 25% más alto supera los 2,6 g/L, lo que evidencia una dispersión baja a moderada. El valor mínimo registrado fue de 0,9 g/L, correspondiente a vinos con una fermentación más completa o estilo seco, y el máximo de 15,5 g/L, representando un nivel inusualmente alto de azúcar residual dentro del conjunto de datos.</p>
 <div id="histograma-de-residual.sugar" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Histograma de residual.sugar<a href="analisis-de-la-variable-residual.html#histograma-de-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="analisis-de-la-variable-residual.html#cb48-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="analisis-de-la-variable-residual.html#cb48-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> residual.sugar))<span class="sc">+</span></span>
-<span id="cb48-3"><a href="analisis-de-la-variable-residual.html#cb48-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
-<span id="cb48-4"><a href="analisis-de-la-variable-residual.html#cb48-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="analisis-de-la-variable-residual.html#cb49-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="analisis-de-la-variable-residual.html#cb49-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> residual.sugar))<span class="sc">+</span></span>
+<span id="cb49-3"><a href="analisis-de-la-variable-residual.html#cb49-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb49-4"><a href="analisis-de-la-variable-residual.html#cb49-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="boxplot-de-residual.sugar" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Boxplot de residual.sugar<a href="analisis-de-la-variable-residual.html#boxplot-de-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="analisis-de-la-variable-residual.html#cb50-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb50-2"><a href="analisis-de-la-variable-residual.html#cb50-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> residual.sugar))<span class="sc">+</span></span>
-<span id="cb50-3"><a href="analisis-de-la-variable-residual.html#cb50-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="analisis-de-la-variable-residual.html#cb51-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="analisis-de-la-variable-residual.html#cb51-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> residual.sugar))<span class="sc">+</span></span>
+<span id="cb51-3"><a href="analisis-de-la-variable-residual.html#cb51-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>La distribución de residual.sugar es altamente asimétrica, con una fuerte concentración de valores bajos y una cantidad significativa de valores extremos altos. Esto indica que, aunque la mayoría de los vinos presentan niveles moderados de azúcar residual, existen algunos con concentraciones excepcionalmente altas que influyen notablemente en estadísticos como la media y la desviación estándar.</p>
 </div>
 </div>

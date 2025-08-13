@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Analisis de la variable alcohol | Wine_quality</title>
-  <meta name="description" content="Chapter 13 Analisis de la variable alcohol | Wine_quality" />
+  <title>Chapter 13 Analisis de la variable alcohol | EDA: Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="Chapter 13 Analisis de la variable alcohol | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Analisis de la variable alcohol | Wine_quality" />
+  <meta property="og:title" content="Chapter 13 Analisis de la variable alcohol | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Analisis de la variable alcohol | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 13 Analisis de la variable alcohol | EDA: Factores que Influyen en la Calidad del Vino" />
   
   
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="analisis-de-la-variable-sulphates.html"/>
-<link rel="next" href="análisis-de-la-calidad.html"/>
+<link rel="next" href="análisis-de-la-variable-quality.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,13 +140,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="2" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>2</b> Variable objetivo</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
-<li class="chapter" data-level="2.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="2.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="2.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#variable-objetivo"><i class="fa fa-check"></i><b>1.1</b> Variable objetivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos.html"><a href="primeros-pasos.html"><i class="fa fa-check"></i><b>2</b> Primeros Pasos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos.html"><a href="primeros-pasos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos.html"><a href="primeros-pasos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos.html"><a href="primeros-pasos.html#crear-función-para-realizar-resumen-de-las-variables"><i class="fa fa-check"></i><b>2.5</b> Crear función para realizar resumen de las variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>3</b> Analisis de la variable fixed.acidity</a>
 <ul>
@@ -202,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>13.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="análisis-de-la-calidad.html"><a href="análisis-de-la-calidad.html"><i class="fa fa-check"></i><b>14</b> Análisis de la Calidad</a></li>
+<li class="chapter" data-level="14" data-path="análisis-de-la-variable-quality.html"><a href="análisis-de-la-variable-quality.html"><i class="fa fa-check"></i><b>14</b> Análisis de la variable quality</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -215,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wine_quality</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EDA: Factores que Influyen en la Calidad del Vino</a>
           </h1>
         </div>
 
@@ -225,35 +229,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analisis-de-la-variable-alcohol" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">Chapter 13</span> Analisis de la variable alcohol<a href="analisis-de-la-variable-alcohol.html#analisis-de-la-variable-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="analisis-de-la-variable-alcohol.html#cb81-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb81-2"><a href="analisis-de-la-variable-alcohol.html#cb81-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(alcohol),</span>
-<span id="cb81-3"><a href="analisis-de-la-variable-alcohol.html#cb81-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(alcohol),</span>
-<span id="cb81-4"><a href="analisis-de-la-variable-alcohol.html#cb81-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(alcohol),</span>
-<span id="cb81-5"><a href="analisis-de-la-variable-alcohol.html#cb81-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(alcohol),</span>
-<span id="cb81-6"><a href="analisis-de-la-variable-alcohol.html#cb81-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(alcohol),</span>
-<span id="cb81-7"><a href="analisis-de-la-variable-alcohol.html#cb81-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(alcohol),</span>
-<span id="cb81-8"><a href="analisis-de-la-variable-alcohol.html#cb81-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(alcohol),</span>
-<span id="cb81-9"><a href="analisis-de-la-variable-alcohol.html#cb81-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.25</span>),</span>
-<span id="cb81-10"><a href="analisis-de-la-variable-alcohol.html#cb81-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.75</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="analisis-de-la-variable-alcohol.html#cb82-1" tabindex="-1"></a><span class="fu">resumen_variable</span>(datos,<span class="st">&quot;alcohol&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 9
 ##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
 ##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1  1599  10.4  1.07    10.2   1.6    8.4   14.9   9.5  11.1</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="analisis-de-la-variable-alcohol.html#cb83-1" tabindex="-1"></a>            <span class="co">#mayores_13_5 = sum(alcohol &gt;= 13.5)</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="analisis-de-la-variable-alcohol.html#cb84-1" tabindex="-1"></a><span class="co">#mayores_13_5 = sum(alcohol &gt;= 13.5)</span></span></code></pre></div>
 <p>La variable alcohol, que en este contexto se refiere a la proporción de etanol presente en el vino expresada en g/L, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 10,42 g/L (DS= 1.065 g/L) y una mediana de 10,2 g/L. El 50% central de los datos se encuentra entre 9,5 g/L (Q1) y 11,1 g/L (Q3), con un rango intercuartílico (RIC) de 1,6 g/L, lo que sugiere una dispersión moderada. Los valores mínimo y máximo registrados fueron 8,4 g/L y 14,9 g/L,con un rango 6,5 g/L respectivamente. La presencia de valores extremos podría elevar ligeramente el promedio con respecto a la mediana.</p>
 <div id="histograma-de-alcohol" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> Histograma de alcohol<a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="analisis-de-la-variable-alcohol.html#cb84-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb84-2"><a href="analisis-de-la-variable-alcohol.html#cb84-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> alcohol))<span class="sc">+</span></span>
-<span id="cb84-3"><a href="analisis-de-la-variable-alcohol.html#cb84-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
-<span id="cb84-4"><a href="analisis-de-la-variable-alcohol.html#cb84-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="analisis-de-la-variable-alcohol.html#cb85-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href="analisis-de-la-variable-alcohol.html#cb85-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb85-3"><a href="analisis-de-la-variable-alcohol.html#cb85-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb85-4"><a href="analisis-de-la-variable-alcohol.html#cb85-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 ## Boxplot de alcohol</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="analisis-de-la-variable-alcohol.html#cb86-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb86-2"><a href="analisis-de-la-variable-alcohol.html#cb86-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> alcohol))<span class="sc">+</span></span>
-<span id="cb86-3"><a href="analisis-de-la-variable-alcohol.html#cb86-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analisis-de-la-variable-alcohol.html#cb87-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="analisis-de-la-variable-alcohol.html#cb87-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb87-3"><a href="analisis-de-la-variable-alcohol.html#cb87-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>La distribución de alcohol presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 13,45g/L. En consecuencia, el máximo identificado se clasifica como un valor atípico alto, dichos valores podrían sesgar la media hacia valores mayores</p>
 </div>
 </div>
@@ -263,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="analisis-de-la-variable-sulphates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análisis-de-la-calidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-de-la-variable-quality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

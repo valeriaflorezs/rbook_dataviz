@@ -49,3 +49,6 @@ analisis-de-la-variable-alcohol
 histograma-de-alcohol
 analisís-de-la-calidad
 análisis-de-la-calidad
+crear-función-para-realizar-resumen-de-las-variables
+análisis-de-la-variable-quality
+primeros-pasos

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Analisis de la variable total.sulfur.dioxide | Wine_quality</title>
-  <meta name="description" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | Wine_quality" />
+  <title>Chapter 9 Analisis de la variable total.sulfur.dioxide | EDA: Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | Wine_quality" />
+  <meta property="og:title" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 9 Analisis de la variable total.sulfur.dioxide | EDA: Factores que Influyen en la Calidad del Vino" />
   
   
   
@@ -140,13 +140,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="2" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>2</b> Variable objetivo</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
-<li class="chapter" data-level="2.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="2.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="2.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#variable-objetivo"><i class="fa fa-check"></i><b>1.1</b> Variable objetivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos.html"><a href="primeros-pasos.html"><i class="fa fa-check"></i><b>2</b> Primeros Pasos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos.html"><a href="primeros-pasos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos.html"><a href="primeros-pasos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos.html"><a href="primeros-pasos.html#crear-función-para-realizar-resumen-de-las-variables"><i class="fa fa-check"></i><b>2.5</b> Crear función para realizar resumen de las variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>3</b> Analisis de la variable fixed.acidity</a>
 <ul>
@@ -202,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>13.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="análisis-de-la-calidad.html"><a href="análisis-de-la-calidad.html"><i class="fa fa-check"></i><b>14</b> Análisis de la Calidad</a></li>
+<li class="chapter" data-level="14" data-path="análisis-de-la-variable-quality.html"><a href="análisis-de-la-variable-quality.html"><i class="fa fa-check"></i><b>14</b> Análisis de la variable quality</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -215,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wine_quality</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EDA: Factores que Influyen en la Calidad del Vino</a>
           </h1>
         </div>
 
@@ -225,16 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analisis-de-la-variable-total.sulfur.dioxide" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Analisis de la variable total.sulfur.dioxide<a href="analisis-de-la-variable-total.sulfur.html#analisis-de-la-variable-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="analisis-de-la-variable-total.sulfur.html#cb61-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb61-2"><a href="analisis-de-la-variable-total.sulfur.html#cb61-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(total.sulfur.dioxide),</span>
-<span id="cb61-3"><a href="analisis-de-la-variable-total.sulfur.html#cb61-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(total.sulfur.dioxide),</span>
-<span id="cb61-4"><a href="analisis-de-la-variable-total.sulfur.html#cb61-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(total.sulfur.dioxide),</span>
-<span id="cb61-5"><a href="analisis-de-la-variable-total.sulfur.html#cb61-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(total.sulfur.dioxide),</span>
-<span id="cb61-6"><a href="analisis-de-la-variable-total.sulfur.html#cb61-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(total.sulfur.dioxide),</span>
-<span id="cb61-7"><a href="analisis-de-la-variable-total.sulfur.html#cb61-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(total.sulfur.dioxide),</span>
-<span id="cb61-8"><a href="analisis-de-la-variable-total.sulfur.html#cb61-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(total.sulfur.dioxide),</span>
-<span id="cb61-9"><a href="analisis-de-la-variable-total.sulfur.html#cb61-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(total.sulfur.dioxide, <span class="fl">0.25</span>),</span>
-<span id="cb61-10"><a href="analisis-de-la-variable-total.sulfur.html#cb61-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(total.sulfur.dioxide, <span class="fl">0.75</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="analisis-de-la-variable-total.sulfur.html#cb62-1" tabindex="-1"></a><span class="fu">resumen_variable</span>(datos,<span class="st">&quot;total.sulfur.dioxide&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 9
 ##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
 ##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -242,19 +237,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La variable total.sulfur.dioxide, analizada a partir de 1.599 observaciones, presenta una distribución asimétrica hacia la derecha, con una clara tendencia a valores bajos y algunos registros considerablemente altos que influyen en los estadísticos descriptivos. La media es de 46,47 mg/L, superior a la mediana de 38 mg/L, lo que indica cierta influencia de valores extremos elevados. El rango intercuartílico (RIC) es de 40 mg/L, con un primer cuartil (Q1) en 22 mg/L y un tercer cuartil (Q3) en 62 mg/L, reflejando una dispersión amplia. El valor mínimo observado fue de 6 mg/L, mientras que el máximo alcanzó los 289 mg/L, una cifra atípica que contribuye significativamente a la alta desviación estándar (32,90 mg/L). Esto sugiere la presencia de un subconjunto de vinos con adiciones inusualmente altas de dióxido de azufre total.</p>
 <div id="histograma-de-total.sulfur.dioxide" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Histograma de total.sulfur.dioxide<a href="analisis-de-la-variable-total.sulfur.html#histograma-de-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="analisis-de-la-variable-total.sulfur.html#cb63-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb63-2"><a href="analisis-de-la-variable-total.sulfur.html#cb63-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
-<span id="cb63-3"><a href="analisis-de-la-variable-total.sulfur.html#cb63-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
-<span id="cb63-4"><a href="analisis-de-la-variable-total.sulfur.html#cb63-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="analisis-de-la-variable-total.sulfur.html#cb64-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb64-2"><a href="analisis-de-la-variable-total.sulfur.html#cb64-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb64-3"><a href="analisis-de-la-variable-total.sulfur.html#cb64-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb64-4"><a href="analisis-de-la-variable-total.sulfur.html#cb64-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="boxplot-de-total.sulfur.dioxide" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">9.2</span> Boxplot de total.sulfur.dioxide<a href="analisis-de-la-variable-total.sulfur.html#boxplot-de-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="analisis-de-la-variable-total.sulfur.html#cb65-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb65-2"><a href="analisis-de-la-variable-total.sulfur.html#cb65-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
-<span id="cb65-3"><a href="analisis-de-la-variable-total.sulfur.html#cb65-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="analisis-de-la-variable-total.sulfur.html#cb66-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="analisis-de-la-variable-total.sulfur.html#cb66-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb66-3"><a href="analisis-de-la-variable-total.sulfur.html#cb66-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 La variable total.sulfur.dioxide presenta una distribución asimétrica hacia la derecha (positivamente sesgada), con una mediana de 38 y una media mayor (46.47), lo que refuerza la presencia de valores altos que influyen en el promedio. El rango intercuartílico (RIC) es de 40, indicando dispersión moderada, y se observan varios valores atípicos por encima del tercer cuartil (Q3 = 62), llegando hasta un máximo de 289. Esto, junto con la forma de la distribución, sugiere que, aunque la mayoría de los datos se concentran en valores bajos o medios, hay casos extremos que deben considerarse en los análisis.</p>
 </div>
 </div>

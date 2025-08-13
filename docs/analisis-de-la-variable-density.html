@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Analisis de la variable density | Wine_quality</title>
-  <meta name="description" content="Chapter 10 Analisis de la variable density | Wine_quality" />
+  <title>Chapter 10 Analisis de la variable density | EDA: Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="Chapter 10 Analisis de la variable density | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Analisis de la variable density | Wine_quality" />
+  <meta property="og:title" content="Chapter 10 Analisis de la variable density | EDA: Factores que Influyen en la Calidad del Vino" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Analisis de la variable density | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 10 Analisis de la variable density | EDA: Factores que Influyen en la Calidad del Vino" />
   
   
   
@@ -140,13 +140,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="2" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>2</b> Variable objetivo</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
-<li class="chapter" data-level="2.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="2.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="2.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#variable-objetivo"><i class="fa fa-check"></i><b>1.1</b> Variable objetivo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="primeros-pasos.html"><a href="primeros-pasos.html"><i class="fa fa-check"></i><b>2</b> Primeros Pasos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="2.2" data-path="primeros-pasos.html"><a href="primeros-pasos.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="2.3" data-path="primeros-pasos.html"><a href="primeros-pasos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="2.4" data-path="primeros-pasos.html"><a href="primeros-pasos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
+<li class="chapter" data-level="2.5" data-path="primeros-pasos.html"><a href="primeros-pasos.html#crear-función-para-realizar-resumen-de-las-variables"><i class="fa fa-check"></i><b>2.5</b> Crear función para realizar resumen de las variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>3</b> Analisis de la variable fixed.acidity</a>
 <ul>
@@ -202,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>13.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="análisis-de-la-calidad.html"><a href="análisis-de-la-calidad.html"><i class="fa fa-check"></i><b>14</b> Análisis de la Calidad</a></li>
+<li class="chapter" data-level="14" data-path="análisis-de-la-variable-quality.html"><a href="análisis-de-la-variable-quality.html"><i class="fa fa-check"></i><b>14</b> Análisis de la variable quality</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -215,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Wine_quality</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EDA: Factores que Influyen en la Calidad del Vino</a>
           </h1>
         </div>
 
@@ -225,16 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analisis-de-la-variable-density" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Analisis de la variable density<a href="analisis-de-la-variable-density.html#analisis-de-la-variable-density" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="analisis-de-la-variable-density.html#cb66-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb66-2"><a href="analisis-de-la-variable-density.html#cb66-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(density),</span>
-<span id="cb66-3"><a href="analisis-de-la-variable-density.html#cb66-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(density),</span>
-<span id="cb66-4"><a href="analisis-de-la-variable-density.html#cb66-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(density),</span>
-<span id="cb66-5"><a href="analisis-de-la-variable-density.html#cb66-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(density),</span>
-<span id="cb66-6"><a href="analisis-de-la-variable-density.html#cb66-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(density),</span>
-<span id="cb66-7"><a href="analisis-de-la-variable-density.html#cb66-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(density),</span>
-<span id="cb66-8"><a href="analisis-de-la-variable-density.html#cb66-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(density),</span>
-<span id="cb66-9"><a href="analisis-de-la-variable-density.html#cb66-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(density, <span class="fl">0.25</span>),</span>
-<span id="cb66-10"><a href="analisis-de-la-variable-density.html#cb66-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(density, <span class="fl">0.75</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="analisis-de-la-variable-density.html#cb67-1" tabindex="-1"></a><span class="fu">resumen_variable</span>(datos,<span class="st">&quot;density&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 9
 ##       n  prom      ds mediana     RIC minimo maximo    Q1    Q3
 ##   &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -242,19 +237,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La variable density presenta una distribución con un promedio de aproximadamente 0.9967 y una desviación estándar muy baja de 0.0019, lo que indica una dispersión mínima de los datos respecto a la media; además, la mediana (0.99675) es prácticamente igual al promedio, lo que sugiere simetría en la distribución. El rango intercuartílico (RIC) es de 0.0022, con un valor mínimo de 0.99007 y máximo de 1.00369, mientras que el primer y tercer cuartil (Q1 y Q3) son 0.9956 y 0.9978, respectivamente; en conjunto, estos valores muestran una alta concentración de los datos dentro de un rango muy estrecho, sin evidencias visibles de valores atípicos ni sesgos pronunciados.</p>
 <div id="histograma-de-density" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Histograma de density<a href="analisis-de-la-variable-density.html#histograma-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="analisis-de-la-variable-density.html#cb68-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb68-2"><a href="analisis-de-la-variable-density.html#cb68-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> density))<span class="sc">+</span></span>
-<span id="cb68-3"><a href="analisis-de-la-variable-density.html#cb68-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
-<span id="cb68-4"><a href="analisis-de-la-variable-density.html#cb68-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="analisis-de-la-variable-density.html#cb69-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="analisis-de-la-variable-density.html#cb69-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> density))<span class="sc">+</span></span>
+<span id="cb69-3"><a href="analisis-de-la-variable-density.html#cb69-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb69-4"><a href="analisis-de-la-variable-density.html#cb69-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 </div>
 <div id="boxplot-de-density" class="section level2 hasAnchor" number="10.2">
 <h2><span class="header-section-number">10.2</span> Boxplot de density<a href="analisis-de-la-variable-density.html#boxplot-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="analisis-de-la-variable-density.html#cb70-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
-<span id="cb70-2"><a href="analisis-de-la-variable-density.html#cb70-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> density))<span class="sc">+</span></span>
-<span id="cb70-3"><a href="analisis-de-la-variable-density.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="analisis-de-la-variable-density.html#cb71-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="analisis-de-la-variable-density.html#cb71-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> density))<span class="sc">+</span></span>
+<span id="cb71-3"><a href="analisis-de-la-variable-density.html#cb71-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 La variable density tiene una distribución normal, con valores muy concentrados alrededor del promedio y ligeros outliers en los extremos. Esto sugiere una alta homogeneidad en esta característica dentro del conjunto de datos analizado.</p>
 </div>
 </div>
