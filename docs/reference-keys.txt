@@ -48,3 +48,4 @@ boxplot-de-sulphates
 analisis-de-la-variable-alcohol
 histograma-de-alcohol
 analisís-de-la-calidad
+análisis-de-la-calidad

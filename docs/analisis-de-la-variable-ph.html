@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Analisis de la variable pH | Wine_quality</title>
-  <meta name="description" content="Chapter 16 Analisis de la variable pH | Wine_quality" />
+  <title>Chapter 11 Analisis de la variable pH | Wine_quality</title>
+  <meta name="description" content="Chapter 11 Analisis de la variable pH | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Analisis de la variable pH | Wine_quality" />
+  <meta property="og:title" content="Chapter 11 Analisis de la variable pH | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Analisis de la variable pH | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 11 Analisis de la variable pH | Wine_quality" />
   
   
   
@@ -123,29 +123,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -163,81 +140,69 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="contexto-de-los-datos.html"><a href="contexto-de-los-datos.html"><i class="fa fa-check"></i><b>2</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="3" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>3</b> Variable objetivo</a></li>
-<li class="chapter" data-level="4" data-path="carga-de-librerias.html"><a href="carga-de-librerias.html"><i class="fa fa-check"></i><b>4</b> Carga de librerias</a></li>
-<li class="chapter" data-level="5" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html"><i class="fa fa-check"></i><b>5</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="6" data-path="cambiar-tipo-de-dato-de-la-variable-quality.html"><a href="cambiar-tipo-de-dato-de-la-variable-quality.html"><i class="fa fa-check"></i><b>6</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="7" data-path="verificar-missing-datas.html"><a href="verificar-missing-datas.html"><i class="fa fa-check"></i><b>7</b> Verificar missing datas</a></li>
-<li class="chapter" data-level="8" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>8</b> Analisis de la variable fixed.acidity</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Contexto de los datos</a></li>
+<li class="chapter" data-level="2" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>2</b> Variable objetivo</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>8.1</b> Histograma de fixed.acidity</a></li>
-<li class="chapter" data-level="8.2" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>8.2</b> Boxplot de fixed.acidity</a></li>
+<li class="chapter" data-level="2.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>2.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="2.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>2.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="2.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>2.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="2.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>2.4</b> Verificar missing datas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html"><i class="fa fa-check"></i><b>9</b> Analisis de la variable volatile.acidity</a>
+<li class="chapter" data-level="3" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>3</b> Analisis de la variable fixed.acidity</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>9.1</b> Histograma de volatile.acidity</a></li>
-<li class="chapter" data-level="9.2" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>9.2</b> Boxplot de volatile.acidity</a></li>
+<li class="chapter" data-level="3.1" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>3.1</b> Histograma de fixed.acidity</a></li>
+<li class="chapter" data-level="3.2" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>3.2</b> Boxplot de fixed.acidity</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html"><i class="fa fa-check"></i><b>10</b> Analisis de la variable citric.acid</a>
+<li class="chapter" data-level="4" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html"><i class="fa fa-check"></i><b>4</b> Analisis de la variable volatile.acidity</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>10.1</b> Histograma de citric.acid</a></li>
-<li class="chapter" data-level="10.2" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>10.2</b> Boxplot de citric.acid</a></li>
+<li class="chapter" data-level="4.1" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>4.1</b> Histograma de volatile.acidity</a></li>
+<li class="chapter" data-level="4.2" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2</b> Boxplot de volatile.acidity</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html"><i class="fa fa-check"></i><b>11</b> Analisis de la variable residual.sugar</a>
+<li class="chapter" data-level="5" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html"><i class="fa fa-check"></i><b>5</b> Analisis de la variable citric.acid</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>11.1</b> Histograma de residual.sugar</a></li>
-<li class="chapter" data-level="11.2" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>11.2</b> Boxplot de residual.sugar</a></li>
+<li class="chapter" data-level="5.1" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>5.1</b> Histograma de citric.acid</a></li>
+<li class="chapter" data-level="5.2" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>5.2</b> Boxplot de citric.acid</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html"><i class="fa fa-check"></i><b>12</b> Analisis de la variable chlorides</a>
+<li class="chapter" data-level="6" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html"><i class="fa fa-check"></i><b>6</b> Analisis de la variable residual.sugar</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>12.1</b> Histograma de chlorides</a></li>
-<li class="chapter" data-level="12.2" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>12.2</b> Boxplot de chlorides</a></li>
+<li class="chapter" data-level="6.1" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>6.1</b> Histograma de residual.sugar</a></li>
+<li class="chapter" data-level="6.2" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>6.2</b> Boxplot de residual.sugar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html"><i class="fa fa-check"></i><b>13</b> Analisis de la variable free.sulfur.dioxide</a>
+<li class="chapter" data-level="7" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html"><i class="fa fa-check"></i><b>7</b> Analisis de la variable chlorides</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>13.1</b> Histograma de free.sulfur.dioxide</a></li>
-<li class="chapter" data-level="13.2" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>13.2</b> Boxplot de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="7.1" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>7.1</b> Histograma de chlorides</a></li>
+<li class="chapter" data-level="7.2" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>7.2</b> Boxplot de chlorides</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html"><i class="fa fa-check"></i><b>14</b> Analisis de la variable total.sulfur.dioxide</a>
+<li class="chapter" data-level="8" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html"><i class="fa fa-check"></i><b>8</b> Analisis de la variable free.sulfur.dioxide</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>14.1</b> Histograma de total.sulfur.dioxide</a></li>
-<li class="chapter" data-level="14.2" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>14.2</b> Boxplot de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="8.1" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>8.1</b> Histograma de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="8.2" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>8.2</b> Boxplot de free.sulfur.dioxide</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html"><i class="fa fa-check"></i><b>15</b> Analisis de la variable density</a>
+<li class="chapter" data-level="9" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html"><i class="fa fa-check"></i><b>9</b> Analisis de la variable total.sulfur.dioxide</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#histograma-de-density"><i class="fa fa-check"></i><b>15.1</b> Histograma de density</a></li>
-<li class="chapter" data-level="15.2" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#boxplot-de-density"><i class="fa fa-check"></i><b>15.2</b> Boxplot de density</a></li>
+<li class="chapter" data-level="9.1" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>9.1</b> Histograma de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="9.2" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>9.2</b> Boxplot de total.sulfur.dioxide</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html"><i class="fa fa-check"></i><b>16</b> Analisis de la variable pH</a>
+<li class="chapter" data-level="10" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html"><i class="fa fa-check"></i><b>10</b> Analisis de la variable density</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#histograma-de-ph"><i class="fa fa-check"></i><b>16.1</b> Histograma de pH</a></li>
-<li class="chapter" data-level="16.2" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#boxplot-de-ph"><i class="fa fa-check"></i><b>16.2</b> Boxplot de pH</a></li>
+<li class="chapter" data-level="10.1" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#histograma-de-density"><i class="fa fa-check"></i><b>10.1</b> Histograma de density</a></li>
+<li class="chapter" data-level="10.2" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#boxplot-de-density"><i class="fa fa-check"></i><b>10.2</b> Boxplot de density</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html"><i class="fa fa-check"></i><b>17</b> Analisis de la variable sulphates</a>
+<li class="chapter" data-level="11" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html"><i class="fa fa-check"></i><b>11</b> Analisis de la variable pH</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>17.1</b> Histograma de sulphates</a></li>
-<li class="chapter" data-level="17.2" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>17.2</b> Boxplot de sulphates</a></li>
+<li class="chapter" data-level="11.1" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#histograma-de-ph"><i class="fa fa-check"></i><b>11.1</b> Histograma de pH</a></li>
+<li class="chapter" data-level="11.2" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#boxplot-de-ph"><i class="fa fa-check"></i><b>11.2</b> Boxplot de pH</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html"><i class="fa fa-check"></i><b>18</b> Analisis de la variable alcohol</a>
+<li class="chapter" data-level="12" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html"><i class="fa fa-check"></i><b>12</b> Analisis de la variable sulphates</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>18.1</b> Histograma de alcohol</a></li>
+<li class="chapter" data-level="12.1" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>12.1</b> Histograma de sulphates</a></li>
+<li class="chapter" data-level="12.2" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>12.2</b> Boxplot de sulphates</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="analisís-de-la-calidad.html"><a href="analisís-de-la-calidad.html"><i class="fa fa-check"></i><b>19</b> Analisís de la calidad</a></li>
-<li class="chapter" data-level="20" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a></li>
-<li class="chapter" data-level="21" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>21</b> Literature</a></li>
-<li class="chapter" data-level="22" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>22</b> Methods</a>
+<li class="chapter" data-level="13" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html"><i class="fa fa-check"></i><b>13</b> Analisis de la variable alcohol</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>22.1</b> math example</a></li>
+<li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>13.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>23</b> Applications</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>23.1</b> Example one</a></li>
-<li class="chapter" data-level="23.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>23.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>24</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="14" data-path="análisis-de-la-calidad.html"><a href="análisis-de-la-calidad.html"><i class="fa fa-check"></i><b>14</b> Análisis de la Calidad</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -258,8 +223,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analisis-de-la-variable-ph" class="section level1 hasAnchor" number="16">
-<h1><span class="header-section-number">Chapter 16</span> Analisis de la variable pH<a href="analisis-de-la-variable-ph.html#analisis-de-la-variable-ph" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="analisis-de-la-variable-ph" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Analisis de la variable pH<a href="analisis-de-la-variable-ph.html#analisis-de-la-variable-ph" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="analisis-de-la-variable-ph.html#cb71-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
 <span id="cb71-2"><a href="analisis-de-la-variable-ph.html#cb71-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(pH),</span>
 <span id="cb71-3"><a href="analisis-de-la-variable-ph.html#cb71-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(pH),</span>
@@ -275,22 +240,20 @@ div.csl-indent {
 ##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1  1599  3.31 0.154    3.31  0.19   2.74   4.01  3.21   3.4</code></pre>
 <p>La variable pH, que en este contexto se refiere a la medida de acidez o alcalinidad del vino (donde valores bajos indican mayor acidez), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 3,311 (DS = 0,154), donde el 50% de los valores se encuentran por debajo de 3,31. El 25% más bajo está por debajo de 3,21 y el 25% más alto supera los 3,40, evidenciando una baja dispersión. El valor mínimo registrado fue de 2,74 y el máximo de 4,01, lo que indica un rango de 1,27.</p>
-<div id="histograma-de-ph" class="section level2 hasAnchor" number="16.1">
-<h2><span class="header-section-number">16.1</span> Histograma de pH<a href="analisis-de-la-variable-ph.html#histograma-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="histograma-de-ph" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Histograma de pH<a href="analisis-de-la-variable-ph.html#histograma-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="analisis-de-la-variable-ph.html#cb73-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
 <span id="cb73-2"><a href="analisis-de-la-variable-ph.html#cb73-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> pH))<span class="sc">+</span></span>
 <span id="cb73-3"><a href="analisis-de-la-variable-ph.html#cb73-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
-<span id="cb73-4"><a href="analisis-de-la-variable-ph.html#cb73-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
-<span id="cb73-5"><a href="analisis-de-la-variable-ph.html#cb73-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<span id="cb73-4"><a href="analisis-de-la-variable-ph.html#cb73-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
-<div id="boxplot-de-ph" class="section level2 hasAnchor" number="16.2">
-<h2><span class="header-section-number">16.2</span> Boxplot de pH<a href="analisis-de-la-variable-ph.html#boxplot-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="boxplot-de-ph" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Boxplot de pH<a href="analisis-de-la-variable-ph.html#boxplot-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="analisis-de-la-variable-ph.html#cb75-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
 <span id="cb75-2"><a href="analisis-de-la-variable-ph.html#cb75-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> pH))<span class="sc">+</span></span>
-<span id="cb75-3"><a href="analisis-de-la-variable-ph.html#cb75-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb75-4"><a href="analisis-de-la-variable-ph.html#cb75-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<span id="cb75-3"><a href="analisis-de-la-variable-ph.html#cb75-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 La distribución de pH es simétrica; sin embargo, presenta una fuerte concentración de datos en valores intermedios y una cantidad significativa de valores extremos, tanto altos como bajos. Esto indica que, aunque la mayoría de los vinos tintos tienen una acidez moderada, existen algunos con valores excepcionalmente altos o bajos que influyen de forma notable en estadísticos como la media y la desviación estándar.</p>
 </div>
@@ -358,20 +321,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

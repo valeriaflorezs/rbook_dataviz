@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Analisís de la calidad | Wine_quality</title>
-  <meta name="description" content="Chapter 19 Analisís de la calidad | Wine_quality" />
+  <title>Chapter 15 Analisís de la calidad | Wine_quality</title>
+  <meta name="description" content="Chapter 15 Analisís de la calidad | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Analisís de la calidad | Wine_quality" />
+  <meta property="og:title" content="Chapter 15 Analisís de la calidad | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Analisís de la calidad | Wine_quality" />
+  <meta name="twitter:title" content="Chapter 15 Analisís de la calidad | Wine_quality" />
   
   
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="analisis-de-la-variable-alcohol.html"/>
-<link rel="next" href="intro.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -123,29 +123,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -165,79 +142,68 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
 <li class="chapter" data-level="2" data-path="contexto-de-los-datos.html"><a href="contexto-de-los-datos.html"><i class="fa fa-check"></i><b>2</b> Contexto de los datos</a></li>
-<li class="chapter" data-level="3" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>3</b> Variable objetivo</a></li>
-<li class="chapter" data-level="4" data-path="carga-de-librerias.html"><a href="carga-de-librerias.html"><i class="fa fa-check"></i><b>4</b> Carga de librerias</a></li>
-<li class="chapter" data-level="5" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html"><i class="fa fa-check"></i><b>5</b> Carga y estructura de los datos</a></li>
-<li class="chapter" data-level="6" data-path="cambiar-tipo-de-dato-de-la-variable-quality.html"><a href="cambiar-tipo-de-dato-de-la-variable-quality.html"><i class="fa fa-check"></i><b>6</b> Cambiar tipo de dato de la variable quality</a></li>
-<li class="chapter" data-level="7" data-path="verificar-missing-datas.html"><a href="verificar-missing-datas.html"><i class="fa fa-check"></i><b>7</b> Verificar missing datas</a></li>
-<li class="chapter" data-level="8" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>8</b> Analisis de la variable fixed.acidity</a>
+<li class="chapter" data-level="3" data-path="variable-objetivo.html"><a href="variable-objetivo.html"><i class="fa fa-check"></i><b>3</b> Variable objetivo</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>8.1</b> Histograma de fixed.acidity</a></li>
-<li class="chapter" data-level="8.2" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>8.2</b> Boxplot de fixed.acidity</a></li>
+<li class="chapter" data-level="3.1" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-de-librerias"><i class="fa fa-check"></i><b>3.1</b> Carga de librerias</a></li>
+<li class="chapter" data-level="3.2" data-path="variable-objetivo.html"><a href="variable-objetivo.html#carga-y-estructura-de-los-datos"><i class="fa fa-check"></i><b>3.2</b> Carga y estructura de los datos</a></li>
+<li class="chapter" data-level="3.3" data-path="variable-objetivo.html"><a href="variable-objetivo.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>3.3</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="3.4" data-path="variable-objetivo.html"><a href="variable-objetivo.html#verificar-missing-datas"><i class="fa fa-check"></i><b>3.4</b> Verificar missing datas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html"><i class="fa fa-check"></i><b>9</b> Analisis de la variable volatile.acidity</a>
+<li class="chapter" data-level="4" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html"><i class="fa fa-check"></i><b>4</b> Analisis de la variable fixed.acidity</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>9.1</b> Histograma de volatile.acidity</a></li>
-<li class="chapter" data-level="9.2" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>9.2</b> Boxplot de volatile.acidity</a></li>
+<li class="chapter" data-level="4.1" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1</b> Histograma de fixed.acidity</a></li>
+<li class="chapter" data-level="4.2" data-path="analisis-de-la-variable-fixed.html"><a href="analisis-de-la-variable-fixed.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>4.2</b> Boxplot de fixed.acidity</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html"><i class="fa fa-check"></i><b>10</b> Analisis de la variable citric.acid</a>
+<li class="chapter" data-level="5" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html"><i class="fa fa-check"></i><b>5</b> Analisis de la variable volatile.acidity</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>10.1</b> Histograma de citric.acid</a></li>
-<li class="chapter" data-level="10.2" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>10.2</b> Boxplot de citric.acid</a></li>
+<li class="chapter" data-level="5.1" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>5.1</b> Histograma de volatile.acidity</a></li>
+<li class="chapter" data-level="5.2" data-path="analisis-de-la-variable-volatile.html"><a href="analisis-de-la-variable-volatile.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>5.2</b> Boxplot de volatile.acidity</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html"><i class="fa fa-check"></i><b>11</b> Analisis de la variable residual.sugar</a>
+<li class="chapter" data-level="6" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html"><i class="fa fa-check"></i><b>6</b> Analisis de la variable citric.acid</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>11.1</b> Histograma de residual.sugar</a></li>
-<li class="chapter" data-level="11.2" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>11.2</b> Boxplot de residual.sugar</a></li>
+<li class="chapter" data-level="6.1" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>6.1</b> Histograma de citric.acid</a></li>
+<li class="chapter" data-level="6.2" data-path="analisis-de-la-variable-citric.html"><a href="analisis-de-la-variable-citric.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>6.2</b> Boxplot de citric.acid</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html"><i class="fa fa-check"></i><b>12</b> Analisis de la variable chlorides</a>
+<li class="chapter" data-level="7" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html"><i class="fa fa-check"></i><b>7</b> Analisis de la variable residual.sugar</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>12.1</b> Histograma de chlorides</a></li>
-<li class="chapter" data-level="12.2" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>12.2</b> Boxplot de chlorides</a></li>
+<li class="chapter" data-level="7.1" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>7.1</b> Histograma de residual.sugar</a></li>
+<li class="chapter" data-level="7.2" data-path="analisis-de-la-variable-residual.html"><a href="analisis-de-la-variable-residual.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>7.2</b> Boxplot de residual.sugar</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html"><i class="fa fa-check"></i><b>13</b> Analisis de la variable free.sulfur.dioxide</a>
+<li class="chapter" data-level="8" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html"><i class="fa fa-check"></i><b>8</b> Analisis de la variable chlorides</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>13.1</b> Histograma de free.sulfur.dioxide</a></li>
-<li class="chapter" data-level="13.2" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>13.2</b> Boxplot de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="8.1" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>8.1</b> Histograma de chlorides</a></li>
+<li class="chapter" data-level="8.2" data-path="analisis-de-la-variable-chlorides.html"><a href="analisis-de-la-variable-chlorides.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>8.2</b> Boxplot de chlorides</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html"><i class="fa fa-check"></i><b>14</b> Analisis de la variable total.sulfur.dioxide</a>
+<li class="chapter" data-level="9" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html"><i class="fa fa-check"></i><b>9</b> Analisis de la variable free.sulfur.dioxide</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>14.1</b> Histograma de total.sulfur.dioxide</a></li>
-<li class="chapter" data-level="14.2" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>14.2</b> Boxplot de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="9.1" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>9.1</b> Histograma de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="9.2" data-path="analisis-de-la-variable-free.sulfur.html"><a href="analisis-de-la-variable-free.sulfur.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>9.2</b> Boxplot de free.sulfur.dioxide</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html"><i class="fa fa-check"></i><b>15</b> Analisis de la variable density</a>
+<li class="chapter" data-level="10" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html"><i class="fa fa-check"></i><b>10</b> Analisis de la variable total.sulfur.dioxide</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#histograma-de-density"><i class="fa fa-check"></i><b>15.1</b> Histograma de density</a></li>
-<li class="chapter" data-level="15.2" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#boxplot-de-density"><i class="fa fa-check"></i><b>15.2</b> Boxplot de density</a></li>
+<li class="chapter" data-level="10.1" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>10.1</b> Histograma de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="10.2" data-path="analisis-de-la-variable-total.sulfur.html"><a href="analisis-de-la-variable-total.sulfur.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>10.2</b> Boxplot de total.sulfur.dioxide</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html"><i class="fa fa-check"></i><b>16</b> Analisis de la variable pH</a>
+<li class="chapter" data-level="11" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html"><i class="fa fa-check"></i><b>11</b> Analisis de la variable density</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#histograma-de-ph"><i class="fa fa-check"></i><b>16.1</b> Histograma de pH</a></li>
-<li class="chapter" data-level="16.2" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#boxplot-de-ph"><i class="fa fa-check"></i><b>16.2</b> Boxplot de pH</a></li>
+<li class="chapter" data-level="11.1" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#histograma-de-density"><i class="fa fa-check"></i><b>11.1</b> Histograma de density</a></li>
+<li class="chapter" data-level="11.2" data-path="analisis-de-la-variable-density.html"><a href="analisis-de-la-variable-density.html#boxplot-de-density"><i class="fa fa-check"></i><b>11.2</b> Boxplot de density</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html"><i class="fa fa-check"></i><b>17</b> Analisis de la variable sulphates</a>
+<li class="chapter" data-level="12" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html"><i class="fa fa-check"></i><b>12</b> Analisis de la variable pH</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>17.1</b> Histograma de sulphates</a></li>
-<li class="chapter" data-level="17.2" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>17.2</b> Boxplot de sulphates</a></li>
+<li class="chapter" data-level="12.1" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#histograma-de-ph"><i class="fa fa-check"></i><b>12.1</b> Histograma de pH</a></li>
+<li class="chapter" data-level="12.2" data-path="analisis-de-la-variable-ph.html"><a href="analisis-de-la-variable-ph.html#boxplot-de-ph"><i class="fa fa-check"></i><b>12.2</b> Boxplot de pH</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html"><i class="fa fa-check"></i><b>18</b> Analisis de la variable alcohol</a>
+<li class="chapter" data-level="13" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html"><i class="fa fa-check"></i><b>13</b> Analisis de la variable sulphates</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>18.1</b> Histograma de alcohol</a></li>
+<li class="chapter" data-level="13.1" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>13.1</b> Histograma de sulphates</a></li>
+<li class="chapter" data-level="13.2" data-path="analisis-de-la-variable-sulphates.html"><a href="analisis-de-la-variable-sulphates.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>13.2</b> Boxplot de sulphates</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="analisís-de-la-calidad.html"><a href="analisís-de-la-calidad.html"><i class="fa fa-check"></i><b>19</b> Analisís de la calidad</a></li>
-<li class="chapter" data-level="20" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a></li>
-<li class="chapter" data-level="21" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>21</b> Literature</a></li>
-<li class="chapter" data-level="22" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>22</b> Methods</a>
+<li class="chapter" data-level="14" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html"><i class="fa fa-check"></i><b>14</b> Analisis de la variable alcohol</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>22.1</b> math example</a></li>
+<li class="chapter" data-level="14.1" data-path="analisis-de-la-variable-alcohol.html"><a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>14.1</b> Histograma de alcohol</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>23</b> Applications</a>
-<ul>
-<li class="chapter" data-level="23.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>23.1</b> Example one</a></li>
-<li class="chapter" data-level="23.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>23.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="24" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>24</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="15" data-path="analisís-de-la-calidad.html"><a href="analisís-de-la-calidad.html"><i class="fa fa-check"></i><b>15</b> Analisís de la calidad</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -258,117 +224,109 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="analisís-de-la-calidad" class="section level1 hasAnchor" number="19">
-<h1><span class="header-section-number">Chapter 19</span> Analisís de la calidad<a href="analisís-de-la-calidad.html#analisís-de-la-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="analisís-de-la-calidad.html#cb86-1" tabindex="-1"></a>tabla_vino_tinto<span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
-<span id="cb86-2"><a href="analisís-de-la-calidad.html#cb86-2" tabindex="-1"></a>  <span class="fu">count</span>(quality, <span class="at">name =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb86-3"><a href="analisís-de-la-calidad.html#cb86-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(Frecuencia <span class="sc">/</span> <span class="fu">sum</span>(Frecuencia) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
-<span id="cb86-4"><a href="analisís-de-la-calidad.html#cb86-4" tabindex="-1"></a>         <span class="at">Etiqueta =</span> <span class="fu">paste0</span>(Frecuencia, <span class="st">&quot; (&quot;</span>, Porcentaje, <span class="st">&quot;%)&quot;</span>))</span>
-<span id="cb86-5"><a href="analisís-de-la-calidad.html#cb86-5" tabindex="-1"></a></span>
-<span id="cb86-6"><a href="analisís-de-la-calidad.html#cb86-6" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_vino_tinto, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(quality), <span class="at">y =</span> Frecuencia)) <span class="sc">+</span></span>
-<span id="cb86-7"><a href="analisís-de-la-calidad.html#cb86-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;purple4&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb86-8"><a href="analisís-de-la-calidad.html#cb86-8" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Etiqueta), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb86-9"><a href="analisís-de-la-calidad.html#cb86-9" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">&quot;Distribución de la variable calidad&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb86-10"><a href="analisís-de-la-calidad.html#cb86-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
-<span id="cb86-11"><a href="analisís-de-la-calidad.html#cb86-11" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>)))<span class="sc">+</span></span>
-<span id="cb86-12"><a href="analisís-de-la-calidad.html#cb86-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo de calidad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia (Porcentaje)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb86-13"><a href="analisís-de-la-calidad.html#cb86-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb86-14"><a href="analisís-de-la-calidad.html#cb86-14" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb86-15"><a href="analisís-de-la-calidad.html#cb86-15" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb86-16"><a href="analisís-de-la-calidad.html#cb86-16" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb86-17"><a href="analisís-de-la-calidad.html#cb86-17" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb86-18"><a href="analisís-de-la-calidad.html#cb86-18" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb86-19"><a href="analisís-de-la-calidad.html#cb86-19" tabindex="-1"></a>  )</span></code></pre></div>
+<div id="analisís-de-la-calidad" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Analisís de la calidad<a href="analisís-de-la-calidad.html#analisís-de-la-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analisís-de-la-calidad.html#cb87-1" tabindex="-1"></a>tabla_vino_tinto<span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="analisís-de-la-calidad.html#cb87-2" tabindex="-1"></a>  <span class="fu">count</span>(quality, <span class="at">name =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb87-3"><a href="analisís-de-la-calidad.html#cb87-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(Frecuencia <span class="sc">/</span> <span class="fu">sum</span>(Frecuencia) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb87-4"><a href="analisís-de-la-calidad.html#cb87-4" tabindex="-1"></a>         <span class="at">Etiqueta =</span> <span class="fu">paste0</span>(Frecuencia, <span class="st">&quot; (&quot;</span>, Porcentaje, <span class="st">&quot;%)&quot;</span>))</span>
+<span id="cb87-5"><a href="analisís-de-la-calidad.html#cb87-5" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_vino_tinto, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(quality), <span class="at">y =</span> Frecuencia)) <span class="sc">+</span></span>
+<span id="cb87-6"><a href="analisís-de-la-calidad.html#cb87-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;purple4&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb87-7"><a href="analisís-de-la-calidad.html#cb87-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Etiqueta), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb87-8"><a href="analisís-de-la-calidad.html#cb87-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">&quot;Distribución de la variable calidad&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb87-9"><a href="analisís-de-la-calidad.html#cb87-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>)))<span class="sc">+</span></span>
+<span id="cb87-10"><a href="analisís-de-la-calidad.html#cb87-10" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>)))<span class="sc">+</span></span>
+<span id="cb87-11"><a href="analisís-de-la-calidad.html#cb87-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Tipo de calidad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia (Porcentaje)&quot;</span>)<span class="sc">+</span></span>
+<span id="cb87-12"><a href="analisís-de-la-calidad.html#cb87-12" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb87-13"><a href="analisís-de-la-calidad.html#cb87-13" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb87-14"><a href="analisís-de-la-calidad.html#cb87-14" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb87-15"><a href="analisís-de-la-calidad.html#cb87-15" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb87-16"><a href="analisís-de-la-calidad.html#cb87-16" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb87-17"><a href="analisís-de-la-calidad.html#cb87-17" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>En el gráfico, la variable <em>calidad</em> muestra una distribución que está claramente centrada en los <em>valores intermedios</em>. La tendencia de la calidad media del producto evaluado se muestra en que la mayor parte de las observaciones se encuentra en las categorías 5 (681 casos, 42.6%) y 6 (638 casos, 39.9%), lo que indica que la calidad promedio del producto evaluado tiende a ser media. Las categorías extremas son poco frecuentes: valores bajos como 3 (10 casos, 0.6 %) y 4 (53 casos, 3.3 %), así como valores altos como 7 (199 casos, 12.4 %) y 8 (18 casos, 1.1 %), tienen una presencia marginal en comparación con el núcleo central.Esta concentración indica que la variable no se distribuye de manera uniforme, sino que tiene un patrón caracterizado por calificaciones moderadas en predominancia, mientras que las calificaciones extremadamente altas o bajas son excepcionales, lo cual podría reflejar una consistencia en la calidad percibida del producto, con pocas desviaciones extremas.</p>
 <p>#Analisis bivariado entre la variable alcohol vs quality</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analisís-de-la-calidad.html#cb87-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
-<span id="cb87-2"><a href="analisís-de-la-calidad.html#cb87-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> alcohol)) <span class="sc">+</span></span>
-<span id="cb87-3"><a href="analisís-de-la-calidad.html#cb87-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb87-4"><a href="analisís-de-la-calidad.html#cb87-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
-<span id="cb87-5"><a href="analisís-de-la-calidad.html#cb87-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb87-6"><a href="analisís-de-la-calidad.html#cb87-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del contenido de alcohol según la calidad del vino&quot;</span>,</span>
-<span id="cb87-7"><a href="analisís-de-la-calidad.html#cb87-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
-<span id="cb87-8"><a href="analisís-de-la-calidad.html#cb87-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Alcohol (%)&quot;</span></span>
-<span id="cb87-9"><a href="analisís-de-la-calidad.html#cb87-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb87-10"><a href="analisís-de-la-calidad.html#cb87-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb87-11"><a href="analisís-de-la-calidad.html#cb87-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb87-12"><a href="analisís-de-la-calidad.html#cb87-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb87-13"><a href="analisís-de-la-calidad.html#cb87-13" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb87-14"><a href="analisís-de-la-calidad.html#cb87-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb87-15"><a href="analisís-de-la-calidad.html#cb87-15" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<p>En el conjunto de datos se registra una tendencia positiva entre la calidad del vino y el contenido de alcohol, y las medianas de alcohol aumentan cuando aumenta la clasificación, siendo las más bajas en los vinos de calidad 3–4 (~9–10%) y las más altas en los vinos de calidad 7–8 (~11–12%). Sin embargo, en calidades intermedias (5–6), la dispersión es bastante mayor, lo que compromete que el alcohol por sí solo explique la calidad. También se encuentran outliers con graduaciones alcohólicas elevadas en calidades medias y calidades bajas, lo que sugiere que un contenido elevado de alcohol no garantiza una mejor valoración. En general, la distribución es asimétrica positivamente, con medias ligeramente superiores a las medianas, y el patrón contemplado hace eco de la hipótesis de que el alcohol influye en la valoración de la calidad, aunque junto a otros factores.</p>
-<p>#Analisis bivariado entre la variable density vs quality</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="analisís-de-la-calidad.html#cb88-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
-<span id="cb88-2"><a href="analisís-de-la-calidad.html#cb88-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> density)) <span class="sc">+</span></span>
+<span id="cb88-2"><a href="analisís-de-la-calidad.html#cb88-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> alcohol)) <span class="sc">+</span></span>
 <span id="cb88-3"><a href="analisís-de-la-calidad.html#cb88-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb88-4"><a href="analisís-de-la-calidad.html#cb88-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
 <span id="cb88-5"><a href="analisís-de-la-calidad.html#cb88-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb88-6"><a href="analisís-de-la-calidad.html#cb88-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución de la densidad según la calidad del vino&quot;</span>,</span>
+<span id="cb88-6"><a href="analisís-de-la-calidad.html#cb88-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del contenido de alcohol según la calidad del vino&quot;</span>,</span>
 <span id="cb88-7"><a href="analisís-de-la-calidad.html#cb88-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
-<span id="cb88-8"><a href="analisís-de-la-calidad.html#cb88-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
-<span id="cb88-9"><a href="analisís-de-la-calidad.html#cb88-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb88-10"><a href="analisís-de-la-calidad.html#cb88-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb88-11"><a href="analisís-de-la-calidad.html#cb88-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb88-12"><a href="analisís-de-la-calidad.html#cb88-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb88-13"><a href="analisís-de-la-calidad.html#cb88-13" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb88-14"><a href="analisís-de-la-calidad.html#cb88-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb88-15"><a href="analisís-de-la-calidad.html#cb88-15" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" />
-La densidad del vino muestra una variación muy estrecha entre las distintas calidades, con cifras que rondan los 0.996 g/cm³, como se aprecia en el gráfico. Las medianas son muy parecidas en todos los grados de calidad, lo que señala que la densidad no parece ser un elemento determinante significativo para la valoración del vino. No obstante, se observan ciertos valores atípicos, en particular en los vinos de calidad 5, que tienen densidades significativamente más altas o más bajas que el rango habitual. Este patrón indica que, a pesar de que la densidad puede tener relación con otras características físico-químicas del vino, su conexión directa con la calidad sensorial es restringida.</p>
-<p>#Analisis bivariado entre la variable pH vs quality</p>
+<span id="cb88-8"><a href="analisís-de-la-calidad.html#cb88-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Alcohol (%)&quot;</span></span>
+<span id="cb88-9"><a href="analisís-de-la-calidad.html#cb88-9" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb88-10"><a href="analisís-de-la-calidad.html#cb88-10" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb88-11"><a href="analisís-de-la-calidad.html#cb88-11" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb88-12"><a href="analisís-de-la-calidad.html#cb88-12" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb88-13"><a href="analisís-de-la-calidad.html#cb88-13" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb88-14"><a href="analisís-de-la-calidad.html#cb88-14" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>En el conjunto de datos se registra una tendencia positiva entre la calidad del vino y el contenido de alcohol, y las medianas de alcohol aumentan cuando aumenta la clasificación, siendo las más bajas en los vinos de calidad 3–4 (~9–10%) y las más altas en los vinos de calidad 7–8 (~11–12%). Sin embargo, en calidades intermedias (5–6), la dispersión es bastante mayor, lo que compromete que el alcohol por sí solo explique la calidad. También se encuentran outliers con graduaciones alcohólicas elevadas en calidades medias y calidades bajas, lo que sugiere que un contenido elevado de alcohol no garantiza una mejor valoración. En general, la distribución es asimétrica positivamente, con medias ligeramente superiores a las medianas, y el patrón contemplado hace eco de la hipótesis de que el alcohol influye en la valoración de la calidad, aunque junto a otros factores.</p>
+<p>#Analisis bivariado entre la variable density vs quality</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="analisís-de-la-calidad.html#cb89-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
-<span id="cb89-2"><a href="analisís-de-la-calidad.html#cb89-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> pH)) <span class="sc">+</span></span>
+<span id="cb89-2"><a href="analisís-de-la-calidad.html#cb89-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> density)) <span class="sc">+</span></span>
 <span id="cb89-3"><a href="analisís-de-la-calidad.html#cb89-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb89-4"><a href="analisís-de-la-calidad.html#cb89-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
 <span id="cb89-5"><a href="analisís-de-la-calidad.html#cb89-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb89-6"><a href="analisís-de-la-calidad.html#cb89-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del pH según la calidad del vino&quot;</span>,</span>
+<span id="cb89-6"><a href="analisís-de-la-calidad.html#cb89-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución de la densidad según la calidad del vino&quot;</span>,</span>
 <span id="cb89-7"><a href="analisís-de-la-calidad.html#cb89-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
-<span id="cb89-8"><a href="analisís-de-la-calidad.html#cb89-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;pH&quot;</span></span>
-<span id="cb89-9"><a href="analisís-de-la-calidad.html#cb89-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb89-10"><a href="analisís-de-la-calidad.html#cb89-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb89-11"><a href="analisís-de-la-calidad.html#cb89-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb89-12"><a href="analisís-de-la-calidad.html#cb89-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb89-13"><a href="analisís-de-la-calidad.html#cb89-13" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb89-14"><a href="analisís-de-la-calidad.html#cb89-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb89-15"><a href="analisís-de-la-calidad.html#cb89-15" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" />
-El gráfico muestra que el pH del vino se mantiene bastante estable en diferentes niveles de calidad, con algunos valores fuera del rango normal, pero no tiene una relación clara y fuerte con la calidad. Aunque el pH es relevante, no es el mejor indicador por sí solo; para determinar la calidad del vino con mayor precisión, es necesario considerar otras variables importantes para definir la calidad de un vino.</p>
-<p>#Analisis bivariado entre la sulphates vs quality</p>
+<span id="cb89-8"><a href="analisís-de-la-calidad.html#cb89-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
+<span id="cb89-9"><a href="analisís-de-la-calidad.html#cb89-9" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb89-10"><a href="analisís-de-la-calidad.html#cb89-10" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb89-11"><a href="analisís-de-la-calidad.html#cb89-11" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb89-12"><a href="analisís-de-la-calidad.html#cb89-12" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb89-13"><a href="analisís-de-la-calidad.html#cb89-13" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+La densidad del vino muestra una variación muy estrecha entre las distintas calidades, con cifras que rondan los 0.996 g/cm³, como se aprecia en el gráfico. Las medianas son muy parecidas en todos los grados de calidad, lo que señala que la densidad no parece ser un elemento determinante significativo para la valoración del vino. No obstante, se observan ciertos valores atípicos, en particular en los vinos de calidad 5, que tienen densidades significativamente más altas o más bajas que el rango habitual. Este patrón indica que, a pesar de que la densidad puede tener relación con otras características físico-químicas del vino, su conexión directa con la calidad sensorial es restringida.</p>
+<p>#Analisis bivariado entre la variable pH vs quality</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="analisís-de-la-calidad.html#cb90-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="analisís-de-la-calidad.html#cb90-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> sulphates)) <span class="sc">+</span></span>
+<span id="cb90-2"><a href="analisís-de-la-calidad.html#cb90-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> pH)) <span class="sc">+</span></span>
 <span id="cb90-3"><a href="analisís-de-la-calidad.html#cb90-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb90-4"><a href="analisís-de-la-calidad.html#cb90-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
 <span id="cb90-5"><a href="analisís-de-la-calidad.html#cb90-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb90-6"><a href="analisís-de-la-calidad.html#cb90-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución de los sulfatos según la calidad del vino&quot;</span>,</span>
+<span id="cb90-6"><a href="analisís-de-la-calidad.html#cb90-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del pH según la calidad del vino&quot;</span>,</span>
 <span id="cb90-7"><a href="analisís-de-la-calidad.html#cb90-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
-<span id="cb90-8"><a href="analisís-de-la-calidad.html#cb90-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Sulfatos&quot;</span></span>
+<span id="cb90-8"><a href="analisís-de-la-calidad.html#cb90-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;pH&quot;</span></span>
 <span id="cb90-9"><a href="analisís-de-la-calidad.html#cb90-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb90-10"><a href="analisís-de-la-calidad.html#cb90-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb90-11"><a href="analisís-de-la-calidad.html#cb90-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb90-12"><a href="analisís-de-la-calidad.html#cb90-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
 <span id="cb90-13"><a href="analisís-de-la-calidad.html#cb90-13" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb90-14"><a href="analisís-de-la-calidad.html#cb90-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb90-15"><a href="analisís-de-la-calidad.html#cb90-15" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" />
-Los sulfatos son un índice importante en la calidad del vino, ya que tienden a incrementarse cuando la calidad del vino se eleva, particularmente en los vinos de alta categoría (de calidad 7 y 8). Se aprecia una correlación positiva leve, a pesar de que la mediana de sulfatos permanece estable en la mayoría de los niveles de calidad. Aunque los sulfatos son un buen parámetro para medir la calidad del vino, más que otras variables como el pH, su fluctuación y la existencia de valores fuera de lo común indican que no deberían ser el único elemento a tener en cuenta.</p>
-<p>#Analisis bivariado entre el acido citrico vs quality</p>
+<span id="cb90-14"><a href="analisís-de-la-calidad.html#cb90-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+El gráfico muestra que el pH del vino se mantiene bastante estable en diferentes niveles de calidad, con algunos valores fuera del rango normal, pero no tiene una relación clara y fuerte con la calidad. Aunque el pH es relevante, no es el mejor indicador por sí solo; para determinar la calidad del vino con mayor precisión, es necesario considerar otras variables importantes para definir la calidad de un vino.</p>
+<p>#Analisis bivariado entre la sulphates vs quality</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="analisís-de-la-calidad.html#cb91-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
-<span id="cb91-2"><a href="analisís-de-la-calidad.html#cb91-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> citric.acid)) <span class="sc">+</span></span>
+<span id="cb91-2"><a href="analisís-de-la-calidad.html#cb91-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> sulphates)) <span class="sc">+</span></span>
 <span id="cb91-3"><a href="analisís-de-la-calidad.html#cb91-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb91-4"><a href="analisís-de-la-calidad.html#cb91-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
 <span id="cb91-5"><a href="analisís-de-la-calidad.html#cb91-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb91-6"><a href="analisís-de-la-calidad.html#cb91-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del acido citrico según la calidad del vino&quot;</span>,</span>
+<span id="cb91-6"><a href="analisís-de-la-calidad.html#cb91-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución de los sulfatos según la calidad del vino&quot;</span>,</span>
 <span id="cb91-7"><a href="analisís-de-la-calidad.html#cb91-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
-<span id="cb91-8"><a href="analisís-de-la-calidad.html#cb91-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Acido citrico&quot;</span></span>
-<span id="cb91-9"><a href="analisís-de-la-calidad.html#cb91-9" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb91-10"><a href="analisís-de-la-calidad.html#cb91-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb91-11"><a href="analisís-de-la-calidad.html#cb91-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb91-12"><a href="analisís-de-la-calidad.html#cb91-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb91-13"><a href="analisís-de-la-calidad.html#cb91-13" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb91-14"><a href="analisís-de-la-calidad.html#cb91-14" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
-<span id="cb91-15"><a href="analisís-de-la-calidad.html#cb91-15" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb91-8"><a href="analisís-de-la-calidad.html#cb91-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Sulfatos&quot;</span></span>
+<span id="cb91-9"><a href="analisís-de-la-calidad.html#cb91-9" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb91-10"><a href="analisís-de-la-calidad.html#cb91-10" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb91-11"><a href="analisís-de-la-calidad.html#cb91-11" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb91-12"><a href="analisís-de-la-calidad.html#cb91-12" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb91-13"><a href="analisís-de-la-calidad.html#cb91-13" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb91-14"><a href="analisís-de-la-calidad.html#cb91-14" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+Los sulfatos son un índice importante en la calidad del vino, ya que tienden a incrementarse cuando la calidad del vino se eleva, particularmente en los vinos de alta categoría (de calidad 7 y 8). Se aprecia una correlación positiva leve, a pesar de que la mediana de sulfatos permanece estable en la mayoría de los niveles de calidad. Aunque los sulfatos son un buen parámetro para medir la calidad del vino, más que otras variables como el pH, su fluctuación y la existencia de valores fuera de lo común indican que no deberían ser el único elemento a tener en cuenta.</p>
+<p>#Analisis bivariado entre el acido citrico vs quality</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="analisís-de-la-calidad.html#cb92-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="analisís-de-la-calidad.html#cb92-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> citric.acid)) <span class="sc">+</span></span>
+<span id="cb92-3"><a href="analisís-de-la-calidad.html#cb92-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-4"><a href="analisís-de-la-calidad.html#cb92-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple4&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-5"><a href="analisís-de-la-calidad.html#cb92-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb92-6"><a href="analisís-de-la-calidad.html#cb92-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribución del acido citrico según la calidad del vino&quot;</span>,</span>
+<span id="cb92-7"><a href="analisís-de-la-calidad.html#cb92-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Calidad del vino&quot;</span>,</span>
+<span id="cb92-8"><a href="analisís-de-la-calidad.html#cb92-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Acido citrico&quot;</span></span>
+<span id="cb92-9"><a href="analisís-de-la-calidad.html#cb92-9" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb92-10"><a href="analisís-de-la-calidad.html#cb92-10" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb92-11"><a href="analisís-de-la-calidad.html#cb92-11" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb92-12"><a href="analisís-de-la-calidad.html#cb92-12" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;gray90&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb92-13"><a href="analisís-de-la-calidad.html#cb92-13" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb92-14"><a href="analisís-de-la-calidad.html#cb92-14" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Según el gráfico, la calidad del vino no tiene una correlación directa o sólida con el ácido cítrico. Para la mayor parte de los niveles de calidad, el ácido cítrico tiene una mediana estable en cifras bajas (entre 0.2 y 0.3). A pesar de ser un elemento químico relevante, su distribución semejante a la del pH indica que, por sí solo, no es un pronosticador decisivo de la calidad.</p>
 
@@ -378,8 +336,8 @@ Los sulfatos son un índice importante en la calidad del vino, ya que tienden a 
           </div>
         </div>
       </div>
-<a href="analisis-de-la-variable-alcohol.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-alcohol.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,20 +394,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
