@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 10 Analisis de la variable citric.acid | Wine_quality</title>
+  <meta name="description" content="Chapter 10 Analisis de la variable citric.acid | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 10 Analisis de la variable citric.acid | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 10 Analisis de la variable citric.acid | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="analisis-de-la-variable-volatile.html"/>
+<link rel="next" href="analisis-de-la-variable-residual.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-citric.acid" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Analisis de la variable citric.acid<a href="analisis-de-la-variable-citric.html#analisis-de-la-variable-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="analisis-de-la-variable-citric.html#cb41-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="analisis-de-la-variable-citric.html#cb41-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(citric.acid),</span>
+<span id="cb41-3"><a href="analisis-de-la-variable-citric.html#cb41-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(citric.acid),</span>
+<span id="cb41-4"><a href="analisis-de-la-variable-citric.html#cb41-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(citric.acid),</span>
+<span id="cb41-5"><a href="analisis-de-la-variable-citric.html#cb41-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(citric.acid),</span>
+<span id="cb41-6"><a href="analisis-de-la-variable-citric.html#cb41-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(citric.acid),</span>
+<span id="cb41-7"><a href="analisis-de-la-variable-citric.html#cb41-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(citric.acid),</span>
+<span id="cb41-8"><a href="analisis-de-la-variable-citric.html#cb41-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(citric.acid),</span>
+<span id="cb41-9"><a href="analisis-de-la-variable-citric.html#cb41-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(citric.acid, <span class="fl">0.25</span>),</span>
+<span id="cb41-10"><a href="analisis-de-la-variable-citric.html#cb41-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(citric.acid, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.271 0.195    0.26  0.33      0      1  0.09  0.42</code></pre>
+<p>La variable citric acid, que en este contexto corresponde a la cantidad de ácido cítrico presente en el vino, un ácido orgánico que aporta frescura, realza la percepción frutal y contribuye al equilibrio general del sabor, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,27 g/L (DS = 0,19 g/L), donde el 50% de los valores se encuentran por debajo de 0,26 g/L, mientras que el 25% más bajo está por debajo de 0,09 g/L y el 25% más alto supera los 0,42 g/L, lo que evidencia una dispersión moderada. El valor mínimo registrado fue de 0 g/L, asociado posiblemente a vinos sin aporte perceptible de este ácido, y el máximo de 1 g/L, representando un nivel alto y poco común dentro del conjunto de datos.</p>
+<div id="histograma-de-citric.acid" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Histograma de citric.acid<a href="analisis-de-la-variable-citric.html#histograma-de-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="analisis-de-la-variable-citric.html#cb43-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="analisis-de-la-variable-citric.html#cb43-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> citric.acid))<span class="sc">+</span></span>
+<span id="cb43-3"><a href="analisis-de-la-variable-citric.html#cb43-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb43-4"><a href="analisis-de-la-variable-citric.html#cb43-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb43-5"><a href="analisis-de-la-variable-citric.html#cb43-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="boxplot-de-citric.acid" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Boxplot de citric.acid<a href="analisis-de-la-variable-citric.html#boxplot-de-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="analisis-de-la-variable-citric.html#cb45-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="analisis-de-la-variable-citric.html#cb45-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> , <span class="at">y=</span> citric.acid))<span class="sc">+</span></span>
+<span id="cb45-3"><a href="analisis-de-la-variable-citric.html#cb45-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb45-4"><a href="analisis-de-la-variable-citric.html#cb45-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+El histograma y la curva de densidad indican que la distribución de citric acid es asimétrica hacia la derecha (sesgo positivo), con una mayor concentración de vinos en valores bajos, especialmente cercanos a 0 g/L, lo que sugiere que en muchos casos el aporte de ácido cítrico es reducido o nulo. Sin embargo, se observan picos intermedios, particularmente alrededor de 0,25 y 0,5 g/L, lo que podría reflejar distintos estilos de vinificación. Los valores más altos (cercanos a 1 g/L) son poco frecuentes y podrían corresponder a vinos con una acidez cítrica marcadamente perceptible.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-volatile.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-residual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

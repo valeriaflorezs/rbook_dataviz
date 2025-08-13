@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 18 Analisis de la variable alcohol | Wine_quality</title>
+  <meta name="description" content="Chapter 18 Analisis de la variable alcohol | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 18 Analisis de la variable alcohol | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 18 Analisis de la variable alcohol | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="analisis-de-la-variable-sulphates.html"/>
+<link rel="next" href="analisís-de-la-calidad.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,51 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-alcohol" class="section level1 hasAnchor" number="18">
+<h1><span class="header-section-number">Chapter 18</span> Analisis de la variable alcohol<a href="analisis-de-la-variable-alcohol.html#analisis-de-la-variable-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="analisis-de-la-variable-alcohol.html#cb81-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="analisis-de-la-variable-alcohol.html#cb81-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(alcohol),</span>
+<span id="cb81-3"><a href="analisis-de-la-variable-alcohol.html#cb81-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(alcohol),</span>
+<span id="cb81-4"><a href="analisis-de-la-variable-alcohol.html#cb81-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(alcohol),</span>
+<span id="cb81-5"><a href="analisis-de-la-variable-alcohol.html#cb81-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(alcohol),</span>
+<span id="cb81-6"><a href="analisis-de-la-variable-alcohol.html#cb81-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(alcohol),</span>
+<span id="cb81-7"><a href="analisis-de-la-variable-alcohol.html#cb81-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(alcohol),</span>
+<span id="cb81-8"><a href="analisis-de-la-variable-alcohol.html#cb81-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(alcohol),</span>
+<span id="cb81-9"><a href="analisis-de-la-variable-alcohol.html#cb81-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.25</span>),</span>
+<span id="cb81-10"><a href="analisis-de-la-variable-alcohol.html#cb81-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.75</span>),</span>
+<span id="cb81-11"><a href="analisis-de-la-variable-alcohol.html#cb81-11" tabindex="-1"></a>            <span class="co">#mayores_13_5 = sum(alcohol &gt;= 13.5)</span></span>
+<span id="cb81-12"><a href="analisis-de-la-variable-alcohol.html#cb81-12" tabindex="-1"></a>            </span>
+<span id="cb81-13"><a href="analisis-de-la-variable-alcohol.html#cb81-13" tabindex="-1"></a>            )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  10.4  1.07    10.2   1.6    8.4   14.9   9.5  11.1</code></pre>
+<p>La variable alcohol, que en este contexto se refiere a la proporción de etanol presente en el vino expresada en g/L, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 10,42 g/L (DS= 1.065 g/L) y una mediana de 10,2 g/L. El 50% central de los datos se encuentra entre 9,5 g/L (Q1) y 11,1 g/L (Q3), con un rango intercuartílico (RIC) de 1,6 g/L, lo que sugiere una dispersión moderada. Los valores mínimo y máximo registrados fueron 8,4 g/L y 14,9 g/L,con un rango 6,5 g/L respectivamente. La presencia de valores extremos podría elevar ligeramente el promedio con respecto a la mediana.</p>
+<div id="histograma-de-alcohol" class="section level2 hasAnchor" number="18.1">
+<h2><span class="header-section-number">18.1</span> Histograma de alcohol<a href="analisis-de-la-variable-alcohol.html#histograma-de-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="analisis-de-la-variable-alcohol.html#cb83-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb83-2"><a href="analisis-de-la-variable-alcohol.html#cb83-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb83-3"><a href="analisis-de-la-variable-alcohol.html#cb83-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb83-4"><a href="analisis-de-la-variable-alcohol.html#cb83-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb83-5"><a href="analisis-de-la-variable-alcohol.html#cb83-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+## Boxplot de alcohol</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="analisis-de-la-variable-alcohol.html#cb85-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href="analisis-de-la-variable-alcohol.html#cb85-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb85-3"><a href="analisis-de-la-variable-alcohol.html#cb85-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb85-4"><a href="analisis-de-la-variable-alcohol.html#cb85-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>La distribución de alcohol presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 13,45g/L. En consecuencia, el máximo identificado se clasifica como un valor atípico alto, dichos valores podrían sesgar la media hacia valores mayores</p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-sulphates.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisís-de-la-calidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 8 Analisis de la variable fixed.acidity | Wine_quality</title>
+  <meta name="description" content="Chapter 8 Analisis de la variable fixed.acidity | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 8 Analisis de la variable fixed.acidity | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 8 Analisis de la variable fixed.acidity | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="verificar-missing-datas.html"/>
+<link rel="next" href="analisis-de-la-variable-volatile.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-fixed.acidity" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Analisis de la variable fixed.acidity<a href="analisis-de-la-variable-fixed.html#analisis-de-la-variable-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="analisis-de-la-variable-fixed.html#cb31-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="analisis-de-la-variable-fixed.html#cb31-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(fixed.acidity),</span>
+<span id="cb31-3"><a href="analisis-de-la-variable-fixed.html#cb31-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(fixed.acidity),</span>
+<span id="cb31-4"><a href="analisis-de-la-variable-fixed.html#cb31-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(fixed.acidity),</span>
+<span id="cb31-5"><a href="analisis-de-la-variable-fixed.html#cb31-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(fixed.acidity),</span>
+<span id="cb31-6"><a href="analisis-de-la-variable-fixed.html#cb31-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(fixed.acidity),</span>
+<span id="cb31-7"><a href="analisis-de-la-variable-fixed.html#cb31-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(fixed.acidity),</span>
+<span id="cb31-8"><a href="analisis-de-la-variable-fixed.html#cb31-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(fixed.acidity),</span>
+<span id="cb31-9"><a href="analisis-de-la-variable-fixed.html#cb31-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(fixed.acidity, <span class="fl">0.25</span>),</span>
+<span id="cb31-10"><a href="analisis-de-la-variable-fixed.html#cb31-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(fixed.acidity, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  8.32  1.74     7.9   2.1    4.6   15.9   7.1   9.2</code></pre>
+<p>La variable fixed acidity, que se refiere a la cantidad de ácidos que no se evaporan fácilmente y que aportan un sabor ácido estable y duradero, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 8,319 g/L (DS = 1,741 g/L), donde El 50% de los valores se encuentran por debajo de 7,9 g/L, mientras que el 25% más bajo está por debajo de 7,1 g/L y el 25% más alto supera los 9,2 g/L, evidenciando una dispersión moderada. El valor mínimo registrado fue de 4,6 g/L y el máximo de 15,9 g/L lo que indica un amplio rango de 11,3 g/L.</p>
+<div id="histograma-de-fixed.acidity" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Histograma de fixed.acidity<a href="analisis-de-la-variable-fixed.html#histograma-de-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="analisis-de-la-variable-fixed.html#cb33-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="analisis-de-la-variable-fixed.html#cb33-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> fixed.acidity))<span class="sc">+</span></span>
+<span id="cb33-3"><a href="analisis-de-la-variable-fixed.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb33-4"><a href="analisis-de-la-variable-fixed.html#cb33-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb33-5"><a href="analisis-de-la-variable-fixed.html#cb33-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="boxplot-de-fixed.acidity" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Boxplot de fixed.acidity<a href="analisis-de-la-variable-fixed.html#boxplot-de-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="analisis-de-la-variable-fixed.html#cb35-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="analisis-de-la-variable-fixed.html#cb35-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> fixed.acidity))<span class="sc">+</span></span>
+<span id="cb35-3"><a href="analisis-de-la-variable-fixed.html#cb35-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb35-4"><a href="analisis-de-la-variable-fixed.html#cb35-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+La distribución de fixed acidity presenta una ligera asimetría positiva, lo que sugiere la presencia de valores de acidez fija inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 12,4 g/L. Dichos valores podrían sesgar la media hacia valores mayores.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="verificar-missing-datas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-volatile.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

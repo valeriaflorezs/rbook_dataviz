@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 7 Verificar missing datas | Wine_quality</title>
+  <meta name="description" content="Chapter 7 Verificar missing datas | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 7 Verificar missing datas | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 7 Verificar missing datas | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="cambiar-tipo-de-dato-de-la-variable-quality.html"/>
+<link rel="next" href="analisis-de-la-variable-fixed.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,30 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
-</div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="verificar-missing-datas" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Verificar missing datas<a href="verificar-missing-datas.html#verificar-missing-datas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="verificar-missing-datas.html#cb26-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="verificar-missing-datas.html#cb26-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.))))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 12
+##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
+##           &lt;int&gt;            &lt;int&gt;       &lt;int&gt;          &lt;int&gt;     &lt;int&gt;
+## 1             0                0           0              0         0
+## # ℹ 7 more variables: free.sulfur.dioxide &lt;int&gt;, total.sulfur.dioxide &lt;int&gt;,
+## #   density &lt;int&gt;, pH &lt;int&gt;, sulphates &lt;int&gt;, alcohol &lt;int&gt;, quality &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="verificar-missing-datas.html#cb28-1" tabindex="-1"></a><span class="co">#Otras formas de mirar NAs (libreria Amelia)</span></span>
+<span id="cb28-2"><a href="verificar-missing-datas.html#cb28-2" tabindex="-1"></a><span class="fu">missmap</span>(datos)</span></code></pre></div>
+<pre><code>## Warning: Unknown or uninitialised column: `arguments`.
+## Unknown or uninitialised column: `arguments`.</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `imputations`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cambiar-tipo-de-dato-de-la-variable-quality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-fixed.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 15 Analisis de la variable density | Wine_quality</title>
+  <meta name="description" content="Chapter 15 Analisis de la variable density | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 15 Analisis de la variable density | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 15 Analisis de la variable density | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="analisis-de-la-variable-total.sulfur.html"/>
+<link rel="next" href="analisis-de-la-variable-ph.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-density" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Analisis de la variable density<a href="analisis-de-la-variable-density.html#analisis-de-la-variable-density" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="analisis-de-la-variable-density.html#cb66-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="analisis-de-la-variable-density.html#cb66-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(density),</span>
+<span id="cb66-3"><a href="analisis-de-la-variable-density.html#cb66-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(density),</span>
+<span id="cb66-4"><a href="analisis-de-la-variable-density.html#cb66-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(density),</span>
+<span id="cb66-5"><a href="analisis-de-la-variable-density.html#cb66-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(density),</span>
+<span id="cb66-6"><a href="analisis-de-la-variable-density.html#cb66-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(density),</span>
+<span id="cb66-7"><a href="analisis-de-la-variable-density.html#cb66-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(density),</span>
+<span id="cb66-8"><a href="analisis-de-la-variable-density.html#cb66-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(density),</span>
+<span id="cb66-9"><a href="analisis-de-la-variable-density.html#cb66-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(density, <span class="fl">0.25</span>),</span>
+<span id="cb66-10"><a href="analisis-de-la-variable-density.html#cb66-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(density, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom      ds mediana     RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.997 0.00189   0.997 0.00223  0.990   1.00 0.996 0.998</code></pre>
+<p>La variable density presenta una distribución con un promedio de aproximadamente 0.9967 y una desviación estándar muy baja de 0.0019, lo que indica una dispersión mínima de los datos respecto a la media; además, la mediana (0.99675) es prácticamente igual al promedio, lo que sugiere simetría en la distribución. El rango intercuartílico (RIC) es de 0.0022, con un valor mínimo de 0.99007 y máximo de 1.00369, mientras que el primer y tercer cuartil (Q1 y Q3) son 0.9956 y 0.9978, respectivamente; en conjunto, estos valores muestran una alta concentración de los datos dentro de un rango muy estrecho, sin evidencias visibles de valores atípicos ni sesgos pronunciados.</p>
+<div id="histograma-de-density" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Histograma de density<a href="analisis-de-la-variable-density.html#histograma-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="analisis-de-la-variable-density.html#cb68-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="analisis-de-la-variable-density.html#cb68-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> density))<span class="sc">+</span></span>
+<span id="cb68-3"><a href="analisis-de-la-variable-density.html#cb68-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb68-4"><a href="analisis-de-la-variable-density.html#cb68-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb68-5"><a href="analisis-de-la-variable-density.html#cb68-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="boxplot-de-density" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> Boxplot de density<a href="analisis-de-la-variable-density.html#boxplot-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="analisis-de-la-variable-density.html#cb70-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="analisis-de-la-variable-density.html#cb70-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> density))<span class="sc">+</span></span>
+<span id="cb70-3"><a href="analisis-de-la-variable-density.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb70-4"><a href="analisis-de-la-variable-density.html#cb70-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+La variable density tiene una distribución normal, con valores muy concentrados alrededor del promedio y ligeros outliers en los extremos. Esto sugiere una alta homogeneidad en esta característica dentro del conjunto de datos analizado.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-total.sulfur.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-ph.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 13 Analisis de la variable free.sulfur.dioxide | Wine_quality</title>
+  <meta name="description" content="Chapter 13 Analisis de la variable free.sulfur.dioxide | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 13 Analisis de la variable free.sulfur.dioxide | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 13 Analisis de la variable free.sulfur.dioxide | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="analisis-de-la-variable-chlorides.html"/>
+<link rel="next" href="analisis-de-la-variable-total.sulfur.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-free.sulfur.dioxide" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Analisis de la variable free.sulfur.dioxide<a href="analisis-de-la-variable-free.sulfur.html#analisis-de-la-variable-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="analisis-de-la-variable-free.sulfur.html#cb56-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="analisis-de-la-variable-free.sulfur.html#cb56-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(free.sulfur.dioxide),</span>
+<span id="cb56-3"><a href="analisis-de-la-variable-free.sulfur.html#cb56-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(free.sulfur.dioxide),</span>
+<span id="cb56-4"><a href="analisis-de-la-variable-free.sulfur.html#cb56-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(free.sulfur.dioxide),</span>
+<span id="cb56-5"><a href="analisis-de-la-variable-free.sulfur.html#cb56-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(free.sulfur.dioxide),</span>
+<span id="cb56-6"><a href="analisis-de-la-variable-free.sulfur.html#cb56-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(free.sulfur.dioxide),</span>
+<span id="cb56-7"><a href="analisis-de-la-variable-free.sulfur.html#cb56-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(free.sulfur.dioxide),</span>
+<span id="cb56-8"><a href="analisis-de-la-variable-free.sulfur.html#cb56-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(free.sulfur.dioxide),</span>
+<span id="cb56-9"><a href="analisis-de-la-variable-free.sulfur.html#cb56-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(free.sulfur.dioxide, <span class="fl">0.25</span>),</span>
+<span id="cb56-10"><a href="analisis-de-la-variable-free.sulfur.html#cb56-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(free.sulfur.dioxide, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  15.9  10.5      14    14      1     72     7    21</code></pre>
+<p>La variable free.sulfur.dioxide, que representa la cantidad de dióxido de azufre libre en el vino,un conservante clave en la prevención de oxidación y proliferación microbiana, fue analizada a partir de 1.599 observaciones. La media fue de 15,87 mg/L (DS = 10,46 mg/L), mientras que la mediana se situó en 14 mg/L, lo que indica una ligera asimetría positiva. El 25% inferior de los valores se encuentra por debajo de 7 mg/L, y el 25% superior supera los 21 mg/L, con un rango intercuartílico (RIC) de 14 mg/L, lo que refleja una dispersión moderada. El valor mínimo observado fue de 1 mg/L y el máximo de 72 mg/L, lo que sugiere la presencia de valores extremos altos que podrían estar influyendo en la media, aunque sin distorsionarla de forma significativa respecto a la mediana.</p>
+<div id="histograma-de-free.sulfur.dioxide" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Histograma de free.sulfur.dioxide<a href="analisis-de-la-variable-free.sulfur.html#histograma-de-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="analisis-de-la-variable-free.sulfur.html#cb58-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="analisis-de-la-variable-free.sulfur.html#cb58-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> free.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb58-3"><a href="analisis-de-la-variable-free.sulfur.html#cb58-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb58-4"><a href="analisis-de-la-variable-free.sulfur.html#cb58-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb58-5"><a href="analisis-de-la-variable-free.sulfur.html#cb58-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="boxplot-de-free.sulfur.dioxide" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Boxplot de free.sulfur.dioxide<a href="analisis-de-la-variable-free.sulfur.html#boxplot-de-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="analisis-de-la-variable-free.sulfur.html#cb60-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb60-2"><a href="analisis-de-la-variable-free.sulfur.html#cb60-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> free.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb60-3"><a href="analisis-de-la-variable-free.sulfur.html#cb60-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb60-4"><a href="analisis-de-la-variable-free.sulfur.html#cb60-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+La distribución de la variable free.sulfur.dioxide muestra una asimetría positiva moderada, con una alta concentración de observaciones en niveles bajos y una cola extendida hacia valores altos. Esto se evidencia tanto en el histograma con curva de densidad como en el boxplot, donde se observan varios valores atípicos superiores. Aunque la media (15,87 mg/L) supera ligeramente a la mediana (14 mg/L), lo que sugiere cierto sesgo, esta diferencia no es extrema. Sin embargo, el valor máximo de 72 mg/L, muy superior al tercer cuartil (21 mg/L), indica la presencia de casos puntuales con concentraciones notablemente altas de dióxido de azufre libre, que influyen en las medidas de tendencia central y dispersión.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-chlorides.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-total.sulfur.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Wine_quality</title>
-  <meta name="description" content="Wine_quality" />
+  <title>Chapter 9 Analisis de la variable volatile.acidity | Wine_quality</title>
+  <meta name="description" content="Chapter 9 Analisis de la variable volatile.acidity | Wine_quality" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Wine_quality" />
+  <meta property="og:title" content="Chapter 9 Analisis de la variable volatile.acidity | Wine_quality" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Wine_quality" />
+  <meta name="twitter:title" content="Chapter 9 Analisis de la variable volatile.acidity | Wine_quality" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contexto-de-los-datos.html"/>
+<link rel="prev" href="analisis-de-la-variable-fixed.html"/>
+<link rel="next" href="analisis-de-la-variable-citric.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -258,26 +258,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Wine_quality</h1>
-<p class="author"><em>K. Barrera, V. Florez &amp; L. Rivera</em></p>
-<p class="date"><em>2025-08-12</em></p>
+<div id="analisis-de-la-variable-volatile.acidity" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Analisis de la variable volatile.acidity<a href="analisis-de-la-variable-volatile.html#analisis-de-la-variable-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="analisis-de-la-variable-volatile.html#cb36-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="analisis-de-la-variable-volatile.html#cb36-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(volatile.acidity),</span>
+<span id="cb36-3"><a href="analisis-de-la-variable-volatile.html#cb36-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(volatile.acidity),</span>
+<span id="cb36-4"><a href="analisis-de-la-variable-volatile.html#cb36-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(volatile.acidity),</span>
+<span id="cb36-5"><a href="analisis-de-la-variable-volatile.html#cb36-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(volatile.acidity),</span>
+<span id="cb36-6"><a href="analisis-de-la-variable-volatile.html#cb36-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(volatile.acidity),</span>
+<span id="cb36-7"><a href="analisis-de-la-variable-volatile.html#cb36-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(volatile.acidity),</span>
+<span id="cb36-8"><a href="analisis-de-la-variable-volatile.html#cb36-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(volatile.acidity),</span>
+<span id="cb36-9"><a href="analisis-de-la-variable-volatile.html#cb36-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(volatile.acidity, <span class="fl">0.25</span>),</span>
+<span id="cb36-10"><a href="analisis-de-la-variable-volatile.html#cb36-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(volatile.acidity, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.528 0.179    0.52  0.25   0.12   1.58  0.39  0.64</code></pre>
+<p>La variable volatile acidity, que en este contexto se refiere a la cantidad de ácidos volátiles presentes en el vino y que en exceso pueden generar aromas y sabores indeseados, fue analizada a partir de 1.599 observaciones.Se obtuvo un promedio de 0,528 g/L (DS = 0,179 g/L), donde el 50% de los valores se encuentran por debajo de 0,52 g/L. El 25% más bajo está por debajo de 0,39 g/L y el 25% más alto supera los 0,64 g/L, evidenciando una dispersión moderada.El valor mínimo registrado fue de 0,12 g/L y el máximo de 1,58 g/L, lo que indica un rango de 1,46 g/L.</p>
+<div id="histograma-de-volatile.acidity" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Histograma de volatile.acidity<a href="analisis-de-la-variable-volatile.html#histograma-de-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="analisis-de-la-variable-volatile.html#cb38-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="analisis-de-la-variable-volatile.html#cb38-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> volatile.acidity))<span class="sc">+</span></span>
+<span id="cb38-3"><a href="analisis-de-la-variable-volatile.html#cb38-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)))<span class="sc">+</span></span>
+<span id="cb38-4"><a href="analisis-de-la-variable-volatile.html#cb38-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;purple4&#39;</span>)<span class="sc">+</span></span>
+<span id="cb38-5"><a href="analisis-de-la-variable-volatile.html#cb38-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués “Vinho Verde”. Para más detalles, consultar: <a href="http://www.vinhoverde.pt/en/" class="uri">http://www.vinhoverde.pt/en/</a> o la referencia [Cortez et al., 2009].</p>
-<p><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" class="uri">https://archive.ics.uci.edu/dataset/186/wine+quality</a></p>
+<div id="boxplot-de-volatile.acidity" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Boxplot de volatile.acidity<a href="analisis-de-la-variable-volatile.html#boxplot-de-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="analisis-de-la-variable-volatile.html#cb40-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="analisis-de-la-variable-volatile.html#cb40-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> volatile.acidity))<span class="sc">+</span></span>
+<span id="cb40-3"><a href="analisis-de-la-variable-volatile.html#cb40-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb40-4"><a href="analisis-de-la-variable-volatile.html#cb40-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+La variable acidez volátil en los vinos tintos presenta una distribución mayormente concentrada entre 0,20 g/L y 0,80 g/L, con un pico en torno a 0,5 g/L, lo que indica que la mayoría de los vinos tienen niveles moderados. La mediana es de 0,52 g/L y el rango intercuartílico se encuentra entre 0,39 g/L y 0,64 g/L, reflejando que el 50 % central de las observaciones se concentra en un intervalo relativamente estrecho. Sin embargo, el diagrama de caja revela la presencia de múltiples valores atípicos por encima del límite superior, alcanzando un máximo de 1,58 g/L, lo que evidencia que, aunque la acidez volátil es moderada en la mayoría de los casos, existen vinos con niveles excepcionalmente altos. Estos outliers pueden afectar las medidas como la media y la desviación estándar y, desde el punto de vista enológico, niveles muy elevados de acidez volátil pueden generar aromas desagradables (como notas avinagradas), mientras que niveles moderados aportan frescura y complejidad al vino.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexto-de-los-datos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="analisis-de-la-variable-fixed.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analisis-de-la-variable-citric.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
