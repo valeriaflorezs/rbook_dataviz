@@ -783,6 +783,33 @@ En esta sección analizaremos las relaciones entre las variables físico-químic
 
 Una correlación positiva indica que, a medida que una variable aumenta, la otra también tiende a aumentar; mientras que una correlación negativa indica que, al aumentar una variable, la otra tiende a disminuir. Este paso es fundamental para comprender la estructura del conjunto de datos y seleccionar variables relevantes para análisis posteriores.
 
+## Matriz de correlación (Spearman)
+```{r}
+datos_num <- datos %>% select(where(is.numeric))
+# Visualización con GGally
+ggcorr(
+  datos_num,
+  method = c("everything", "spearman"),
+  label = TRUE,           # Mostrar coeficientes
+  label_round = 2,        # Redondear a 2 decimales
+  label_size = 3,         # Tamaño de texto
+  hjust = 0.85,           # Ajuste horizontal para evitar sobreposición
+  layout.exp = 3,         # Espaciado para mejorar legibilidad
+  low = "#FFB6C1", mid = "#C95E78", high = "#57223F" # Paleta personalizada
+) +
+  ggtitle("Matriz de correlación (Spearman)") +
+  theme_bw(base_size = 14)
+```
+
+Dado que la mayoría de las variables no cumplen normalidad, se utilizó el coeficiente de Spearman. Las correlaciones más relevantes encontradas son:
+
+- **free.sulfur.dioxide vs total.sulfur.dioxide (ρ ≈ 0.79)**
+Existe una asociación positiva muy fuerte entre el dióxido de azufre libre y el total, lo que indica que ambas variables están estrechamente relacionadas y aportan información redundante. Esto sugiere que, en análisis predictivos, podría bastar con incluir una de ellas para evitar colinealidad.
+- **fixed.acidity vs citric.acid (ρ ≈ 0.66)**
+Se observa una correlación positiva moderada: a mayor acidez fija, mayor contenido de ácido cítrico. Esta relación es consistente con la química del vino, ya que ambos parámetros están vinculados al perfil ácido del producto.
+- **volatile.acidity vs citric.acid (ρ ≈ 0.62)**
+Existe una correlación positiva moderada: cuando aumenta la acidez volátil, también tiende a aumentar el ácido cítrico. Esto indica que estos componentes están relacionados y podrían influir conjuntamente en la percepción sensorial y calidad del vino.
+
 ## chlorides vs sulphates
 ```{r}
 datos %>%  
@@ -790,8 +817,8 @@ datos %>%
   geom_point(color = "#C95E78", size = 3)+
   geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
   labs(title = "Relación entre Clorides vs Sulphates",
-       x = "Acido citrico ",
-       y = "PH") +
+       x = "Chlorides",
+       y = "Sulphates") +
   theme_bw()
 ```
 
@@ -801,7 +828,7 @@ shapiro.test(datos$chlorides)
 shapiro.test(datos$sulphates)
 ```
 
-Con una confianza del 95%, se observa que las distribuciones de las variables chlorides (W = 0.48425, p-valor < 2.2e-16) y sulphates *(W = 0.83304, p-valor < 2.2e-16)* no provienen de una distribución normal.
+Con una confianza del 95%, se observa que las distribuciones de las variables chlorides *(W = 0.48425, p-valor < 2.2e-16)* y sulphates *(W = 0.83304, p-valor < 2.2e-16)* no provienen de una distribución normal.
 
 ### Correlación Spearman
 ```{r}
@@ -918,29 +945,15 @@ cor.test(datos$volatile.acidity,datos$citric.acid, method = 'spearman', exact=FA
 
 El análisis de correlación de Spearman entre volatile.acidity y citric.acid mostró un coeficiente ρ=−0.6103, indicando una *correlación negativa alta* y significativa (p-valor < 2.2e-16). Esto implica que a mayor acidez volátil, menor contenido de ácido cítrico, siendo esta relación estadísticamente significativa.
 
-## Matriz de correlación (Spearman)
-```{r}
-datos_num <- datos %>% select(where(is.numeric))
-# Visualización con GGally
-ggcorr(
-  datos_num,
-  method = c("everything", "spearman"),
-  label = TRUE,           # Mostrar coeficientes
-  label_round = 2,        # Redondear a 2 decimales
-  label_size = 3,         # Tamaño de texto
-  hjust = 0.85,           # Ajuste horizontal para evitar sobreposición
-  layout.exp = 3,         # Espaciado para mejorar legibilidad
-  low = "#FFB6C1", mid = "#C95E78", high = "#57223F" # Paleta personalizada
-) +
-  ggtitle("Matriz de correlación (Spearman)") +
-  theme_bw(base_size = 14)
-```
+# Conclusión general del análisis
+La calidad del vino tinto no depende de un único factor, sino de la combinación de varias características fisicoquímicas. Las correlaciones entre variables y calidad son en su mayoría moderadas o débiles, destacando:
 
-Dado que las variables no cumplen normalidad, se utilizó el coeficiente de Spearman. Las correlaciones más relevantes encontradas son:
+Alcohol: correlación positiva con la calidad; vinos con mayor grado alcohólico tienden a ser mejor valorados.
+Acidez volátil y densidad: correlaciones negativas; valores altos se asocian con menor calidad.
+Relaciones esperadas entre variables:
 
-- **free.sulfur.dioxide vs total.sulfur.dioxide (ρ ≈ 0.79)**
-Existe una asociación positiva muy fuerte entre el dióxido de azufre libre y el total, lo que indica que ambas variables están estrechamente relacionadas y aportan información redundante. Esto sugiere que, en análisis predictivos, podría bastar con incluir una de ellas para evitar colinealidad.
-- **fixed.acidity vs citric.acid (ρ ≈ 0.66)**
-Se observa una correlación positiva moderada: a mayor acidez fija, mayor contenido de ácido cítrico. Esta relación es consistente con la química del vino, ya que ambos parámetros están vinculados al perfil ácido del producto.
-- **volatile.acidity vs citric.acid (ρ ≈ 0.62)**
-Existe una correlación positiva moderada: cuando aumenta la acidez volátil, también tiende a aumentar el ácido cítrico. Esto indica que estos componentes están relacionados y podrían influir conjuntamente en la percepción sensorial y calidad del vino.
+free.sulfur.dioxide y total.sulfur.dioxide presentan correlación fuerte.
+citric acid se asocia negativamente con volatile acidity, coherente con procesos de fermentación.
+chlorides y sulphates muestran correlación débil.
+
+En síntesis, el contenido de alcohol y la acidez son los factores más influyentes, mientras que otras variables tienen efectos menores o indirectos. Esto confirma la complejidad sensorial y química del vino: la calidad resulta de un equilibrio entre múltiples atributos.
