@@ -1,0 +1,996 @@
+---
+title: "Factores que Influyen en la Calidad del Vino"
+author: "Autoras: Katherin Barrera Lopez, Valeria Florez Sarmiento & Laura Rivera Figueredo"
+output:
+  html_document:
+    toc: true       
+    toc_float:
+      collapsed: false
+    code_folding: hide
+    css: style.css
+    theme: lumen
+---
+
+<div style="text-align: center;">
+  <img src="portada.png" alt="Logo vino"
+       style="width:295px; height:auto;">
+</div>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 5,
+  dpi = 300
+)
+# Paleta de colores consistente
+colores <- c("#800020", "#000000")
+```
+
+Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués "Vinho Verde". Para más detalles, consultar: http://www.vinhoverde.pt/en/ o la referencia [Cortez et al., 2009].
+
+https://archive.ics.uci.edu/dataset/186/wine+quality
+
+**Contexto de los datos **
+
+| **Variable**               | **Contexto**                                                                                                                                           |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **fixed\.acidity**         | Representa los ácidos no volátiles (principalmente ácido tartárico y málico) que no se evaporan fácilmente. Afectan directamente el sabor y la frescura del vino. |
+| **volatile\.acidity**      | Mide los ácidos volátiles (principalmente ácido acético). En cantidades altas, puede generar un olor desagradable (como a vinagre).                               |
+| **citric\.acid**           | Presente de forma natural en pequeñas cantidades, añade frescura y sabor cítrico. Puede equilibrar el dulzor del vino.                                            |
+| **residual\.sugar**        | Es el azúcar que queda después de la fermentación. Valores altos indican vinos dulces; bajos, vinos secos.                                                        |
+| **chlorides**              | Representan la cantidad de sal (principalmente cloruro de sodio) en el vino. Afecta el sabor; niveles altos pueden ser negativos.                                 |
+| **free\.sulfur\.dioxide**  | Es el dióxido de azufre libre, usado como conservante para prevenir oxidación y crecimiento microbiano. Este componente es activo y protege el vino.              |
+| **total\.sulfur\.dioxide** | Incluye tanto el dióxido de azufre libre como el combinado. Altas cantidades pueden afectar negativamente el aroma y sabor del vino.                              |
+| **density**                | Es la densidad del vino, relacionada con el contenido de azúcar y alcohol. Vinos más dulces tienden a tener mayor densidad.                                       |
+| **pH**                     | Mide la acidez global del vino. Un pH bajo indica mayor acidez. Influye en el sabor, color y estabilidad microbiológica.                                          |
+| **sulphates**              | Son sales que pueden contribuir a la conservación del vino y mejorar su sabor. En exceso, pueden ser perjudiciales.                                               |
+| **alcohol**                | Porcentaje de etanol. Afecta el cuerpo, el sabor y la percepción de dulzor. Es un factor importante en la calidad percibida del vino.                             |
+
+
+|  **Variable Objetivo**  | **Contexto**                                                                                                                                                                      |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **quality**  | Es una puntuación (de 0 a 10) dada por catadores expertos, basada en aspectos sensoriales del vino (aroma, sabor, equilibrio, etc.). Se usa como variable objetivo para predecir la calidad. |
+
+
+# Carga de librerias
+```{r message=FALSE, warning=FALSE}
+# Manipulación y visualización
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(GGally) 
+library(corrplot) #Correlation Matrix
+library(Amelia) #Missing Data
+
+# Pruebas de normalidad
+library(nortest)
+
+# Verificación de supuestos
+library(car)
+
+# Pruebas no paramétricas y tamaños de efecto
+library(rstatix)
+library(coin)
+```
+
+# Carga y estructura de los datos
+```{r message=FALSE, warning=FALSE}
+datos <- read_delim("winequality-red.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+dim(datos)
+str(datos)
+names(datos) <- gsub(" ", ".", names(datos))
+```
+El dataset contiene 1599 observaciones y las 12 variables antes descritas. 
+
+
+### Cambiar tipo de dato de la variable quality 
+```{r}
+datos$quality <- factor(datos$quality, ordered = TRUE, levels = sort(unique(datos$quality)))
+```
+La variable quality se convierte en un factor ordinal porque representa una escala de valoración subjetiva (de 0 a 10) asignada por catadores, donde valores mayores indican mejor calidad. Este cambio permite analizar y modelar la calidad del vino considerando el orden natural de las categorías, sin asumir que las diferencias entre puntuaciones son lineales.
+
+### Verificar missing datas 
+```{r}
+datos %>% 
+  summarise(across(everything(), ~ sum(is.na(.))))
+
+#Otras formas de mirar NAs (libreria Amelia)
+colores= c("#000", '#800020')
+missmap(datos, col = colores)
+```
+El conjunto de datos está completo y limpio, sin registros incompletos en ninguna de sus variables.
+Esto permite continuar con el análisis sin necesidad de aplicar técnicas de imputación o eliminación de observaciones.
+
+# Análisis Univariados
+
+## Variable fixed.acidity
+```{r}
+datos %>% 
+  summarise(n= length(fixed.acidity),
+            prom= mean(fixed.acidity),
+            ds= sd(fixed.acidity),
+            mediana= median(fixed.acidity),
+            RIC= IQR(fixed.acidity),
+            minimo= min(fixed.acidity),
+            maximo= max(fixed.acidity),
+            Q1= quantile(fixed.acidity, 0.25),
+            Q3= quantile(fixed.acidity, 0.75))
+```
+
+La variable fixed acidity, que se refiere a la cantidad de ácidos que no se evaporan fácilmente y que aportan un sabor ácido estable y duradero, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 8,319 g/L (DS = 1,741 g/L), donde El 50% de los valores se encuentran por debajo de 7,9 g/L, mientras que el 25% más bajo está por debajo de 7,1 g/L y el 25% más alto supera los 9,2 g/L, evidenciando una dispersión moderada. El valor mínimo registrado fue de 4,6 g/L y el máximo de 15,9 g/L lo que indica un amplio rango de 11,3 g/L. 
+
+### Histograma de fixed.acidity
+```{r}
+datos %>% 
+  ggplot(aes(x= fixed.acidity))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de fixed.acidity
+```{r}
+datos %>% 
+  ggplot(aes(y= fixed.acidity))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de fixed acidity presenta una ligera asimetría positiva, lo que sugiere la presencia de valores de acidez fija inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 12,4 g/L. Dichos valores podrían sesgar la media hacia valores mayores.
+
+## Variable volatile.acidity
+```{r}
+datos %>% 
+  summarise(n= length(volatile.acidity),
+            prom= mean(volatile.acidity),
+            ds= sd(volatile.acidity),
+            mediana= median(volatile.acidity),
+            RIC= IQR(volatile.acidity),
+            minimo= min(volatile.acidity),
+            maximo= max(volatile.acidity),
+            Q1= quantile(volatile.acidity, 0.25),
+            Q3= quantile(volatile.acidity, 0.75))
+```
+
+La variable volatile acidity, que en este contexto se refiere a la cantidad de ácidos volátiles presentes en el vino y que en exceso pueden generar aromas y sabores indeseados, fue analizada a partir de 1.599 observaciones.Se obtuvo un promedio de 0,528 g/L (DS = 0,179 g/L), donde el 50% de los valores se encuentran por debajo de 0,52 g/L. El 25% más bajo está por debajo de 0,39 g/L y el 25% más alto supera los 0,64 g/L, evidenciando una dispersión moderada.El valor mínimo registrado fue de 0,12 g/L y el máximo de 1,58 g/L, lo que indica un rango de 1,46 g/L.
+
+
+### Histograma de volatile.acidity
+```{r}
+datos %>% 
+  ggplot(aes(x= volatile.acidity))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de volatile.acidity
+```{r}
+datos %>% 
+  ggplot(aes(y= volatile.acidity))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La variable acidez volátil en los vinos tintos presenta una distribución mayormente concentrada entre 0,20 g/L y 0,80 g/L, con un pico en torno a 0,5 g/L, lo que indica que la mayoría de los vinos tienen niveles moderados. La mediana es de 0,52 g/L y el rango intercuartílico se encuentra entre 0,39 g/L y 0,64 g/L, reflejando que el 50 % central de las observaciones se concentra en un intervalo relativamente estrecho. Sin embargo, el diagrama de caja revela la presencia de múltiples valores atípicos por encima del límite superior, alcanzando un máximo de 1,58 g/L, lo que evidencia que, aunque la acidez volátil es moderada en la mayoría de los casos, existen vinos con niveles excepcionalmente altos. Estos outliers pueden afectar las medidas como la media y la desviación estándar y, desde el punto de vista enológico, niveles muy elevados de acidez volátil pueden generar aromas desagradables (como notas avinagradas), mientras que niveles moderados aportan frescura y complejidad al vino.
+
+## Variable citric.acid
+```{r}
+datos %>% 
+  summarise(n= length(citric.acid),
+            prom= mean(citric.acid),
+            ds= sd(citric.acid),
+            mediana= median(citric.acid),
+            RIC= IQR(citric.acid),
+            minimo= min(citric.acid),
+            maximo= max(citric.acid),
+            Q1= quantile(citric.acid, 0.25),
+            Q3= quantile(citric.acid, 0.75))
+```
+
+La variable citric acid, que en este contexto corresponde a la cantidad de ácido cítrico presente en el vino, un ácido orgánico que aporta frescura, realza la percepción frutal y contribuye al equilibrio general del sabor, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,27 g/L (DS = 0,19 g/L), donde el 50% de los valores se encuentran por debajo de 0,26 g/L, mientras que el 25% más bajo está por debajo de 0,09 g/L y el 25% más alto supera los 0,42 g/L, lo que evidencia una dispersión moderada. El valor mínimo registrado fue de 0 g/L, asociado posiblemente a vinos sin aporte perceptible de este ácido, y el máximo de 1 g/L, representando un nivel alto y poco común dentro del conjunto de datos.
+
+### Histograma de citric.acid
+```{r}
+datos %>% 
+  ggplot(aes(x= citric.acid))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de citric.acid
+```{r}
+datos %>% 
+  ggplot(aes(group = , y= citric.acid))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+El histograma y la curva de densidad indican que la distribución de citric acid es asimétrica hacia la derecha (sesgo positivo), con una mayor concentración de vinos en valores bajos, especialmente cercanos a 0 g/L, lo que sugiere que en muchos casos el aporte de ácido cítrico es reducido o nulo. Sin embargo, se observan picos intermedios, particularmente alrededor de 0,25 y 0,5 g/L, lo que podría reflejar distintos estilos de vinificación. Los valores más altos (cercanos a 1 g/L) son poco frecuentes y podrían corresponder a vinos con una acidez cítrica marcadamente perceptible.
+
+## Variable residual.sugar
+```{r}
+datos %>% 
+  summarise(n= length(residual.sugar),
+            prom= mean(residual.sugar),
+            ds= sd(residual.sugar),
+            mediana= median(residual.sugar),
+            RIC= IQR(residual.sugar),
+            minimo= min(residual.sugar),
+            maximo= max(residual.sugar),
+            Q1= quantile(residual.sugar, 0.25),
+            Q3= quantile(residual.sugar, 0.75))
+```
+
+La variable residual.sugar, que en este contexto corresponde a la cantidad de azúcar residual presente en el vino (es decir, los azúcares que no se han fermentado completamente), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 2,54 g/L (DS = 1,41 g/L), donde el 50% de los valores se encuentran por debajo de 2,2 g/L, mientras que el 25% más bajo está por debajo de 1,9 g/L y el 25% más alto supera los 2,6 g/L, lo que evidencia una dispersión baja a moderada. El valor mínimo registrado fue de 0,9 g/L, correspondiente a vinos con una fermentación más completa o estilo seco, y el máximo de 15,5 g/L, representando un nivel inusualmente alto de azúcar residual dentro del conjunto de datos.
+
+### Histograma de residual.sugar
+```{r}
+datos %>% 
+  ggplot(aes(x= residual.sugar))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de residual.sugar
+```{r}
+datos %>% 
+  ggplot(aes(y= residual.sugar))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de residual.sugar es altamente asimétrica, con una fuerte concentración de valores bajos y una cantidad significativa de valores extremos altos. Esto indica que, aunque la mayoría de los vinos presentan niveles moderados de azúcar residual, existen algunos con concentraciones excepcionalmente altas que influyen notablemente en estadísticos como la media y la desviación estándar.
+
+## Variable chlorides
+```{r}
+datos %>% 
+  summarise(n= length(chlorides),
+            prom= mean(chlorides),
+            ds= sd(chlorides),
+            mediana= median(chlorides),
+            RIC= IQR(chlorides),
+            minimo= min(chlorides),
+            maximo= max(chlorides),
+            Q1= quantile(chlorides, 0.25),
+            Q3= quantile(chlorides, 0.75))
+```
+
+La variable chlorides, que en este contexto representa la concentración de cloruros en el vino que son compuestos que influyen en la percepción de salinidad y, en algunos casos, en la estabilidad microbiológica.Fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,087 g/L (DS = 0,047 g/L), con una mediana de 0,079 g/L, lo que indica una leve asimetría positiva en la distribución. El 25% de los valores más bajos se sitúa por debajo de 0,070 g/L, mientras que el 25% más alto supera los 0,090 g/L, lo cual refleja una dispersión baja en la mayoría de los casos, con una amplitud intercuartílica (RIC) de 0,02 g/L.El valor mínimo registrado fue de 0,012 g/L, típico en vinos con bajo contenido mineral, mientras que el valor máximo alcanzó los 0,611 g/L, considerablemente superior al resto y posibl-emente correspondiente a un valor atípico. Este rango sugiere que, aunque los niveles de cloruros suelen ser bajos y consistentes, existen casos excepcionales que pueden afectar medidas como la media y la desviación estándar.
+
+### Histograma de chlorides
+```{r}
+datos %>% 
+  ggplot(aes(x= chlorides))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de chlorides
+```{r}
+datos %>% 
+  ggplot(aes(y= chlorides))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La variable chlorides presenta una distribución asimétrica positiva, con una clara concentración de valores bajos y una cola larga hacia valores altos, como se observa tanto en el histograma con curva de densidad como en el boxplot. La presencia de múltiples valores atípicos elevados, junto con un valor máximo considerablemente superior al resto (0,611 g/L), indica que, aunque la mayoría de los vinos tienen concentraciones bajas y consistentes de cloruros, existe un pequeño grupo con niveles anómalamente altos que distorsionan la media (0,087 g/L) respecto a la mediana (0,079 g/L). Esta distribución sugiere que medidas como la media y la desviación estándar pueden no representar adecuadamente la tendencia central del conjunto de datos.
+
+## Variable free.sulfur.dioxide
+```{r}
+datos %>% 
+  summarise(n= length(free.sulfur.dioxide),
+            prom= mean(free.sulfur.dioxide),
+            ds= sd(free.sulfur.dioxide),
+            mediana= median(free.sulfur.dioxide),
+            RIC= IQR(free.sulfur.dioxide),
+            minimo= min(free.sulfur.dioxide),
+            maximo= max(free.sulfur.dioxide),
+            Q1= quantile(free.sulfur.dioxide, 0.25),
+            Q3= quantile(free.sulfur.dioxide, 0.75))
+```
+
+La variable free.sulfur.dioxide, que representa la cantidad de dióxido de azufre libre en el vino,un conservante clave en la prevención de oxidación y proliferación microbiana, fue analizada a partir de 1.599 observaciones. La media fue de 15,87 mg/L (DS = 10,46 mg/L), mientras que la mediana se situó en 14 mg/L, lo que indica una ligera asimetría positiva. El 25% inferior de los valores se encuentra por debajo de 7 mg/L, y el 25% superior supera los 21 mg/L, con un rango intercuartílico (RIC) de 14 mg/L, lo que refleja una dispersión moderada. El valor mínimo observado fue de 1 mg/L y el máximo de 72 mg/L, lo que sugiere la presencia de valores extremos altos que podrían estar influyendo en la media, aunque sin distorsionarla de forma significativa respecto a la mediana.
+
+### Histograma de free.sulfur.dioxide
+```{r}
+datos %>% 
+  ggplot(aes(x= free.sulfur.dioxide))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de free.sulfur.dioxide
+```{r}
+datos %>% 
+  ggplot(aes(y= free.sulfur.dioxide))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de la variable free.sulfur.dioxide muestra una asimetría positiva moderada, con una alta concentración de observaciones en niveles bajos y una cola extendida hacia valores altos. Esto se evidencia tanto en el histograma con curva de densidad como en el boxplot, donde se observan varios valores atípicos superiores. Aunque la media (15,87 mg/L) supera ligeramente a la mediana (14 mg/L), lo que sugiere cierto sesgo, esta diferencia no es extrema. Sin embargo, el valor máximo de 72 mg/L, muy superior al tercer cuartil (21 mg/L), indica la presencia de casos puntuales con concentraciones notablemente altas de dióxido de azufre libre, que influyen en las medidas de tendencia central y dispersión.
+
+## Variable total.sulfur.dioxide
+```{r}
+datos %>% 
+  summarise(n= length(total.sulfur.dioxide),
+            prom= mean(total.sulfur.dioxide),
+            ds= sd(total.sulfur.dioxide),
+            mediana= median(total.sulfur.dioxide),
+            RIC= IQR(total.sulfur.dioxide),
+            minimo= min(total.sulfur.dioxide),
+            maximo= max(total.sulfur.dioxide),
+            Q1= quantile(total.sulfur.dioxide, 0.25),
+            Q3= quantile(total.sulfur.dioxide, 0.75))
+```
+
+La variable total.sulfur.dioxide, analizada a partir de 1.599 observaciones, presenta una distribución asimétrica hacia la derecha, con una clara tendencia a valores bajos y algunos registros considerablemente altos que influyen en los estadísticos descriptivos. La media es de 46,47 mg/L, superior a la mediana de 38 mg/L, lo que indica cierta influencia de valores extremos elevados. El rango intercuartílico (RIC) es de 40 mg/L, con un primer cuartil (Q1) en 22 mg/L y un tercer cuartil (Q3) en 62 mg/L, reflejando una dispersión amplia. El valor mínimo observado fue de 6 mg/L, mientras que el máximo alcanzó los 289 mg/L, una cifra atípica que contribuye significativamente a la alta desviación estándar (32,90 mg/L). Esto sugiere la presencia de un subconjunto de vinos con adiciones inusualmente altas de dióxido de azufre total.
+
+### Histograma de total.sulfur.dioxide
+```{r}
+datos %>% 
+  ggplot(aes(x= total.sulfur.dioxide))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de total.sulfur.dioxide
+```{r}
+datos %>% 
+  ggplot(aes(y= total.sulfur.dioxide))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La variable total.sulfur.dioxide presenta una distribución asimétrica hacia la derecha (positivamente sesgada), con una mediana de 38 y una media mayor (46.47), lo que refuerza la presencia de valores altos que influyen en el promedio. El rango intercuartílico (RIC) es de 40, indicando dispersión moderada, y se observan varios valores atípicos por encima del tercer cuartil (Q3 = 62), llegando hasta un máximo de 289. Esto, junto con la forma de la distribución, sugiere que, aunque la mayoría de los datos se concentran en valores bajos o medios, hay casos extremos que deben considerarse en los análisis.
+
+## Variable density
+```{r}
+datos %>% 
+  summarise(n= length(density),
+            prom= mean(density),
+            ds= sd(density),
+            mediana= median(density),
+            RIC= IQR(density),
+            minimo= min(density),
+            maximo= max(density),
+            Q1= quantile(density, 0.25),
+            Q3= quantile(density, 0.75))
+```
+
+La variable density presenta una distribución con un promedio de aproximadamente 0.9967 y una desviación estándar muy baja de 0.0019, lo que indica una dispersión mínima de los datos respecto a la media; además, la mediana (0.99675) es prácticamente igual al promedio, lo que sugiere simetría en la distribución. El rango intercuartílico (RIC) es de 0.0022, con un valor mínimo de 0.99007 y máximo de 1.00369, mientras que el primer y tercer cuartil (Q1 y Q3) son 0.9956 y 0.9978, respectivamente; en conjunto, estos valores muestran una alta concentración de los datos dentro de un rango muy estrecho, sin evidencias visibles de valores atípicos ni sesgos pronunciados.
+
+### Histograma de density
+```{r}
+datos %>% 
+  ggplot(aes(x= density))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de density
+```{r}
+datos %>% 
+  ggplot(aes(y= density))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La variable density tiene una distribución normal, con valores muy concentrados alrededor del promedio y ligeros outliers en los extremos. Esto sugiere una alta homogeneidad en esta característica dentro del conjunto de datos analizado.
+
+## Variable pH
+```{r}
+datos %>% 
+  summarise(n= length(pH),
+            prom= mean(pH),
+            ds= sd(pH),
+            mediana= median(pH),
+            RIC= IQR(pH),
+            minimo= min(pH),
+            maximo= max(pH),
+            Q1= quantile(pH, 0.25),
+            Q3= quantile(pH, 0.75))
+```
+
+La variable pH, que en este contexto se refiere a la medida de acidez o alcalinidad del vino (donde valores bajos indican mayor acidez), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 3,311 (DS = 0,154), donde el 50% de los valores se encuentran por debajo de 3,31. El 25% más bajo está por debajo de 3,21 y el 25% más alto supera los 3,40, evidenciando una baja dispersión. El valor mínimo registrado fue de 2,74 y el máximo de 4,01, lo que indica un rango de 1,27.
+
+### Histograma de pH
+```{r}
+datos %>% 
+  ggplot(aes(x= pH))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de pH
+```{r}
+datos %>% 
+  ggplot(aes(y= pH))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de pH es simétrica; sin embargo, presenta una fuerte concentración de datos en valores intermedios y una cantidad significativa de valores extremos, tanto altos como bajos. Esto indica que, aunque la mayoría de los vinos tintos tienen una acidez moderada, existen algunos con valores excepcionalmente altos o bajos que influyen de forma notable en estadísticos como la media y la desviación estándar.
+
+## Variable sulphates
+```{r}
+datos %>% 
+  summarise(n= length(sulphates),
+            prom= mean(sulphates),
+            ds= sd(sulphates),
+            mediana= median(sulphates),
+            RIC= IQR(sulphates),
+            minimo= min(sulphates),
+            maximo= max(sulphates),
+            Q1= quantile(sulphates, 0.25),
+            Q3= quantile(sulphates, 0.75))
+```
+
+La variable sulphates, que en este contexto se refiere a las sales de ácido sulfúrico presentes en el vino y que contribuyen a la estabilidad microbiológica y a realzar ciertos sabores, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,658 g/L (DS = 0,170 g/L), donde el 50% de los valores se encuentran por debajo de 0,62 g/L. El 25% más bajo está por debajo de 0,55 g/L y el 25% más alto supera los 0,73 g/L, evidenciando una baja dispersión.
+El valor mínimo registrado fue de 0,33 g/L y el máximo de 2,00 g/L, lo que indica un amplio rango de 1,67 g/L.
+
+### Histograma de sulphates
+```{r}
+datos %>% 
+  ggplot(aes(x= sulphates))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de sulphates
+```{r}
+datos %>% 
+  ggplot(aes(y= sulphates))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de sulphates presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos de este compuesto. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 1,0 g/L. Dichos valores podrían sesgar la media hacia valores mayores.
+
+## Variable alcohol
+```{r}
+datos %>% 
+  summarise(n= length(alcohol),
+            prom= mean(alcohol),
+            ds= sd(alcohol),
+            mediana= median(alcohol),
+            RIC= IQR(alcohol),
+            minimo= min(alcohol),
+            maximo= max(alcohol),
+            Q1= quantile(alcohol, 0.25),
+            Q3= quantile(alcohol, 0.75),
+            #mayores_13_5 = sum(alcohol >= 13.5)
+            
+            )
+```
+
+La variable alcohol, que en este contexto se refiere a la proporción de etanol presente en el vino expresada en g/L, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 10,42 g/L (DS= 1.065 g/L) y una mediana de 10,2 g/L. El 50% central de los datos se encuentra entre 9,5 g/L (Q1) y 11,1 g/L (Q3), con un rango intercuartílico (RIC) de 1,6 g/L, lo que sugiere una dispersión moderada. Los valores mínimo y máximo registrados fueron 8,4 g/L y 14,9 g/L,con un rango 6,5 g/L respectivamente. La presencia de valores extremos podría elevar ligeramente el promedio con respecto a la mediana.
+
+### Histograma de alcohol
+```{r}
+datos %>% 
+  ggplot(aes(x= alcohol))+
+  geom_histogram(aes(y=after_stat(density)), fill = "#C95E78")+
+  geom_density(color= 'darkred')+
+  theme_bw()
+```
+
+### Boxplot de alcohol
+```{r}
+datos %>% 
+  ggplot(aes(y= alcohol))+
+  geom_boxplot()+
+  theme_bw()
+```
+
+La distribución de alcohol  presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 13,45g/L. En consecuencia, el máximo identificado se clasifica como un valor atípico alto, dichos valores podrían sesgar la media hacia valores mayores
+
+## Variable Objetivo: quality 
+```{r}
+tabla_vino_tinto<- datos %>%
+  count(quality, name = "Frecuencia") %>%
+  mutate(Porcentaje = round(Frecuencia / sum(Frecuencia) * 100, 1),
+         Etiqueta = paste0(Frecuencia, " (", Porcentaje, "%)"))
+
+ggplot(tabla_vino_tinto, aes(x = quality, y = Frecuencia)) +
+  geom_col(fill = "darkred", width = 0.6) +
+  geom_text(aes(label = Etiqueta), vjust = -0.5, size = 3) +
+  facet_wrap(~ "Distribución de la variable calidad") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  scale_x_discrete(expand = expansion(mult = c(0.05, 0.05))) +
+  labs(x = "Calidad", y = "Frecuencia (Porcentaje)") +
+  theme_bw(base_size = 14) +
+  theme(
+    plot.title = element_blank(),
+    strip.background = element_rect(fill = 'gray80', color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+En el gráfico, la variable *calidad* muestra una distribución que está claramente centrada en los *valores intermedios*. La tendencia de la calidad media del producto evaluado se muestra en que la mayor parte de las observaciones se encuentra en las categorías 5 (681 casos, 42.6%) y 6 (638 casos, 39.9%), lo que indica que la calidad promedio del producto evaluado tiende a ser media. Las categorías extremas son poco frecuentes: valores bajos como 3 (10 casos, 0.6 %) y 4 (53 casos, 3.3 %), así como valores altos como 7 (199 casos, 12.4 %) y 8 (18 casos, 1.1 %), tienen una presencia marginal en comparación con el núcleo central.Esta concentración indica que la variable no se distribuye de manera uniforme, sino que tiene un patrón caracterizado por calificaciones moderadas en predominancia, mientras que las calificaciones extremadamente altas o bajas son excepcionales, lo cual podría reflejar una consistencia en la calidad percibida del producto, con pocas desviaciones extremas.
+
+# Análisis Bivariados 
+
+## alcohol vs quality
+```{r}
+datos %>%
+  ggplot(aes(x = quality, y = alcohol)) +
+  geom_boxplot(fill = "white", alpha = 0.6, color = "black") +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "darkred") +
+  labs(
+    title = "Distribución del contenido de alcohol según la calidad del vino",
+    x = "Calidad del vino",
+    y = "Alcohol (%)"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_rect(fill = "gray90", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+En el conjunto de datos se registra una tendencia positiva entre la calidad del vino y el contenido de alcohol, y las medianas de alcohol aumentan cuando aumenta la clasificación, siendo las más bajas en los vinos de calidad 3–4 (~9–10%) y las más altas en los vinos de calidad 7–8 (~11–12%). Sin embargo, en calidades intermedias (5–6), la dispersión es bastante mayor, lo que compromete que el alcohol por sí solo explique la calidad. También se encuentran outliers con graduaciones alcohólicas elevadas en calidades medias y calidades bajas, lo que sugiere que un contenido elevado de alcohol no garantiza una mejor valoración. En general, la distribución es asimétrica positivamente, con medias ligeramente superiores a las medianas, y el patrón contemplado hace eco de la hipótesis de que el alcohol influye en la valoración de la calidad, aunque junto a otros factores.
+
+## density vs quality
+```{r}
+datos %>%
+  ggplot(aes(x = quality, y = density)) +
+  geom_boxplot(fill = "white", alpha = 0.6, color = "black") +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "darkred") +
+  labs(
+    title = "Distribución de la densidad según la calidad del vino",
+    x = "Calidad del vino",
+    y = "Density"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_rect(fill = "gray90", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+La densidad del vino muestra una variación muy estrecha entre las distintas calidades, con cifras que rondan los 0.996 g/cm³, como se aprecia en el gráfico. Las medianas son muy parecidas en todos los grados de calidad, lo que señala que la densidad no parece ser un elemento determinante significativo para la valoración del vino. No obstante, se observan ciertos valores atípicos, en particular en los vinos de calidad 5, que tienen densidades significativamente más altas o más bajas que el rango habitual. Este patrón indica que, a pesar de que la densidad puede tener relación con otras características físico-químicas del vino, su conexión directa con la calidad sensorial es restringida.
+
+## pH vs quality
+```{r}
+datos %>%
+  ggplot(aes(x = quality, y = pH)) +
+  geom_boxplot(fill = "white", alpha = 0.6, color = "black") +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "darkred") +
+  labs(
+    title = "Distribución del pH según la calidad del vino",
+    x = "Calidad del vino",
+    y = "pH"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_rect(fill = "gray90", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+El gráfico muestra que el pH del vino se mantiene bastante estable en diferentes niveles de calidad, con algunos valores fuera del rango normal, pero no tiene una relación clara y fuerte con la calidad. Aunque el pH es relevante, no es el mejor indicador por sí solo; para determinar la calidad del vino con mayor precisión, es necesario considerar otras variables importantes para definir la calidad de un vino.
+
+## sulphates vs quality
+
+```{r}
+datos %>%
+  ggplot(aes(x = quality, y = sulphates)) +
+  geom_boxplot(fill = "white", alpha = 0.6, color = "black") +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "darkred") +
+  labs(
+    title = "Distribución de los sulfatos según la calidad del vino",
+    x = "Calidad del vino",
+    y = "Sulfatos"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_rect(fill = "gray90", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+Los sulfatos son un índice importante en la calidad del vino, ya que tienden a incrementarse cuando la calidad del vino se eleva, particularmente en los vinos de alta categoría (de calidad 7 y 8). Se aprecia una correlación positiva leve, a pesar de que la mediana de sulfatos permanece estable en la mayoría de los niveles de calidad. Aunque los sulfatos son un buen parámetro para medir la calidad del vino, más que otras variables como el pH, su fluctuación y la existencia de valores fuera de lo común indican que no deberían ser el único elemento a tener en cuenta.
+
+## citric.acid vs quality
+```{r}
+datos %>%
+  ggplot(aes(x = quality, y = citric.acid)) +
+  geom_boxplot(fill = "white", alpha = 0.6, color = "black") +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "darkred") +
+  labs(
+    title = "Distribución del acido citrico según la calidad del vino",
+    x = "Calidad del vino",
+    y = "Acido citrico"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_rect(fill = "gray90", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+Según el gráfico, la calidad del vino no tiene una correlación directa o sólida con el ácido cítrico. Para la mayor parte de los niveles de calidad, el ácido cítrico tiene una mediana estable en cifras bajas (entre 0.2 y 0.3). A pesar de ser un elemento químico relevante, su distribución semejante a la del pH indica que, por sí solo, no es un pronosticador decisivo de la calidad.
+
+Perfecto ✅ Aquí tienes el código **completo y adaptado**, reemplazando las pruebas de Wilcoxon (no apropiadas para más de dos grupos) por **Kruskal–Wallis**, junto con la interpretación y conclusiones en el mismo tono y estilo que tu texto original.
+Todo el bloque mantiene la coherencia, redacción y formato académico que estabas usando.
+
+---
+
+# Diferencia de medianas por calidad
+
+En esta sección evaluaremos si las variables físico-químicas del vino presentan diferencias significativas entre las calificaciones de calidad (`quality`).
+Dado que la variable `quality` es categórica ordinal con seis niveles (de 3 a 8) y las variables físico-químicas son numéricas y que no hay normalidad en la mayoría de los casos se opta por utilizar una prueba no paramétrica de comparación de medianas entre grupos.
+
+## alcohol vs quality
+
+### Normalidad
+
+```{r}
+datos %>%
+  group_by(quality) %>%
+  summarise(n = length(alcohol),
+            est_ks = ks.test(scale(alcohol), 'pnorm')$statistic,
+            p_ks = ks.test(scale(alcohol), 'pnorm')$p.value,
+            estsw = shapiro.test(alcohol)$statistic,
+            p_sw = shapiro.test(alcohol)$p.value,
+            est_lt = lillie.test(alcohol)$statistic,
+            p_lt = lillie.test(alcohol)$p.value)
+```
+
+Los resultados indican que la variable **alcohol** no sigue una distribución normal dentro de la mayoría de los grupos definidos por la variable `quality`. Los p-valores de las pruebas de normalidad (Kolmogorov–Smirnov, Shapiro–Wilk y Lilliefors) son inferiores a 0.05 en casi todos los niveles, lo que lleva a rechazar la hipótesis nula de normalidad.
+
+### Homocedasticidad
+
+```{r}
+leveneTest(alcohol ~ quality, data = datos, center = "median")
+```
+
+La prueba de Levene (centrada en la mediana) muestra un **p-valor < 0.05**, lo que indica que no se cumple el supuesto de homocedasticidad: la varianza de `alcohol` difiere significativamente entre los niveles de calidad.
+
+### Kruskal–Wallis y comparaciones post hoc
+
+```{r}
+kruskal.test(alcohol ~ quality, data = datos)
+```
+
+La **prueba de Kruskal–Wallis** muestra un **p-valor < 2.2e-16**, por lo que se **rechaza la hipótesis nula** de igualdad de medianas. Esto implica que al menos un grupo de calidad difiere significativamente en el contenido de alcohol.
+
+```{r}
+rstatix::dunn_test(data = datos,alcohol ~ quality, p.adjust.method = "bonferroni")
+```
+
+Las comparaciones múltiples de Dunn confirman diferencias altamente significativas entre los niveles extremos de calidad (por ejemplo, 3 vs 7, 4 vs 8, 5 vs 7), mientras que las diferencias entre calidades adyacentes no resultan significativas. Esto sugiere que los vinos de mayor calidad tienden a tener un contenido de alcohol significativamente superior.
+
+```{r}
+rstatix::kruskal_effsize(datos, alcohol ~ quality)
+```
+
+El tamaño del efecto (η² de Kruskal–Wallis) se interpreta como **moderado a grande**, indicando que la calidad explica una proporción relevante de la variabilidad del contenido de alcohol.
+
+## density vs quality
+
+### Normalidad
+
+```{r}
+datos %>%
+  group_by(quality) %>%
+  summarise(n = length(density),
+            est_ks = ks.test(scale(density), 'pnorm')$statistic,
+            p_ks = ks.test(scale(density), 'pnorm')$p.value,
+            estsw = shapiro.test(density)$statistic,
+            p_sw = shapiro.test(density)$p.value,
+            est_lt = lillie.test(density)$statistic,
+            p_lt = lillie.test(density)$p.value)
+```
+
+Los resultados muestran que **density** no sigue una distribución normal en casi ningún grupo (p < 0.05 en la mayoría de las pruebas).
+
+### Homocedasticidad
+
+```{r}
+leveneTest(density ~ quality, data = datos, center = "median")
+```
+
+La prueba de Levene arroja un p-valor de **3.27e-09 (< 0.05)**, indicando que no hay igualdad de varianzas entre grupos.
+
+### Kruskal–Wallis y comparaciones post hoc
+
+```{r}
+kruskal.test(density ~ quality, data = datos)
+```
+
+El resultado del **test de Kruskal–Wallis** arroja un **p-valor < 2.2e-16**, por lo que se concluye que existen diferencias significativas en las medianas de densidad entre los distintos niveles de calidad.
+
+```{r}
+rstatix::dunn_test(data = datos,density ~ quality, p.adjust.method = "bonferroni")
+```
+
+Las pruebas post hoc evidencian diferencias notorias entre calidades distantes (por ejemplo, 3 vs 7, 4 vs 8, 5 vs 7), mientras que los niveles contiguos (como 6 vs 7) no difieren significativamente.
+
+```{r}
+rstatix::kruskal_effsize(datos, density ~ quality)
+```
+
+El tamaño del efecto indica una **influencia moderada de la calidad** sobre la densidad, lo que sugiere que esta variable cambia de forma consistente con el nivel de calidad del vino.
+
+## pH vs quality
+
+### Normalidad
+
+```{r}
+datos %>%
+  group_by(quality) %>%
+  summarise(n = length(pH),
+            est_ks = ks.test(scale(pH),'pnorm')$statistic,
+            p_ks = ks.test(scale(pH),'pnorm')$p.value,
+            estsw = shapiro.test(pH)$statistic,
+            p_sw = shapiro.test(pH)$p.value,
+            est_lt = lillie.test(pH)$statistic,
+            p_lt = lillie.test(pH)$p.value)
+```
+
+Los resultados muestran que la variable **pH** no presenta normalidad en la mayoría de los niveles de calidad (p < 0.05).
+
+### Homocedasticidad
+
+```{r}
+leveneTest(pH ~ quality, data = datos, center = "median")
+```
+
+El p-valor obtenido (**0.91**) es mayor que 0.05, por lo que **no se rechaza la hipótesis nula de igualdad de varianzas**. Se cumple el supuesto de homocedasticidad.
+
+### Kruskal–Wallis y comparaciones post hoc
+
+```{r}
+kruskal.test(pH ~ quality, data = datos)
+```
+
+El resultado de la prueba de Kruskal–Wallis arroja un **p-valor = 0.008**, indicando diferencias estadísticamente significativas en las medianas del pH según la calidad del vino.
+
+```{r}
+rstatix::dunn_test(data = datos,pH ~ quality, p.adjust.method = "bonferroni")
+```
+
+Las comparaciones múltiples muestran que las calidades 4, 5, 6 y 7 presentan diferencias significativas entre sí, especialmente entre 4 vs 7 y 5 vs 7 (p.adj < 0.01). Esto sugiere que el **pH tiende a disminuir levemente con la calidad** del vino.
+
+```{r}
+rstatix::kruskal_effsize(datos, pH ~ quality)
+```
+
+El tamaño del efecto indica que la relación entre pH y calidad es **pequeña a moderada**, por lo que las diferencias son estadísticamente significativas, aunque con magnitud práctica limitada.
+
+## sulphates vs quality
+
+### Normalidad
+
+```{r}
+datos %>%
+  group_by(quality) %>%
+  summarise(n = length(sulphates),
+            est_ks = ks.test(scale(sulphates),'pnorm')$statistic,
+            p_ks = ks.test(scale(sulphates),'pnorm')$p.value,
+            estsw = shapiro.test(sulphates)$statistic,
+            p_sw = shapiro.test(sulphates)$p.value,
+            est_lt = lillie.test(sulphates)$statistic,
+            p_lt = lillie.test(sulphates)$p.value)
+```
+
+El análisis de normalidad indica que **sulphates** no sigue una distribución normal en casi todos los grupos de calidad (p < 0.05).
+
+### Homocedasticidad
+
+```{r}
+leveneTest(sulphates ~ quality, data = datos, center = "median")
+```
+
+El resultado arroja **F = 0.2301 y p = 0.9495**, por lo que **no se rechaza la hipótesis nula**. Se cumple el supuesto de igualdad de varianzas.
+
+### Kruskal–Wallis y comparaciones post hoc
+
+```{r}
+kruskal.test(sulphates ~ quality, data = datos)
+```
+
+El test de Kruskal–Wallis devuelve un **p-valor < 2.2e-16**, evidenciando diferencias significativas entre las medianas de sulfatos según la calidad.
+
+```{r}
+rstatix::dunn_test(data = datos,sulphates ~ quality, p.adjust.method = "bonferroni")
+```
+
+Las comparaciones múltiples muestran diferencias muy significativas entre calidades medias y altas (4 vs 7, 5 vs 8, 6 vs 8; p.adj < 0.001), mientras que las calidades extremas (3 vs 4, 7 vs 8) no difieren. Esto sugiere que el contenido de sulfatos aumenta con la calidad hasta cierto punto, constituyéndose en un **factor diferenciador clave**.
+
+```{r}
+rstatix::kruskal_effsize(datos, sulphates ~ quality)
+```
+
+El tamaño del efecto de Kruskal–Wallis para los sulfatos es **moderado a alto**, indicando una relación clara entre esta variable y la calidad percibida del vino.
+
+# Correlación lineal entre variables númericas 
+
+En esta sección analizaremos las relaciones entre las variables físico-químicas del vino, todas ellas numéricas, con el fin de identificar asociaciones internas que puedan influir en la calidad. Este análisis no busca correlacionar directamente con la variable `quality` (que es categórica), sino detectar patrones y posibles colinealidades entre predictores. 
+
+Una correlación positiva indica que, a medida que una variable aumenta, la otra también tiende a aumentar; mientras que una correlación negativa indica que, al aumentar una variable, la otra tiende a disminuir. Este paso es fundamental para comprender la estructura del conjunto de datos y seleccionar variables relevantes para análisis posteriores.
+
+## chlorides vs sulphates
+```{r}
+datos %>%  
+  ggplot(aes(x = datos$chlorides, y = datos$sulphates)) +
+  geom_point(color = "#C95E78", size = 3)+
+  geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
+  labs(title = "Relación entre acido citrico y PH",
+       x = "Acido citrico ",
+       y = "PH") +
+  theme_bw()
+```
+
+### Normalidad
+```{r}
+shapiro.test(datos$chlorides)
+shapiro.test(datos$sulphates)
+```
+
+Con una confianza del 95%, se observa que las distribuciones de las variables chlorides (W = 0.48425, p-valor < 2.2e-16) y sulphates *(W = 0.83304, p-valor < 2.2e-16)* no provienen de una distribución normal.
+
+### Correlación Spearman
+```{r}
+cor.test(datos$chlorides,datos$sulphates, method = 'spearman', exact=FALSE)
+```
+
+El análisis de correlación de Spearman entre las variables chlorides y sulphates mostró un coeficiente ρ=0.0208, lo que indica una *correlación muy baja entre ambas variables*. La prueba de significancia (S = 667196985, p-valor = 0.4053) no permitió rechazar la hipótesis nula de ausencia de correlación, lo que implica que la relación observada no es estadísticamente significativa.
+
+## density vs alcohol
+```{r}
+datos %>%  
+  ggplot(aes(x = datos$density, y = datos$alcohol)) +
+  geom_point(color = "#C95E78", size = 3)+
+  geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
+  labs(title = "Relación entre densidad y alcohol",
+       x = "Densidad",
+       y = "Alcohol") +
+  theme_bw()
+```
+
+### Normalidad
+```{r}
+shapiro.test(datos$density)
+shapiro.test(datos$alcohol)
+```
+
+Con una confianza del 95%, se observa que las distribuciones de las variables density (W = 0.99087, p-valor = 1.936e-08) y alcohol (W = 0.92884, p-valor < 2.2e-16) no provienen de una distribución normal.
+
+### Correlación Spearman
+```{r}
+cor.test(datos$density,datos$alcohol, method = 'spearman', exact=FALSE)
+```
+
+El análisis de correlación de Spearman entre density y alcohol mostró un coeficiente ρ=−0.4624, indicando una *correlación negativa* de magnitud media. La prueba de significancia (S = 996491017, p-valor < 2.2e-16) permite rechazar la hipótesis nula de ausencia de correlación, confirmando que la relación observada es estadísticamente significativa.
+
+## free.sulfur.dioxide vs total.sulfur.dioxide
+```{r}
+datos %>%  
+  ggplot(aes(x = datos$free.sulfur.dioxide , y = datos$total.sulfur.dioxide)) +
+  geom_point(color = "#C95E78", size = 3)+
+  geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
+  labs(title = "Relación entre dióxido de azufre libre y dióxido de azufre total",
+       x = "DAL",
+       y = "DAT") +
+  theme_bw()
+```
+
+### Normalidad
+```{r}
+shapiro.test(datos$free.sulfur.dioxide)
+shapiro.test(datos$total.sulfur.dioxide)
+```
+
+Con una confianza del 95%, las variables chlorides (W = 0.48425, p-valor < 2.2e-16) y sulphates (W = 0.83304, p-valor < 2.2e-16) no provienen de una distribución normal, por lo que se recomienda emplear métodos estadísticos no paramétricos para su análisis.
+
+### Correlación Spearman
+```{r}
+cor.test(datos$free.sulfur.dioxide,datos$total.sulfur.dioxide, method = 'spearman', exact=FALSE)
+```
+
+El análisis de correlación de Spearman mostró un coeficiente ρ=0.7897 entre las variables free.sulfur.dioxide y total.sulfur.dioxide, indicando una correlación *positiva alta muy significativa*. La prueba de significancia (S = 143297175, p-valor < 2.2e-16) nos permite rechazar la hipótesis nula de ausencia de correlación, confirmando que la relación observada es estadísticamente significativa.
+
+## fixed.acidity vs citric.acid
+```{r}
+datos %>%  
+  ggplot(aes(x = datos$fixed.acidity, y = datos$citric.acid)) +
+  geom_point(color = "#C95E78", size = 3)+
+  geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
+  labs(title = "Relación entre acidez fija y ácido cítrico",
+       x = "acidez fija ",
+       y = "ácido cítrico") +
+  theme_bw()
+```
+
+### Normalidad
+```{r}
+shapiro.test(datos$fixed.acidity)
+shapiro.test(datos$citric.acid)
+```
+
+Con un nivel de confianza del 95%, se concluye que las distribuciones de las variables fixed.acidity (W = 0.94203, p-valor < 2.2e-16) y citric.acid (W = 0.95529, p-valor < 2.2e-16) no provienen de una distribución normal. Por lo tanto, se recomienda utilizar técnicas estadísticas no paramétricas para su análisis.
+
+### Correlación Spearman
+```{r}
+cor.test(datos$fixed.acidity,datos$citric.acid, method = 'spearman', exact=FALSE)
+```
+
+El análisis de correlación de Spearman entre fixed.acidity y citric.acid mostró un coeficiente ρ=0.6617, con un p-valor < 2.2e-16. Esto indica una correlación *positiva significativa* de magnitud alta, lo que significa que a mayores valores de fixed.acidity, mayores valores de citric.acid y viceversa.
+
+## volatile.acidity vs citric.acid
+```{r}
+datos %>%  
+  ggplot(aes(x = datos$volatile.acidity, y = datos$citric.acid)) +
+  geom_point(color = "#C95E78", size = 3)+
+  geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
+  labs(title = "Relación entre acidez volatil y ácido cítrico",
+       x = "acidez volatil ",
+       y = "ácido cítrico") +
+  theme_bw()
+```
+
+### Normalidad
+```{r}
+shapiro.test(datos$volatile.acidity)
+shapiro.test(datos$citric.acid)
+```
+
+Con una confianza del 95%, se concluye que las variables fixed.acidity, citric.acid y volatile.acidity no provienen de una distribución normal (test Shapiro-Wilk: W = 0.94203, 0.95529 y 0.97434 respectivamente, con p-valores < 0.05). 
+
+### Correlación Spearman
+```{r}
+cor.test(datos$volatile.acidity,datos$citric.acid, method = 'spearman', exact=FALSE)
+```
+
+El análisis de correlación de Spearman entre volatile.acidity y citric.acid mostró un coeficiente ρ=−0.6103, indicando una *correlación negativa alta* y significativa (p-valor < 2.2e-16). Esto implica que a mayor acidez volátil, menor contenido de ácido cítrico, siendo esta relación estadísticamente significativa.
+
+
+## Matriz de correlación (Spearman)
+```{r}
+datos_num <- datos %>% select(where(is.numeric))
+# Visualización con GGally
+ggcorr(
+  datos_num,
+  method = c("everything", "spearman"),
+  label = TRUE,           # Mostrar coeficientes
+  label_round = 2,        # Redondear a 2 decimales
+  label_size = 3,         # Tamaño de texto
+  hjust = 0.85,           # Ajuste horizontal para evitar sobreposición
+  layout.exp = 3,         # Espaciado para mejorar legibilidad
+  low = "#FFB6C1", mid = "#C95E78", high = "#57223F" # Paleta personalizada
+) +
+  ggtitle("Matriz de correlación (Spearman)") +
+  theme_bw(base_size = 14)
+```
+
+Dado que las variables no cumplen normalidad, se utilizó el coeficiente de Spearman. Las correlaciones más relevantes encontradas son:
+
+- **free.sulfur.dioxide vs total.sulfur.dioxide (ρ ≈ 0.79)**
+Existe una asociación positiva muy fuerte entre el dióxido de azufre libre y el total, lo que indica que ambas variables están estrechamente relacionadas y aportan información redundante. Esto sugiere que, en análisis predictivos, podría bastar con incluir una de ellas para evitar colinealidad.
+- **fixed.acidity vs citric.acid (ρ ≈ 0.66)**
+Se observa una correlación positiva moderada: a mayor acidez fija, mayor contenido de ácido cítrico. Esta relación es consistente con la química del vino, ya que ambos parámetros están vinculados al perfil ácido del producto.
+- **volatile.acidity vs citric.acid (ρ ≈ 0.62)**
+Existe una correlación positiva moderada: cuando aumenta la acidez volátil, también tiende a aumentar el ácido cítrico. Esto indica que estos componentes están relacionados y podrían influir conjuntamente en la percepción sensorial y calidad del vino.
+

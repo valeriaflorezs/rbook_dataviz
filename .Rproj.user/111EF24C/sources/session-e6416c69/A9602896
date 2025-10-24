@@ -1,0 +1,29 @@
+{
+    "id": "A9602896",
+    "path": "~/book_CienciaDatos/rbook_Wine/wine_quality.Rmd",
+    "project_path": "wine_quality.Rmd",
+    "type": "r_markdown",
+    "hash": "3924908895",
+    "contents": "",
+    "dirty": false,
+    "created": 1760919924507.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "15,23",
+        "scrollLine": "2",
+        "last_setup_crc32": "",
+        "disableDependencyDiscovery": "1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1761279237,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1761279237535,
+    "read_only": false,
+    "read_only_alternatives": []
+}

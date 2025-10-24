@@ -1,0 +1,53 @@
+
+/* Cambiar la fuente del cuerpo del documento a Times New Roman */
+body {
+  font-family: 'Times New Roman', serif;
+  text-align: justify;
+  line-height: 1.6;
+  color: #000;
+}
+
+/* Cambiar el color de los títulos a vino */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", serif;
+  color: #800020 !important;
+  text-align: center !important;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+
+pre code {
+  white-space: inherit;
+}
+
+.book .book-body .page-wrapper .page-inner {
+  max-width: 850px;
+}
+
+code, pre {
+  background-color: #f4f4f4;
+  border-radius: 6px;
+  padding: 2px 5px;
+}
+
+table {
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  border-collapse: collapse;
+  margin: auto;
+}
+th {
+  background-color: #8d3148;
+  color: white;
+  text-align: center;
+}
+td {
+  text-align: center;
+  padding: 8px;
+}

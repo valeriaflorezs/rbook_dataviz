@@ -1,0 +1,5 @@
+"0","#Calculamos"
+"0","alfa <- 0.05"
+"0","chi_cuadrado  = sum(((tabla_agrupada-esperados)^2) /esperados)                #Estadistico "
+"2","Error: objeto 'tabla_agrupada' no encontrado
+"
