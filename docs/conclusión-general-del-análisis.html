@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Factores que Influyen en la Calidad del Vino</title>
+  <title>Capítulo 8 Conclusión general del análisis | Factores que Influyen en la Calidad del Vino</title>
   <meta name="description" content="Análisis de factores que influyen en la calidad del vino tinto" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Factores que Influyen en la Calidad del Vino" />
+  <meta property="og:title" content="Capítulo 8 Conclusión general del análisis | Factores que Influyen en la Calidad del Vino" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/portada.png" />
   <meta property="og:description" content="Análisis de factores que influyen en la calidad del vino tinto" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Factores que Influyen en la Calidad del Vino" />
+  <meta name="twitter:title" content="Capítulo 8 Conclusión general del análisis | Factores que Influyen en la Calidad del Vino" />
   
   <meta name="twitter:description" content="Análisis de factores que influyen en la calidad del vino tinto" />
   <meta name="twitter:image" content="/portada.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="correlación-lineal-entre-variables-númericas.html"/>
 
-<link rel="next" href="carga-de-librerias.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -294,107 +294,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Factores que Influyen en la Calidad del Vino</h1>
-<p class="author"><em>Katherin Barrera Lopez, Valeria Florez Sarmiento &amp; Laura Rivera Figueredo</em></p>
-<p class="date"><em>2025-10-24</em></p>
-</div>
-<div id="introducción" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Capítulo 1</span> Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.</p>
-<p>Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
-Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a></p>
-<p>Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>
-<p>Este libro fue elaborado con <strong>Bookdown</strong> y tiene como objetivo explorar los factores que influyen en la calidad del vino tinto “Vinho Verde”.<br />
-A lo largo del libro se aplican técnicas de análisis y visualización de datos utilizando R, con base en el conjunto de datos publicado por Cortez et al. (2009) y disponible públicamente en el repositorio UCI.</p>
-<div id="contexto-de-los-datos" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Contexto de los datos<a href="index.html#contexto-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<table>
-<colgroup>
-<col width="13%" />
-<col width="86%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Variable</strong></th>
-<th><strong>Contexto</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>fixed.acidity</strong></td>
-<td>Representa los ácidos no volátiles (principalmente ácido tartárico y málico) que no se evaporan fácilmente. Afectan directamente el sabor y la frescura del vino.</td>
-</tr>
-<tr class="even">
-<td><strong>volatile.acidity</strong></td>
-<td>Mide los ácidos volátiles (principalmente ácido acético). En cantidades altas, puede generar un olor desagradable (como a vinagre).</td>
-</tr>
-<tr class="odd">
-<td><strong>citric.acid</strong></td>
-<td>Presente de forma natural en pequeñas cantidades, añade frescura y sabor cítrico. Puede equilibrar el dulzor del vino.</td>
-</tr>
-<tr class="even">
-<td><strong>residual.sugar</strong></td>
-<td>Es el azúcar que queda después de la fermentación. Valores altos indican vinos dulces; bajos, vinos secos.</td>
-</tr>
-<tr class="odd">
-<td><strong>chlorides</strong></td>
-<td>Representan la cantidad de sal (principalmente cloruro de sodio) en el vino. Afecta el sabor; niveles altos pueden ser negativos.</td>
-</tr>
-<tr class="even">
-<td><strong>free.sulfur.dioxide</strong></td>
-<td>Es el dióxido de azufre libre, usado como conservante para prevenir oxidación y crecimiento microbiano. Este componente es activo y protege el vino.</td>
-</tr>
-<tr class="odd">
-<td><strong>total.sulfur.dioxide</strong></td>
-<td>Incluye tanto el dióxido de azufre libre como el combinado. Altas cantidades pueden afectar negativamente el aroma y sabor del vino.</td>
-</tr>
-<tr class="even">
-<td><strong>density</strong></td>
-<td>Es la densidad del vino, relacionada con el contenido de azúcar y alcohol. Vinos más dulces tienden a tener mayor densidad.</td>
-</tr>
-<tr class="odd">
-<td><strong>pH</strong></td>
-<td>Mide la acidez global del vino. Un pH bajo indica mayor acidez. Influye en el sabor, color y estabilidad microbiológica.</td>
-</tr>
-<tr class="even">
-<td><strong>sulphates</strong></td>
-<td>Son sales que pueden contribuir a la conservación del vino y mejorar su sabor. En exceso, pueden ser perjudiciales.</td>
-</tr>
-<tr class="odd">
-<td><strong>alcohol</strong></td>
-<td>Porcentaje de etanol. Afecta el cuerpo, el sabor y la percepción de dulzor. Es un factor importante en la calidad percibida del vino.</td>
-</tr>
-</tbody>
-</table>
-<table>
-<colgroup>
-<col width="6%" />
-<col width="94%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Variable Objetivo</strong></th>
-<th><strong>Contexto</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>quality</strong></td>
-<td>Es una puntuación (de 0 a 10) dada por catadores expertos, basada en aspectos sensoriales del vino (aroma, sabor, equilibrio, etc.). Se usa como variable objetivo para predecir la calidad.</td>
-</tr>
-</tbody>
-</table>
+<div id="conclusión-general-del-análisis" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Conclusión general del análisis<a href="conclusión-general-del-análisis.html#conclusión-general-del-análisis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La calidad del vino tinto no depende de un único factor, sino de la combinación de varias características fisicoquímicas. Las correlaciones entre variables y calidad son en su mayoría moderadas o débiles, destacando:</p>
+<p>Alcohol: correlación positiva con la calidad; vinos con mayor grado alcohólico tienden a ser mejor valorados.
+Acidez volátil y densidad: correlaciones negativas; valores altos se asocian con menor calidad.
+Relaciones esperadas entre variables:</p>
+<p>free.sulfur.dioxide y total.sulfur.dioxide presentan correlación fuerte.
+citric acid se asocia negativamente con volatile acidity, coherente con procesos de fermentación.
+chlorides y sulphates muestran correlación débil.</p>
+<p>En síntesis, el contenido de alcohol y la acidez son los factores más influyentes, mientras que otras variables tienen efectos menores o indirectos. Esto confirma la complejidad sensorial y química del vino: la calidad resulta de un equilibrio entre múltiples atributos.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="correlación-lineal-entre-variables-númericas.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="carga-de-librerias.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -425,7 +343,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/valeriaflorezs/rbook_dataviz/edit/BRANCH/index.Rmd",
+    "link": "https://github.com/valeriaflorezs/rbook_dataviz/edit/BRANCH/wine_quality.Rmd",
     "text": "Edit"
   },
   "history": {

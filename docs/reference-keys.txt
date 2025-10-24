@@ -63,6 +63,7 @@ normalidad-3
 homocedasticidad-3
 kruskalwallis-y-comparaciones-post-hoc-3
 correlación-lineal-entre-variables-númericas
+matriz-de-correlación-spearman
 chlorides-vs-sulphates
 normalidad-4
 correlación-spearman
@@ -78,4 +79,4 @@ correlación-spearman-3
 volatile.acidity-vs-citric.acid
 normalidad-8
 correlación-spearman-4
-matriz-de-correlación-spearman
+conclusión-general-del-análisis
