@@ -1,22 +1,3 @@
----
-title: "Factores que Influyen en la Calidad del Vino"
-author: "Autoras: Katherin Barrera Lopez, Valeria Florez Sarmiento & Laura Rivera Figueredo"
-output:
-  html_document:
-    toc: true       
-    toc_float:
-      collapsed: false
-    code_folding: hide
-    css: style.css
-    theme: lumen
----
-
-<div style="text-align: center;">
-  <img src="portada.png" alt="Logo vino"
-       style="width:295px; height:auto;">
-</div>
-
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   message = FALSE,
@@ -29,32 +10,6 @@ knitr::opts_chunk$set(
 # Paleta de colores consistente
 colores <- c("#800020", "#000000")
 ```
-
-Para el desarrollo de las visualización trabajaremos en base con datos sobre la calidad de los vinos tintos con base al portugués "Vinho Verde". Para más detalles, consultar: http://www.vinhoverde.pt/en/ o la referencia [Cortez et al., 2009].
-
-https://archive.ics.uci.edu/dataset/186/wine+quality
-
-**Contexto de los datos **
-
-| **Variable**               | **Contexto**                                                                                                                                           |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **fixed\.acidity**         | Representa los ácidos no volátiles (principalmente ácido tartárico y málico) que no se evaporan fácilmente. Afectan directamente el sabor y la frescura del vino. |
-| **volatile\.acidity**      | Mide los ácidos volátiles (principalmente ácido acético). En cantidades altas, puede generar un olor desagradable (como a vinagre).                               |
-| **citric\.acid**           | Presente de forma natural en pequeñas cantidades, añade frescura y sabor cítrico. Puede equilibrar el dulzor del vino.                                            |
-| **residual\.sugar**        | Es el azúcar que queda después de la fermentación. Valores altos indican vinos dulces; bajos, vinos secos.                                                        |
-| **chlorides**              | Representan la cantidad de sal (principalmente cloruro de sodio) en el vino. Afecta el sabor; niveles altos pueden ser negativos.                                 |
-| **free\.sulfur\.dioxide**  | Es el dióxido de azufre libre, usado como conservante para prevenir oxidación y crecimiento microbiano. Este componente es activo y protege el vino.              |
-| **total\.sulfur\.dioxide** | Incluye tanto el dióxido de azufre libre como el combinado. Altas cantidades pueden afectar negativamente el aroma y sabor del vino.                              |
-| **density**                | Es la densidad del vino, relacionada con el contenido de azúcar y alcohol. Vinos más dulces tienden a tener mayor densidad.                                       |
-| **pH**                     | Mide la acidez global del vino. Un pH bajo indica mayor acidez. Influye en el sabor, color y estabilidad microbiológica.                                          |
-| **sulphates**              | Son sales que pueden contribuir a la conservación del vino y mejorar su sabor. En exceso, pueden ser perjudiciales.                                               |
-| **alcohol**                | Porcentaje de etanol. Afecta el cuerpo, el sabor y la percepción de dulzor. Es un factor importante en la calidad percibida del vino.                             |
-
-
-|  **Variable Objetivo**  | **Contexto**                                                                                                                                                                      |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **quality**  | Es una puntuación (de 0 a 10) dada por catadores expertos, basada en aspectos sensoriales del vino (aroma, sabor, equilibrio, etc.). Se usa como variable objetivo para predecir la calidad. |
-
 
 # Carga de librerias
 ```{r message=FALSE, warning=FALSE}
@@ -966,7 +921,6 @@ cor.test(datos$volatile.acidity,datos$citric.acid, method = 'spearman', exact=FA
 
 El análisis de correlación de Spearman entre volatile.acidity y citric.acid mostró un coeficiente ρ=−0.6103, indicando una *correlación negativa alta* y significativa (p-valor < 2.2e-16). Esto implica que a mayor acidez volátil, menor contenido de ácido cítrico, siendo esta relación estadísticamente significativa.
 
-
 ## Matriz de correlación (Spearman)
 ```{r}
 datos_num <- datos %>% select(where(is.numeric))
@@ -993,4 +947,3 @@ Existe una asociación positiva muy fuerte entre el dióxido de azufre libre y e
 Se observa una correlación positiva moderada: a mayor acidez fija, mayor contenido de ácido cítrico. Esta relación es consistente con la química del vino, ya que ambos parámetros están vinculados al perfil ácido del producto.
 - **volatile.acidity vs citric.acid (ρ ≈ 0.62)**
 Existe una correlación positiva moderada: cuando aumenta la acidez volátil, también tiende a aumentar el ácido cítrico. Esto indica que estos componentes están relacionados y podrían influir conjuntamente en la percepción sensorial y calidad del vino.
-

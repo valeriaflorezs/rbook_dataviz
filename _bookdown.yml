@@ -1,0 +1,19 @@
+# Nombre del archivo final del libro (sin extensión)
+book_filename: "rbook_Wine"
+
+# Lista y orden de los archivos Rmd que formarán el libro
+rmd_files:
+  - index.Rmd        # portada o introducción
+  - wine_quality.Rmd # tu archivo principal con el contenido completo
+
+# Carpeta donde se guardará el libro compilado
+output_dir: "_book"
+
+# Configuración opcional del idioma y etiquetas
+language:
+  ui:
+    chapter_name: "Capítulo "
+
+# Si se debe eliminar el archivo combinado temporal (TRUE = más limpio)
+delete_merged_file: true
+
