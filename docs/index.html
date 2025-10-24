@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Factores que Influyen en la Calidad del Vino" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/portada.png" />
+  <meta property="og:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="github-repo" content="valeriaflorezs/rbook_dataviz" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Factores que Influyen en la Calidad del Vino" />
+  
+  <meta name="twitter:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="twitter:image" content="/portada.png" />
+
+<meta name="author" content="Katherin Barrera López, Valeria Flórez Sarmiento y Laura Rivera Figueredo" />
+
+
+<meta name="date" content="2025-10-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="carga-de-librerias.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contexto-de-los-datos"><i class="fa fa-check"></i><b>1.1</b> Contexto de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="carga-de-librerias.html"><a href="carga-de-librerias.html"><i class="fa fa-check"></i><b>2</b> Carga de librerias</a></li>
+<li class="chapter" data-level="3" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Carga y estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>3.0.1</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="3.0.2" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>3.0.2</b> Verificar missing datas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-univariados.html"><a href="análisis-univariados.html"><i class="fa fa-check"></i><b>4</b> Análisis Univariados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-fixed.acidity"><i class="fa fa-check"></i><b>4.1</b> Variable fixed.acidity</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.1</b> Histograma de fixed.acidity</a></li>
+<li class="chapter" data-level="4.1.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.2</b> Boxplot de fixed.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-volatile.acidity"><i class="fa fa-check"></i><b>4.2</b> Variable volatile.acidity</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.1</b> Histograma de volatile.acidity</a></li>
+<li class="chapter" data-level="4.2.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.2</b> Boxplot de volatile.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-citric.acid"><i class="fa fa-check"></i><b>4.3</b> Variable citric.acid</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>4.3.1</b> Histograma de citric.acid</a></li>
+<li class="chapter" data-level="4.3.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>4.3.2</b> Boxplot de citric.acid</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-residual.sugar"><i class="fa fa-check"></i><b>4.4</b> Variable residual.sugar</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.1</b> Histograma de residual.sugar</a></li>
+<li class="chapter" data-level="4.4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.2</b> Boxplot de residual.sugar</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-chlorides"><i class="fa fa-check"></i><b>4.5</b> Variable chlorides</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>4.5.1</b> Histograma de chlorides</a></li>
+<li class="chapter" data-level="4.5.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>4.5.2</b> Boxplot de chlorides</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6</b> Variable free.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.1</b> Histograma de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.6.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.2</b> Boxplot de free.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7</b> Variable total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.1</b> Histograma de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.7.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.2</b> Boxplot de total.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-density"><i class="fa fa-check"></i><b>4.8</b> Variable density</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-density"><i class="fa fa-check"></i><b>4.8.1</b> Histograma de density</a></li>
+<li class="chapter" data-level="4.8.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-density"><i class="fa fa-check"></i><b>4.8.2</b> Boxplot de density</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-ph"><i class="fa fa-check"></i><b>4.9</b> Variable pH</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-ph"><i class="fa fa-check"></i><b>4.9.1</b> Histograma de pH</a></li>
+<li class="chapter" data-level="4.9.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-ph"><i class="fa fa-check"></i><b>4.9.2</b> Boxplot de pH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-sulphates"><i class="fa fa-check"></i><b>4.10</b> Variable sulphates</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>4.10.1</b> Histograma de sulphates</a></li>
+<li class="chapter" data-level="4.10.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>4.10.2</b> Boxplot de sulphates</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-alcohol"><i class="fa fa-check"></i><b>4.11</b> Variable alcohol</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>4.11.1</b> Histograma de alcohol</a></li>
+<li class="chapter" data-level="4.11.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-alcohol"><i class="fa fa-check"></i><b>4.11.2</b> Boxplot de alcohol</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-objetivo-quality"><i class="fa fa-check"></i><b>4.12</b> Variable Objetivo: quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html"><i class="fa fa-check"></i><b>5</b> Análisis Bivariados</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#alcohol-vs-quality"><i class="fa fa-check"></i><b>5.1</b> alcohol vs quality</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#density-vs-quality"><i class="fa fa-check"></i><b>5.2</b> density vs quality</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#ph-vs-quality"><i class="fa fa-check"></i><b>5.3</b> pH vs quality</a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#sulphates-vs-quality"><i class="fa fa-check"></i><b>5.4</b> sulphates vs quality</a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#citric.acid-vs-quality"><i class="fa fa-check"></i><b>5.5</b> citric.acid vs quality</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html"><i class="fa fa-check"></i><b>6</b> Diferencia de medianas por calidad</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#alcohol-vs-quality-1"><i class="fa fa-check"></i><b>6.1</b> alcohol vs quality</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad"><i class="fa fa-check"></i><b>6.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.1.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad"><i class="fa fa-check"></i><b>6.1.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.1.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc"><i class="fa fa-check"></i><b>6.1.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#density-vs-quality-1"><i class="fa fa-check"></i><b>6.2</b> density vs quality</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-1"><i class="fa fa-check"></i><b>6.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.2.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-1"><i class="fa fa-check"></i><b>6.2.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.2.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-1"><i class="fa fa-check"></i><b>6.2.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#ph-vs-quality-1"><i class="fa fa-check"></i><b>6.3</b> pH vs quality</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-2"><i class="fa fa-check"></i><b>6.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-2"><i class="fa fa-check"></i><b>6.3.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.3.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-2"><i class="fa fa-check"></i><b>6.3.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#sulphates-vs-quality-1"><i class="fa fa-check"></i><b>6.4</b> sulphates vs quality</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-3"><i class="fa fa-check"></i><b>6.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.4.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-3"><i class="fa fa-check"></i><b>6.4.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.4.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-3"><i class="fa fa-check"></i><b>6.4.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html"><i class="fa fa-check"></i><b>7</b> Correlación lineal entre variables númericas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#chlorides-vs-sulphates"><i class="fa fa-check"></i><b>7.1</b> chlorides vs sulphates</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-4"><i class="fa fa-check"></i><b>7.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.1.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman"><i class="fa fa-check"></i><b>7.1.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#density-vs-alcohol"><i class="fa fa-check"></i><b>7.2</b> density vs alcohol</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-5"><i class="fa fa-check"></i><b>7.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.2.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-1"><i class="fa fa-check"></i><b>7.2.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#free.sulfur.dioxide-vs-total.sulfur.dioxide"><i class="fa fa-check"></i><b>7.3</b> free.sulfur.dioxide vs total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-6"><i class="fa fa-check"></i><b>7.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.3.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-2"><i class="fa fa-check"></i><b>7.3.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#fixed.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.4</b> fixed.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-7"><i class="fa fa-check"></i><b>7.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.4.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-3"><i class="fa fa-check"></i><b>7.4.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#volatile.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.5</b> volatile.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-8"><i class="fa fa-check"></i><b>7.5.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.5.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-4"><i class="fa fa-check"></i><b>7.5.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#matriz-de-correlación-spearman"><i class="fa fa-check"></i><b>7.6</b> Matriz de correlación (Spearman)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores que Influyen en la Calidad del Vino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Factores que Influyen en la Calidad del Vino</h1>
+<p class="author"><em>Katherin Barrera López, Valeria Flórez Sarmiento y Laura Rivera Figueredo</em></p>
+<p class="date"><em>2025-10-24</em></p>
+</div>
+<div id="introducción" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Capítulo 1</span> Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Este libro fue elaborado con <strong>Bookdown</strong> y tiene como objetivo explorar los factores que influyen en la calidad del vino tinto “Vinho Verde”.<br />
+A lo largo del libro se aplican técnicas de análisis y visualización de datos utilizando R, con base en el conjunto de datos publicado por Cortez et al. (2009) y disponible públicamente en el repositorio UCI.</p>
+<div id="contexto-de-los-datos" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Contexto de los datos<a href="index.html#contexto-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Contexto</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>fixed.acidity</strong></td>
+<td>Representa los ácidos no volátiles (principalmente ácido tartárico y málico) que no se evaporan fácilmente. Afectan directamente el sabor y la frescura del vino.</td>
+</tr>
+<tr class="even">
+<td><strong>volatile.acidity</strong></td>
+<td>Mide los ácidos volátiles (principalmente ácido acético). En cantidades altas, puede generar un olor desagradable (como a vinagre).</td>
+</tr>
+<tr class="odd">
+<td><strong>citric.acid</strong></td>
+<td>Presente de forma natural en pequeñas cantidades, añade frescura y sabor cítrico. Puede equilibrar el dulzor del vino.</td>
+</tr>
+<tr class="even">
+<td><strong>residual.sugar</strong></td>
+<td>Es el azúcar que queda después de la fermentación. Valores altos indican vinos dulces; bajos, vinos secos.</td>
+</tr>
+<tr class="odd">
+<td><strong>chlorides</strong></td>
+<td>Representan la cantidad de sal (principalmente cloruro de sodio) en el vino. Afecta el sabor; niveles altos pueden ser negativos.</td>
+</tr>
+<tr class="even">
+<td><strong>free.sulfur.dioxide</strong></td>
+<td>Es el dióxido de azufre libre, usado como conservante para prevenir oxidación y crecimiento microbiano. Este componente es activo y protege el vino.</td>
+</tr>
+<tr class="odd">
+<td><strong>total.sulfur.dioxide</strong></td>
+<td>Incluye tanto el dióxido de azufre libre como el combinado. Altas cantidades pueden afectar negativamente el aroma y sabor del vino.</td>
+</tr>
+<tr class="even">
+<td><strong>density</strong></td>
+<td>Es la densidad del vino, relacionada con el contenido de azúcar y alcohol. Vinos más dulces tienden a tener mayor densidad.</td>
+</tr>
+<tr class="odd">
+<td><strong>pH</strong></td>
+<td>Mide la acidez global del vino. Un pH bajo indica mayor acidez. Influye en el sabor, color y estabilidad microbiológica.</td>
+</tr>
+<tr class="even">
+<td><strong>sulphates</strong></td>
+<td>Son sales que pueden contribuir a la conservación del vino y mejorar su sabor. En exceso, pueden ser perjudiciales.</td>
+</tr>
+<tr class="odd">
+<td><strong>alcohol</strong></td>
+<td>Porcentaje de etanol. Afecta el cuerpo, el sabor y la percepción de dulzor. Es un factor importante en la calidad percibida del vino.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable Objetivo</strong></th>
+<th><strong>Contexto</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>quality</strong></td>
+<td>Es una puntuación (de 0 a 10) dada por catadores expertos, basada en aspectos sensoriales del vino (aroma, sabor, equilibrio, etc.). Se usa como variable objetivo para predecir la calidad.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="carga-de-librerias.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/valeriaflorezs/rbook_dataviz/edit/BRANCH/index.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["rbook_Wine.pdf", "rbook_Wine.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "toolbar": {
+    "position": "fixed"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

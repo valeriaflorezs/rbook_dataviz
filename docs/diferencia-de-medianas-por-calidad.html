@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Diferencia de medianas por calidad | Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Diferencia de medianas por calidad | Factores que Influyen en la Calidad del Vino" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/portada.png" />
+  <meta property="og:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="github-repo" content="valeriaflorezs/rbook_dataviz" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Diferencia de medianas por calidad | Factores que Influyen en la Calidad del Vino" />
+  
+  <meta name="twitter:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="twitter:image" content="/portada.png" />
+
+<meta name="author" content="Katherin Barrera López, Valeria Flórez Sarmiento y Laura Rivera Figueredo" />
+
+
+<meta name="date" content="2025-10-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-bivariados.html"/>
+<link rel="next" href="correlación-lineal-entre-variables-númericas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contexto-de-los-datos"><i class="fa fa-check"></i><b>1.1</b> Contexto de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="carga-de-librerias.html"><a href="carga-de-librerias.html"><i class="fa fa-check"></i><b>2</b> Carga de librerias</a></li>
+<li class="chapter" data-level="3" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Carga y estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>3.0.1</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="3.0.2" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>3.0.2</b> Verificar missing datas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-univariados.html"><a href="análisis-univariados.html"><i class="fa fa-check"></i><b>4</b> Análisis Univariados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-fixed.acidity"><i class="fa fa-check"></i><b>4.1</b> Variable fixed.acidity</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.1</b> Histograma de fixed.acidity</a></li>
+<li class="chapter" data-level="4.1.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.2</b> Boxplot de fixed.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-volatile.acidity"><i class="fa fa-check"></i><b>4.2</b> Variable volatile.acidity</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.1</b> Histograma de volatile.acidity</a></li>
+<li class="chapter" data-level="4.2.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.2</b> Boxplot de volatile.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-citric.acid"><i class="fa fa-check"></i><b>4.3</b> Variable citric.acid</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>4.3.1</b> Histograma de citric.acid</a></li>
+<li class="chapter" data-level="4.3.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>4.3.2</b> Boxplot de citric.acid</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-residual.sugar"><i class="fa fa-check"></i><b>4.4</b> Variable residual.sugar</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.1</b> Histograma de residual.sugar</a></li>
+<li class="chapter" data-level="4.4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.2</b> Boxplot de residual.sugar</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-chlorides"><i class="fa fa-check"></i><b>4.5</b> Variable chlorides</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>4.5.1</b> Histograma de chlorides</a></li>
+<li class="chapter" data-level="4.5.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>4.5.2</b> Boxplot de chlorides</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6</b> Variable free.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.1</b> Histograma de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.6.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.2</b> Boxplot de free.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7</b> Variable total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.1</b> Histograma de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.7.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.2</b> Boxplot de total.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-density"><i class="fa fa-check"></i><b>4.8</b> Variable density</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-density"><i class="fa fa-check"></i><b>4.8.1</b> Histograma de density</a></li>
+<li class="chapter" data-level="4.8.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-density"><i class="fa fa-check"></i><b>4.8.2</b> Boxplot de density</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-ph"><i class="fa fa-check"></i><b>4.9</b> Variable pH</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-ph"><i class="fa fa-check"></i><b>4.9.1</b> Histograma de pH</a></li>
+<li class="chapter" data-level="4.9.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-ph"><i class="fa fa-check"></i><b>4.9.2</b> Boxplot de pH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-sulphates"><i class="fa fa-check"></i><b>4.10</b> Variable sulphates</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>4.10.1</b> Histograma de sulphates</a></li>
+<li class="chapter" data-level="4.10.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>4.10.2</b> Boxplot de sulphates</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-alcohol"><i class="fa fa-check"></i><b>4.11</b> Variable alcohol</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>4.11.1</b> Histograma de alcohol</a></li>
+<li class="chapter" data-level="4.11.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-alcohol"><i class="fa fa-check"></i><b>4.11.2</b> Boxplot de alcohol</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-objetivo-quality"><i class="fa fa-check"></i><b>4.12</b> Variable Objetivo: quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html"><i class="fa fa-check"></i><b>5</b> Análisis Bivariados</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#alcohol-vs-quality"><i class="fa fa-check"></i><b>5.1</b> alcohol vs quality</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#density-vs-quality"><i class="fa fa-check"></i><b>5.2</b> density vs quality</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#ph-vs-quality"><i class="fa fa-check"></i><b>5.3</b> pH vs quality</a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#sulphates-vs-quality"><i class="fa fa-check"></i><b>5.4</b> sulphates vs quality</a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#citric.acid-vs-quality"><i class="fa fa-check"></i><b>5.5</b> citric.acid vs quality</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html"><i class="fa fa-check"></i><b>6</b> Diferencia de medianas por calidad</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#alcohol-vs-quality-1"><i class="fa fa-check"></i><b>6.1</b> alcohol vs quality</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad"><i class="fa fa-check"></i><b>6.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.1.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad"><i class="fa fa-check"></i><b>6.1.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.1.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc"><i class="fa fa-check"></i><b>6.1.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#density-vs-quality-1"><i class="fa fa-check"></i><b>6.2</b> density vs quality</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-1"><i class="fa fa-check"></i><b>6.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.2.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-1"><i class="fa fa-check"></i><b>6.2.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.2.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-1"><i class="fa fa-check"></i><b>6.2.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#ph-vs-quality-1"><i class="fa fa-check"></i><b>6.3</b> pH vs quality</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-2"><i class="fa fa-check"></i><b>6.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-2"><i class="fa fa-check"></i><b>6.3.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.3.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-2"><i class="fa fa-check"></i><b>6.3.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#sulphates-vs-quality-1"><i class="fa fa-check"></i><b>6.4</b> sulphates vs quality</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-3"><i class="fa fa-check"></i><b>6.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.4.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-3"><i class="fa fa-check"></i><b>6.4.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.4.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-3"><i class="fa fa-check"></i><b>6.4.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html"><i class="fa fa-check"></i><b>7</b> Correlación lineal entre variables númericas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#chlorides-vs-sulphates"><i class="fa fa-check"></i><b>7.1</b> chlorides vs sulphates</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-4"><i class="fa fa-check"></i><b>7.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.1.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman"><i class="fa fa-check"></i><b>7.1.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#density-vs-alcohol"><i class="fa fa-check"></i><b>7.2</b> density vs alcohol</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-5"><i class="fa fa-check"></i><b>7.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.2.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-1"><i class="fa fa-check"></i><b>7.2.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#free.sulfur.dioxide-vs-total.sulfur.dioxide"><i class="fa fa-check"></i><b>7.3</b> free.sulfur.dioxide vs total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-6"><i class="fa fa-check"></i><b>7.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.3.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-2"><i class="fa fa-check"></i><b>7.3.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#fixed.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.4</b> fixed.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-7"><i class="fa fa-check"></i><b>7.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.4.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-3"><i class="fa fa-check"></i><b>7.4.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#volatile.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.5</b> volatile.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-8"><i class="fa fa-check"></i><b>7.5.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.5.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-4"><i class="fa fa-check"></i><b>7.5.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#matriz-de-correlación-spearman"><i class="fa fa-check"></i><b>7.6</b> Matriz de correlación (Spearman)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores que Influyen en la Calidad del Vino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="diferencia-de-medianas-por-calidad" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Diferencia de medianas por calidad<a href="diferencia-de-medianas-por-calidad.html#diferencia-de-medianas-por-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En esta sección evaluaremos si las variables físico-químicas del vino presentan diferencias significativas entre las calificaciones de calidad (<code>quality</code>).
+Dado que la variable <code>quality</code> es categórica ordinal con seis niveles (de 3 a 8) y las variables físico-químicas son numéricas y que no hay normalidad en la mayoría de los casos se opta por utilizar una prueba no paramétrica de comparación de medianas entre grupos.</p>
+<div id="alcohol-vs-quality-1" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> alcohol vs quality<a href="diferencia-de-medianas-por-calidad.html#alcohol-vs-quality-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normalidad" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Normalidad<a href="diferencia-de-medianas-por-calidad.html#normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="diferencia-de-medianas-por-calidad.html#cb61-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="diferencia-de-medianas-por-calidad.html#cb61-2" tabindex="-1"></a>  <span class="fu">group_by</span>(quality) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="diferencia-de-medianas-por-calidad.html#cb61-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(alcohol),</span>
+<span id="cb61-4"><a href="diferencia-de-medianas-por-calidad.html#cb61-4" tabindex="-1"></a>            <span class="at">est_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(alcohol), <span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>statistic,</span>
+<span id="cb61-5"><a href="diferencia-de-medianas-por-calidad.html#cb61-5" tabindex="-1"></a>            <span class="at">p_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(alcohol), <span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb61-6"><a href="diferencia-de-medianas-por-calidad.html#cb61-6" tabindex="-1"></a>            <span class="at">estsw =</span> <span class="fu">shapiro.test</span>(alcohol)<span class="sc">$</span>statistic,</span>
+<span id="cb61-7"><a href="diferencia-de-medianas-por-calidad.html#cb61-7" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(alcohol)<span class="sc">$</span>p.value,</span>
+<span id="cb61-8"><a href="diferencia-de-medianas-por-calidad.html#cb61-8" tabindex="-1"></a>            <span class="at">est_lt =</span> <span class="fu">lillie.test</span>(alcohol)<span class="sc">$</span>statistic,</span>
+<span id="cb61-9"><a href="diferencia-de-medianas-por-calidad.html#cb61-9" tabindex="-1"></a>            <span class="at">p_lt =</span> <span class="fu">lillie.test</span>(alcohol)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   quality     n est_ks     p_ks estsw     p_sw est_lt     p_lt
+##   &lt;ord&gt;   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 3          10 0.178  8.58e- 1 0.942 5.79e- 1 0.178  4.96e- 1
+## 2 4          53 0.140  2.50e- 1 0.934 6.07e- 3 0.140  1.13e- 2
+## 3 5         681 0.172  6.19e-18 0.843 2.17e-25 0.172  1.21e-55
+## 4 6         638 0.0692 4.43e- 3 0.969 2.88e-10 0.0692 1.10e- 7
+## 5 7         199 0.0584 5.05e- 1 0.992 3.11e- 1 0.0584 9.51e- 2
+## 6 8          18 0.130  9.22e- 1 0.963 6.68e- 1 0.130  5.85e- 1</code></pre>
+<p>Los resultados indican que la variable <strong>alcohol</strong> no sigue una distribución normal dentro de la mayoría de los grupos definidos por la variable <code>quality</code>. Los p-valores de las pruebas de normalidad (Kolmogorov–Smirnov, Shapiro–Wilk y Lilliefors) son inferiores a 0.05 en casi todos los niveles, lo que lleva a rechazar la hipótesis nula de normalidad.</p>
+</div>
+<div id="homocedasticidad" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Homocedasticidad<a href="diferencia-de-medianas-por-calidad.html#homocedasticidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="diferencia-de-medianas-por-calidad.html#cb63-1" tabindex="-1"></a><span class="fu">leveneTest</span>(alcohol <span class="sc">~</span> quality, <span class="at">data =</span> datos, <span class="at">center =</span> <span class="st">&quot;median&quot;</span>)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = &quot;median&quot;)
+##         Df F value    Pr(&gt;F)    
+## group    5  24.226 &lt; 2.2e-16 ***
+##       1593                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>La prueba de Levene (centrada en la mediana) muestra un <strong>p-valor &lt; 0.05</strong>, lo que indica que no se cumple el supuesto de homocedasticidad: la varianza de <code>alcohol</code> difiere significativamente entre los niveles de calidad.</p>
+</div>
+<div id="kruskalwallis-y-comparaciones-post-hoc" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Kruskal–Wallis y comparaciones post hoc<a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="diferencia-de-medianas-por-calidad.html#cb65-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(alcohol <span class="sc">~</span> quality, <span class="at">data =</span> datos)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  alcohol by quality
+## Kruskal-Wallis chi-squared = 412.38, df = 5, p-value &lt; 2.2e-16</code></pre>
+<p>La <strong>prueba de Kruskal–Wallis</strong> muestra un <strong>p-valor &lt; 2.2e-16</strong>, por lo que se <strong>rechaza la hipótesis nula</strong> de igualdad de medianas. Esto implica que al menos un grupo de calidad difiere significativamente en el contenido de alcohol.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="diferencia-de-medianas-por-calidad.html#cb67-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">dunn_test</span>(<span class="at">data =</span> datos,alcohol <span class="sc">~</span> quality, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 9
+##    .y.     group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
+##  * &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
+##  1 alcohol 3      4         10    53     0.551 5.82e- 1 1   e+ 0 ns          
+##  2 alcohol 3      5         10   681    -0.631 5.28e- 1 1   e+ 0 ns          
+##  3 alcohol 3      6         10   638     1.67  9.56e- 2 1   e+ 0 ns          
+##  4 alcohol 3      7         10   199     3.86  1.16e- 4 1.73e- 3 **          
+##  5 alcohol 3      8         10    18     3.83  1.27e- 4 1.90e- 3 **          
+##  6 alcohol 4      5         53   681    -2.74  6.11e- 3 9.17e- 2 ns          
+##  7 alcohol 4      6         53   638     2.39  1.70e- 2 2.55e- 1 ns          
+##  8 alcohol 4      7         53   199     6.85  7.17e-12 1.08e-10 ****        
+##  9 alcohol 4      8         53    18     4.85  1.26e- 6 1.89e- 5 ****        
+## 10 alcohol 5      6        681   638    13.3   2.65e-40 3.98e-39 ****        
+## 11 alcohol 5      7        681   199    18.0   1.96e-72 2.94e-71 ****        
+## 12 alcohol 5      8        681    18     7.17  7.34e-13 1.10e-11 ****        
+## 13 alcohol 6      7        638   199     8.85  9.10e-19 1.36e-17 ****        
+## 14 alcohol 6      8        638    18     4.10  4.08e- 5 6.12e- 4 ***         
+## 15 alcohol 7      8        199    18     1.07  2.86e- 1 1   e+ 0 ns</code></pre>
+<p>Las comparaciones múltiples de Dunn confirman diferencias altamente significativas entre los niveles extremos de calidad (por ejemplo, 3 vs 7, 4 vs 8, 5 vs 7), mientras que las diferencias entre calidades adyacentes no resultan significativas. Esto sugiere que los vinos de mayor calidad tienden a tener un contenido de alcohol significativamente superior.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="diferencia-de-medianas-por-calidad.html#cb69-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">kruskal_effsize</span>(datos, alcohol <span class="sc">~</span> quality)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   .y.         n effsize method  magnitude
+## * &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
+## 1 alcohol  1599   0.256 eta2[H] large</code></pre>
+<p>El tamaño del efecto (η² de Kruskal–Wallis) se interpreta como <strong>moderado a grande</strong>, indicando que la calidad explica una proporción relevante de la variabilidad del contenido de alcohol.</p>
+</div>
+</div>
+<div id="density-vs-quality-1" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> density vs quality<a href="diferencia-de-medianas-por-calidad.html#density-vs-quality-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normalidad-1" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Normalidad<a href="diferencia-de-medianas-por-calidad.html#normalidad-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="diferencia-de-medianas-por-calidad.html#cb71-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="diferencia-de-medianas-por-calidad.html#cb71-2" tabindex="-1"></a>  <span class="fu">group_by</span>(quality) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="diferencia-de-medianas-por-calidad.html#cb71-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(density),</span>
+<span id="cb71-4"><a href="diferencia-de-medianas-por-calidad.html#cb71-4" tabindex="-1"></a>            <span class="at">est_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(density), <span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>statistic,</span>
+<span id="cb71-5"><a href="diferencia-de-medianas-por-calidad.html#cb71-5" tabindex="-1"></a>            <span class="at">p_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(density), <span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb71-6"><a href="diferencia-de-medianas-por-calidad.html#cb71-6" tabindex="-1"></a>            <span class="at">estsw =</span> <span class="fu">shapiro.test</span>(density)<span class="sc">$</span>statistic,</span>
+<span id="cb71-7"><a href="diferencia-de-medianas-por-calidad.html#cb71-7" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(density)<span class="sc">$</span>p.value,</span>
+<span id="cb71-8"><a href="diferencia-de-medianas-por-calidad.html#cb71-8" tabindex="-1"></a>            <span class="at">est_lt =</span> <span class="fu">lillie.test</span>(density)<span class="sc">$</span>statistic,</span>
+<span id="cb71-9"><a href="diferencia-de-medianas-por-calidad.html#cb71-9" tabindex="-1"></a>            <span class="at">p_lt =</span> <span class="fu">lillie.test</span>(density)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   quality     n est_ks    p_ks estsw          p_sw est_lt       p_lt
+##   &lt;ord&gt;   &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+## 1 3          10 0.121  0.994   0.965 0.838         0.121  0.947     
+## 2 4          53 0.0670 0.971   0.979 0.491         0.0670 0.800     
+## 3 5         681 0.0626 0.00968 0.976 0.00000000332 0.0626 0.00000120
+## 4 6         638 0.0417 0.217   0.993 0.00612       0.0417 0.0103    
+## 5 7         199 0.0782 0.175   0.987 0.0756        0.0782 0.00482   
+## 6 8          18 0.132  0.914   0.957 0.550         0.132  0.562</code></pre>
+<p>Los resultados muestran que <strong>density</strong> no sigue una distribución normal en casi ningún grupo (p &lt; 0.05 en la mayoría de las pruebas).</p>
+</div>
+<div id="homocedasticidad-1" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Homocedasticidad<a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="diferencia-de-medianas-por-calidad.html#cb73-1" tabindex="-1"></a><span class="fu">leveneTest</span>(density <span class="sc">~</span> quality, <span class="at">data =</span> datos, <span class="at">center =</span> <span class="st">&quot;median&quot;</span>)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = &quot;median&quot;)
+##         Df F value    Pr(&gt;F)    
+## group    5  9.7725 3.274e-09 ***
+##       1593                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>La prueba de Levene arroja un p-valor de <strong>3.27e-09 (&lt; 0.05)</strong>, indicando que no hay igualdad de varianzas entre grupos.</p>
+</div>
+<div id="kruskalwallis-y-comparaciones-post-hoc-1" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Kruskal–Wallis y comparaciones post hoc<a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="diferencia-de-medianas-por-calidad.html#cb75-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(density <span class="sc">~</span> quality, <span class="at">data =</span> datos)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  density by quality
+## Kruskal-Wallis chi-squared = 65.329, df = 5, p-value = 9.58e-13</code></pre>
+<p>El resultado del <strong>test de Kruskal–Wallis</strong> arroja un <strong>p-valor &lt; 2.2e-16</strong>, por lo que se concluye que existen diferencias significativas en las medianas de densidad entre los distintos niveles de calidad.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="diferencia-de-medianas-por-calidad.html#cb77-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">dunn_test</span>(<span class="at">data =</span> datos,density <span class="sc">~</span> quality, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 9
+##    .y.     group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
+##  * &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
+##  1 density 3      4         10    53    -1.42  1.54e- 1 1   e+ 0 ns          
+##  2 density 3      5         10   681    -0.484 6.28e- 1 1   e+ 0 ns          
+##  3 density 3      6         10   638    -1.34  1.79e- 1 1   e+ 0 ns          
+##  4 density 3      7         10   199    -2.20  2.80e- 2 4.21e- 1 ns          
+##  5 density 3      8         10    18    -2.47  1.36e- 2 2.03e- 1 ns          
+##  6 density 4      5         53   681     2.36  1.81e- 2 2.71e- 1 ns          
+##  7 density 4      6         53   638     0.443 6.58e- 1 1   e+ 0 ns          
+##  8 density 4      7         53   199    -1.43  1.54e- 1 1   e+ 0 ns          
+##  9 density 4      8         53    18    -1.77  7.71e- 2 1   e+ 0 ns          
+## 10 density 5      6        681   638    -4.97  6.72e- 7 1.01e- 5 ****        
+## 11 density 5      7        681   199    -6.92  4.49e-12 6.73e-11 ****        
+## 12 density 5      8        681    18    -3.43  6.00e- 4 9.00e- 3 **          
+## 13 density 6      7        638   199    -3.50  4.71e- 4 7.07e- 3 **          
+## 14 density 6      8        638    18    -2.28  2.24e- 2 3.36e- 1 ns          
+## 15 density 7      8        199    18    -1.06  2.88e- 1 1   e+ 0 ns</code></pre>
+<p>Las pruebas post hoc evidencian diferencias notorias entre calidades distantes (por ejemplo, 3 vs 7, 4 vs 8, 5 vs 7), mientras que los niveles contiguos (como 6 vs 7) no difieren significativamente.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="diferencia-de-medianas-por-calidad.html#cb79-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">kruskal_effsize</span>(datos, density <span class="sc">~</span> quality)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   .y.         n effsize method  magnitude
+## * &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
+## 1 density  1599  0.0379 eta2[H] small</code></pre>
+<p>El tamaño del efecto indica una <strong>influencia moderada de la calidad</strong> sobre la densidad, lo que sugiere que esta variable cambia de forma consistente con el nivel de calidad del vino.</p>
+</div>
+</div>
+<div id="ph-vs-quality-1" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> pH vs quality<a href="diferencia-de-medianas-por-calidad.html#ph-vs-quality-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normalidad-2" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Normalidad<a href="diferencia-de-medianas-por-calidad.html#normalidad-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="diferencia-de-medianas-por-calidad.html#cb81-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="diferencia-de-medianas-por-calidad.html#cb81-2" tabindex="-1"></a>  <span class="fu">group_by</span>(quality) <span class="sc">%&gt;%</span></span>
+<span id="cb81-3"><a href="diferencia-de-medianas-por-calidad.html#cb81-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(pH),</span>
+<span id="cb81-4"><a href="diferencia-de-medianas-por-calidad.html#cb81-4" tabindex="-1"></a>            <span class="at">est_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(pH),<span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>statistic,</span>
+<span id="cb81-5"><a href="diferencia-de-medianas-por-calidad.html#cb81-5" tabindex="-1"></a>            <span class="at">p_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(pH),<span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb81-6"><a href="diferencia-de-medianas-por-calidad.html#cb81-6" tabindex="-1"></a>            <span class="at">estsw =</span> <span class="fu">shapiro.test</span>(pH)<span class="sc">$</span>statistic,</span>
+<span id="cb81-7"><a href="diferencia-de-medianas-por-calidad.html#cb81-7" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(pH)<span class="sc">$</span>p.value,</span>
+<span id="cb81-8"><a href="diferencia-de-medianas-por-calidad.html#cb81-8" tabindex="-1"></a>            <span class="at">est_lt =</span> <span class="fu">lillie.test</span>(pH)<span class="sc">$</span>statistic,</span>
+<span id="cb81-9"><a href="diferencia-de-medianas-por-calidad.html#cb81-9" tabindex="-1"></a>            <span class="at">p_lt =</span> <span class="fu">lillie.test</span>(pH)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   quality     n est_ks   p_ks estsw       p_sw est_lt     p_lt
+##   &lt;ord&gt;   &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 3          10 0.115  0.997  0.988 0.993      0.115  0.967   
+## 2 4          53 0.119  0.436  0.947 0.0197     0.119  0.0570  
+## 3 5         681 0.0315 0.510  0.997 0.378      0.0315 0.105   
+## 4 6         638 0.0503 0.0797 0.984 0.00000247 0.0503 0.000602
+## 5 7         199 0.0639 0.390  0.983 0.0177     0.0639 0.0463  
+## 6 8          18 0.221  0.345  0.945 0.345      0.221  0.0207</code></pre>
+<p>Los resultados muestran que la variable <strong>pH</strong> no presenta normalidad en la mayoría de los niveles de calidad (p &lt; 0.05).</p>
+</div>
+<div id="homocedasticidad-2" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Homocedasticidad<a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="diferencia-de-medianas-por-calidad.html#cb83-1" tabindex="-1"></a><span class="fu">leveneTest</span>(pH <span class="sc">~</span> quality, <span class="at">data =</span> datos, <span class="at">center =</span> <span class="st">&quot;median&quot;</span>)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = &quot;median&quot;)
+##         Df F value Pr(&gt;F)
+## group    5  0.2978 0.9143
+##       1593</code></pre>
+<p>El p-valor obtenido (<strong>0.91</strong>) es mayor que 0.05, por lo que <strong>no se rechaza la hipótesis nula de igualdad de varianzas</strong>. Se cumple el supuesto de homocedasticidad.</p>
+</div>
+<div id="kruskalwallis-y-comparaciones-post-hoc-2" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Kruskal–Wallis y comparaciones post hoc<a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="diferencia-de-medianas-por-calidad.html#cb85-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(pH <span class="sc">~</span> quality, <span class="at">data =</span> datos)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  pH by quality
+## Kruskal-Wallis chi-squared = 23.736, df = 5, p-value = 0.000244</code></pre>
+<p>El resultado de la prueba de Kruskal–Wallis arroja un <strong>p-valor = 0.008</strong>, indicando diferencias estadísticamente significativas en las medianas del pH según la calidad del vino.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="diferencia-de-medianas-por-calidad.html#cb87-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">dunn_test</span>(<span class="at">data =</span> datos,pH <span class="sc">~</span> quality, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 9
+##    .y.   group1 group2    n1    n2 statistic         p   p.adj p.adj.signif
+##  * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       
+##  1 pH    3      4         10    53    -0.311 0.756     1       ns          
+##  2 pH    3      5         10   681    -1.90  0.0571    0.857   ns          
+##  3 pH    3      6         10   638    -1.62  0.105     1       ns          
+##  4 pH    3      7         10   199    -2.23  0.0261    0.391   ns          
+##  5 pH    3      8         10    18    -2.28  0.0228    0.342   ns          
+##  6 pH    4      5         53   681    -3.50  0.000469  0.00703 **          
+##  7 pH    4      6         53   638    -2.87  0.00413   0.0619  ns          
+##  8 pH    4      7         53   199    -3.97  0.0000714 0.00107 **          
+##  9 pH    4      8         53    18    -2.90  0.00374   0.0561  ns          
+## 10 pH    5      6        681   638     1.61  0.107     1       ns          
+## 11 pH    5      7        681   199    -1.43  0.153     1       ns          
+## 12 pH    5      8        681    18    -1.22  0.221     1       ns          
+## 13 pH    6      7        638   199    -2.51  0.0120    0.181   ns          
+## 14 pH    6      8        638    18    -1.59  0.111     1       ns          
+## 15 pH    7      8        199    18    -0.719 0.472     1       ns</code></pre>
+<p>Las comparaciones múltiples muestran que las calidades 4, 5, 6 y 7 presentan diferencias significativas entre sí, especialmente entre 4 vs 7 y 5 vs 7 (p.adj &lt; 0.01). Esto sugiere que el <strong>pH tiende a disminuir levemente con la calidad</strong> del vino.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="diferencia-de-medianas-por-calidad.html#cb89-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">kruskal_effsize</span>(datos, pH <span class="sc">~</span> quality)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   .y.       n effsize method  magnitude
+## * &lt;chr&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
+## 1 pH     1599  0.0118 eta2[H] small</code></pre>
+<p>El tamaño del efecto indica que la relación entre pH y calidad es <strong>pequeña a moderada</strong>, por lo que las diferencias son estadísticamente significativas, aunque con magnitud práctica limitada.</p>
+</div>
+</div>
+<div id="sulphates-vs-quality-1" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> sulphates vs quality<a href="diferencia-de-medianas-por-calidad.html#sulphates-vs-quality-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normalidad-3" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Normalidad<a href="diferencia-de-medianas-por-calidad.html#normalidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="diferencia-de-medianas-por-calidad.html#cb91-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span></span>
+<span id="cb91-2"><a href="diferencia-de-medianas-por-calidad.html#cb91-2" tabindex="-1"></a>  <span class="fu">group_by</span>(quality) <span class="sc">%&gt;%</span></span>
+<span id="cb91-3"><a href="diferencia-de-medianas-por-calidad.html#cb91-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(sulphates),</span>
+<span id="cb91-4"><a href="diferencia-de-medianas-por-calidad.html#cb91-4" tabindex="-1"></a>            <span class="at">est_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(sulphates),<span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>statistic,</span>
+<span id="cb91-5"><a href="diferencia-de-medianas-por-calidad.html#cb91-5" tabindex="-1"></a>            <span class="at">p_ks =</span> <span class="fu">ks.test</span>(<span class="fu">scale</span>(sulphates),<span class="st">&#39;pnorm&#39;</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb91-6"><a href="diferencia-de-medianas-por-calidad.html#cb91-6" tabindex="-1"></a>            <span class="at">estsw =</span> <span class="fu">shapiro.test</span>(sulphates)<span class="sc">$</span>statistic,</span>
+<span id="cb91-7"><a href="diferencia-de-medianas-por-calidad.html#cb91-7" tabindex="-1"></a>            <span class="at">p_sw =</span> <span class="fu">shapiro.test</span>(sulphates)<span class="sc">$</span>p.value,</span>
+<span id="cb91-8"><a href="diferencia-de-medianas-por-calidad.html#cb91-8" tabindex="-1"></a>            <span class="at">est_lt =</span> <span class="fu">lillie.test</span>(sulphates)<span class="sc">$</span>statistic,</span>
+<span id="cb91-9"><a href="diferencia-de-medianas-por-calidad.html#cb91-9" tabindex="-1"></a>            <span class="at">p_lt =</span> <span class="fu">lillie.test</span>(sulphates)<span class="sc">$</span>p.value)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   quality     n est_ks     p_ks estsw     p_sw est_lt     p_lt
+##   &lt;ord&gt;   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 3          10 0.211  7.63e- 1 0.874 1.11e- 1 0.211  2.32e- 1
+## 2 4          53 0.296  1.89e- 4 0.551 1.73e-11 0.296  1.09e-12
+## 3 5         681 0.178  3.33e-19 0.756 1.65e-30 0.178  7.72e-60
+## 4 6         638 0.122  1.30e- 8 0.818 3.19e-26 0.122  3.47e-25
+## 5 7         199 0.0593 4.86e- 1 0.971 3.60e- 4 0.0593 8.55e- 2
+## 6 8          18 0.159  7.55e- 1 0.878 2.37e- 2 0.159  2.69e- 1</code></pre>
+<p>El análisis de normalidad indica que <strong>sulphates</strong> no sigue una distribución normal en casi todos los grupos de calidad (p &lt; 0.05).</p>
+</div>
+<div id="homocedasticidad-3" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Homocedasticidad<a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="diferencia-de-medianas-por-calidad.html#cb93-1" tabindex="-1"></a><span class="fu">leveneTest</span>(sulphates <span class="sc">~</span> quality, <span class="at">data =</span> datos, <span class="at">center =</span> <span class="st">&quot;median&quot;</span>)</span></code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = &quot;median&quot;)
+##         Df F value Pr(&gt;F)
+## group    5  0.2301 0.9495
+##       1593</code></pre>
+<p>El resultado arroja <strong>F = 0.2301 y p = 0.9495</strong>, por lo que <strong>no se rechaza la hipótesis nula</strong>. Se cumple el supuesto de igualdad de varianzas.</p>
+</div>
+<div id="kruskalwallis-y-comparaciones-post-hoc-3" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Kruskal–Wallis y comparaciones post hoc<a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="diferencia-de-medianas-por-calidad.html#cb95-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(sulphates <span class="sc">~</span> quality, <span class="at">data =</span> datos)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  sulphates by quality
+## Kruskal-Wallis chi-squared = 232.39, df = 5, p-value &lt; 2.2e-16</code></pre>
+<p>El test de Kruskal–Wallis devuelve un <strong>p-valor &lt; 2.2e-16</strong>, evidenciando diferencias significativas entre las medianas de sulfatos según la calidad.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="diferencia-de-medianas-por-calidad.html#cb97-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">dunn_test</span>(<span class="at">data =</span> datos,sulphates <span class="sc">~</span> quality, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 9
+##    .y.       group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
+##  * &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
+##  1 sulphates 3      4         10    53    0.0241 9.81e- 1 1   e+ 0 ns          
+##  2 sulphates 3      5         10   681    1.02   3.07e- 1 1   e+ 0 ns          
+##  3 sulphates 3      6         10   638    2.61   9.15e- 3 1.37e- 1 ns          
+##  4 sulphates 3      7         10   199    4.17   3.02e- 5 4.53e- 4 ***         
+##  5 sulphates 3      8         10    18    4.03   5.68e- 5 8.52e- 4 ***         
+##  6 sulphates 4      5         53   681    2.22   2.61e- 2 3.92e- 1 ns          
+##  7 sulphates 4      6         53   638    5.75   8.81e- 9 1.32e- 7 ****        
+##  8 sulphates 4      7         53   199    8.69   3.54e-18 5.31e-17 ****        
+##  9 sulphates 4      8         53    18    5.79   7.06e- 9 1.06e- 7 ****        
+## 10 sulphates 5      6        681   638    9.17   4.87e-20 7.30e-19 ****        
+## 11 sulphates 5      7        681   199   12.7    3.63e-37 5.44e-36 ****        
+## 12 sulphates 5      8        681    18    5.29   1.25e- 7 1.88e- 6 ****        
+## 13 sulphates 6      7        638   199    6.42   1.35e-10 2.02e- 9 ****        
+## 14 sulphates 6      8        638    18    3.17   1.54e- 3 2.30e- 2 *           
+## 15 sulphates 7      8        199    18    0.958  3.38e- 1 1   e+ 0 ns</code></pre>
+<p>Las comparaciones múltiples muestran diferencias muy significativas entre calidades medias y altas (4 vs 7, 5 vs 8, 6 vs 8; p.adj &lt; 0.001), mientras que las calidades extremas (3 vs 4, 7 vs 8) no difieren. Esto sugiere que el contenido de sulfatos aumenta con la calidad hasta cierto punto, constituyéndose en un <strong>factor diferenciador clave</strong>.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="diferencia-de-medianas-por-calidad.html#cb99-1" tabindex="-1"></a>rstatix<span class="sc">::</span><span class="fu">kruskal_effsize</span>(datos, sulphates <span class="sc">~</span> quality)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 5
+##   .y.           n effsize method  magnitude
+## * &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;ord&gt;    
+## 1 sulphates  1599   0.143 eta2[H] large</code></pre>
+<p>El tamaño del efecto de Kruskal–Wallis para los sulfatos es <strong>moderado a alto</strong>, indicando una relación clara entre esta variable y la calidad percibida del vino.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-bivariados.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="correlación-lineal-entre-variables-númericas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/valeriaflorezs/rbook_dataviz/edit/BRANCH/wine_quality.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["rbook_Wine.pdf", "rbook_Wine.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "toolbar": {
+    "position": "fixed"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

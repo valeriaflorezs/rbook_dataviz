@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Análisis Univariados | Factores que Influyen en la Calidad del Vino</title>
+  <meta name="description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Análisis Univariados | Factores que Influyen en la Calidad del Vino" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/portada.png" />
+  <meta property="og:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="github-repo" content="valeriaflorezs/rbook_dataviz" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Análisis Univariados | Factores que Influyen en la Calidad del Vino" />
+  
+  <meta name="twitter:description" content="<p>Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo “Vinho Verde” de Portugal, utilizando técnicas de análisis de datos y visualización.
+Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., &amp; Reis, J. (2009). <em>Modeling wine preferences by data mining from physicochemical properties</em>. Decision Support Systems, 47(4), 547–553. Elsevier. <a href="https://doi.org/10.1016/j.dss.2009.05.016" class="uri">https://doi.org/10.1016/j.dss.2009.05.016</a><br />
+Enlace al dataset: <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset - UCI Machine Learning Repository</a></p>" />
+  <meta name="twitter:image" content="/portada.png" />
+
+<meta name="author" content="Katherin Barrera López, Valeria Flórez Sarmiento y Laura Rivera Figueredo" />
+
+
+<meta name="date" content="2025-10-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="carga-y-estructura-de-los-datos.html"/>
+<link rel="next" href="análisis-bivariados.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contexto-de-los-datos"><i class="fa fa-check"></i><b>1.1</b> Contexto de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="carga-de-librerias.html"><a href="carga-de-librerias.html"><i class="fa fa-check"></i><b>2</b> Carga de librerias</a></li>
+<li class="chapter" data-level="3" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html"><i class="fa fa-check"></i><b>3</b> Carga y estructura de los datos</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#cambiar-tipo-de-dato-de-la-variable-quality"><i class="fa fa-check"></i><b>3.0.1</b> Cambiar tipo de dato de la variable quality</a></li>
+<li class="chapter" data-level="3.0.2" data-path="carga-y-estructura-de-los-datos.html"><a href="carga-y-estructura-de-los-datos.html#verificar-missing-datas"><i class="fa fa-check"></i><b>3.0.2</b> Verificar missing datas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-univariados.html"><a href="análisis-univariados.html"><i class="fa fa-check"></i><b>4</b> Análisis Univariados</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-fixed.acidity"><i class="fa fa-check"></i><b>4.1</b> Variable fixed.acidity</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.1</b> Histograma de fixed.acidity</a></li>
+<li class="chapter" data-level="4.1.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-fixed.acidity"><i class="fa fa-check"></i><b>4.1.2</b> Boxplot de fixed.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-volatile.acidity"><i class="fa fa-check"></i><b>4.2</b> Variable volatile.acidity</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.1</b> Histograma de volatile.acidity</a></li>
+<li class="chapter" data-level="4.2.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-volatile.acidity"><i class="fa fa-check"></i><b>4.2.2</b> Boxplot de volatile.acidity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-citric.acid"><i class="fa fa-check"></i><b>4.3</b> Variable citric.acid</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-citric.acid"><i class="fa fa-check"></i><b>4.3.1</b> Histograma de citric.acid</a></li>
+<li class="chapter" data-level="4.3.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-citric.acid"><i class="fa fa-check"></i><b>4.3.2</b> Boxplot de citric.acid</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-residual.sugar"><i class="fa fa-check"></i><b>4.4</b> Variable residual.sugar</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.1</b> Histograma de residual.sugar</a></li>
+<li class="chapter" data-level="4.4.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-residual.sugar"><i class="fa fa-check"></i><b>4.4.2</b> Boxplot de residual.sugar</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-chlorides"><i class="fa fa-check"></i><b>4.5</b> Variable chlorides</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-chlorides"><i class="fa fa-check"></i><b>4.5.1</b> Histograma de chlorides</a></li>
+<li class="chapter" data-level="4.5.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-chlorides"><i class="fa fa-check"></i><b>4.5.2</b> Boxplot de chlorides</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6</b> Variable free.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.1</b> Histograma de free.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.6.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-free.sulfur.dioxide"><i class="fa fa-check"></i><b>4.6.2</b> Boxplot de free.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7</b> Variable total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.1</b> Histograma de total.sulfur.dioxide</a></li>
+<li class="chapter" data-level="4.7.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-total.sulfur.dioxide"><i class="fa fa-check"></i><b>4.7.2</b> Boxplot de total.sulfur.dioxide</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-density"><i class="fa fa-check"></i><b>4.8</b> Variable density</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-density"><i class="fa fa-check"></i><b>4.8.1</b> Histograma de density</a></li>
+<li class="chapter" data-level="4.8.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-density"><i class="fa fa-check"></i><b>4.8.2</b> Boxplot de density</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-ph"><i class="fa fa-check"></i><b>4.9</b> Variable pH</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-ph"><i class="fa fa-check"></i><b>4.9.1</b> Histograma de pH</a></li>
+<li class="chapter" data-level="4.9.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-ph"><i class="fa fa-check"></i><b>4.9.2</b> Boxplot de pH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-sulphates"><i class="fa fa-check"></i><b>4.10</b> Variable sulphates</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-sulphates"><i class="fa fa-check"></i><b>4.10.1</b> Histograma de sulphates</a></li>
+<li class="chapter" data-level="4.10.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-sulphates"><i class="fa fa-check"></i><b>4.10.2</b> Boxplot de sulphates</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-alcohol"><i class="fa fa-check"></i><b>4.11</b> Variable alcohol</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="análisis-univariados.html"><a href="análisis-univariados.html#histograma-de-alcohol"><i class="fa fa-check"></i><b>4.11.1</b> Histograma de alcohol</a></li>
+<li class="chapter" data-level="4.11.2" data-path="análisis-univariados.html"><a href="análisis-univariados.html#boxplot-de-alcohol"><i class="fa fa-check"></i><b>4.11.2</b> Boxplot de alcohol</a></li>
+</ul></li>
+<li class="chapter" data-level="4.12" data-path="análisis-univariados.html"><a href="análisis-univariados.html#variable-objetivo-quality"><i class="fa fa-check"></i><b>4.12</b> Variable Objetivo: quality</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html"><i class="fa fa-check"></i><b>5</b> Análisis Bivariados</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#alcohol-vs-quality"><i class="fa fa-check"></i><b>5.1</b> alcohol vs quality</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#density-vs-quality"><i class="fa fa-check"></i><b>5.2</b> density vs quality</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#ph-vs-quality"><i class="fa fa-check"></i><b>5.3</b> pH vs quality</a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#sulphates-vs-quality"><i class="fa fa-check"></i><b>5.4</b> sulphates vs quality</a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-bivariados.html"><a href="análisis-bivariados.html#citric.acid-vs-quality"><i class="fa fa-check"></i><b>5.5</b> citric.acid vs quality</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html"><i class="fa fa-check"></i><b>6</b> Diferencia de medianas por calidad</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#alcohol-vs-quality-1"><i class="fa fa-check"></i><b>6.1</b> alcohol vs quality</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad"><i class="fa fa-check"></i><b>6.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.1.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad"><i class="fa fa-check"></i><b>6.1.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.1.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc"><i class="fa fa-check"></i><b>6.1.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#density-vs-quality-1"><i class="fa fa-check"></i><b>6.2</b> density vs quality</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-1"><i class="fa fa-check"></i><b>6.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.2.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-1"><i class="fa fa-check"></i><b>6.2.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.2.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-1"><i class="fa fa-check"></i><b>6.2.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#ph-vs-quality-1"><i class="fa fa-check"></i><b>6.3</b> pH vs quality</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-2"><i class="fa fa-check"></i><b>6.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-2"><i class="fa fa-check"></i><b>6.3.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.3.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-2"><i class="fa fa-check"></i><b>6.3.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#sulphates-vs-quality-1"><i class="fa fa-check"></i><b>6.4</b> sulphates vs quality</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#normalidad-3"><i class="fa fa-check"></i><b>6.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="6.4.2" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#homocedasticidad-3"><i class="fa fa-check"></i><b>6.4.2</b> Homocedasticidad</a></li>
+<li class="chapter" data-level="6.4.3" data-path="diferencia-de-medianas-por-calidad.html"><a href="diferencia-de-medianas-por-calidad.html#kruskalwallis-y-comparaciones-post-hoc-3"><i class="fa fa-check"></i><b>6.4.3</b> Kruskal–Wallis y comparaciones post hoc</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html"><i class="fa fa-check"></i><b>7</b> Correlación lineal entre variables númericas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#chlorides-vs-sulphates"><i class="fa fa-check"></i><b>7.1</b> chlorides vs sulphates</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-4"><i class="fa fa-check"></i><b>7.1.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.1.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman"><i class="fa fa-check"></i><b>7.1.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#density-vs-alcohol"><i class="fa fa-check"></i><b>7.2</b> density vs alcohol</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-5"><i class="fa fa-check"></i><b>7.2.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.2.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-1"><i class="fa fa-check"></i><b>7.2.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#free.sulfur.dioxide-vs-total.sulfur.dioxide"><i class="fa fa-check"></i><b>7.3</b> free.sulfur.dioxide vs total.sulfur.dioxide</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-6"><i class="fa fa-check"></i><b>7.3.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.3.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-2"><i class="fa fa-check"></i><b>7.3.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#fixed.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.4</b> fixed.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-7"><i class="fa fa-check"></i><b>7.4.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.4.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-3"><i class="fa fa-check"></i><b>7.4.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#volatile.acidity-vs-citric.acid"><i class="fa fa-check"></i><b>7.5</b> volatile.acidity vs citric.acid</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#normalidad-8"><i class="fa fa-check"></i><b>7.5.1</b> Normalidad</a></li>
+<li class="chapter" data-level="7.5.2" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#correlación-spearman-4"><i class="fa fa-check"></i><b>7.5.2</b> Correlación Spearman</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="correlación-lineal-entre-variables-númericas.html"><a href="correlación-lineal-entre-variables-númericas.html#matriz-de-correlación-spearman"><i class="fa fa-check"></i><b>7.6</b> Matriz de correlación (Spearman)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores que Influyen en la Calidad del Vino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-univariados" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Análisis Univariados<a href="análisis-univariados.html#análisis-univariados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="variable-fixed.acidity" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Variable fixed.acidity<a href="análisis-univariados.html#variable-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="análisis-univariados.html#cb11-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="análisis-univariados.html#cb11-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(fixed.acidity),</span>
+<span id="cb11-3"><a href="análisis-univariados.html#cb11-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(fixed.acidity),</span>
+<span id="cb11-4"><a href="análisis-univariados.html#cb11-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(fixed.acidity),</span>
+<span id="cb11-5"><a href="análisis-univariados.html#cb11-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(fixed.acidity),</span>
+<span id="cb11-6"><a href="análisis-univariados.html#cb11-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(fixed.acidity),</span>
+<span id="cb11-7"><a href="análisis-univariados.html#cb11-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(fixed.acidity),</span>
+<span id="cb11-8"><a href="análisis-univariados.html#cb11-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(fixed.acidity),</span>
+<span id="cb11-9"><a href="análisis-univariados.html#cb11-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(fixed.acidity, <span class="fl">0.25</span>),</span>
+<span id="cb11-10"><a href="análisis-univariados.html#cb11-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(fixed.acidity, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  8.32  1.74     7.9   2.1    4.6   15.9   7.1   9.2</code></pre>
+<p>La variable fixed acidity, que se refiere a la cantidad de ácidos que no se evaporan fácilmente y que aportan un sabor ácido estable y duradero, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 8,319 g/L (DS = 1,741 g/L), donde El 50% de los valores se encuentran por debajo de 7,9 g/L, mientras que el 25% más bajo está por debajo de 7,1 g/L y el 25% más alto supera los 9,2 g/L, evidenciando una dispersión moderada. El valor mínimo registrado fue de 4,6 g/L y el máximo de 15,9 g/L lo que indica un amplio rango de 11,3 g/L.</p>
+<div id="histograma-de-fixed.acidity" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Histograma de fixed.acidity<a href="análisis-univariados.html#histograma-de-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="análisis-univariados.html#cb13-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="análisis-univariados.html#cb13-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> fixed.acidity))<span class="sc">+</span></span>
+<span id="cb13-3"><a href="análisis-univariados.html#cb13-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb13-4"><a href="análisis-univariados.html#cb13-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb13-5"><a href="análisis-univariados.html#cb13-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-6-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-fixed.acidity" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Boxplot de fixed.acidity<a href="análisis-univariados.html#boxplot-de-fixed.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="análisis-univariados.html#cb14-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="análisis-univariados.html#cb14-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> fixed.acidity))<span class="sc">+</span></span>
+<span id="cb14-3"><a href="análisis-univariados.html#cb14-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb14-4"><a href="análisis-univariados.html#cb14-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-7-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de fixed acidity presenta una ligera asimetría positiva, lo que sugiere la presencia de valores de acidez fija inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 12,4 g/L. Dichos valores podrían sesgar la media hacia valores mayores.</p>
+</div>
+</div>
+<div id="variable-volatile.acidity" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Variable volatile.acidity<a href="análisis-univariados.html#variable-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="análisis-univariados.html#cb15-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="análisis-univariados.html#cb15-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(volatile.acidity),</span>
+<span id="cb15-3"><a href="análisis-univariados.html#cb15-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(volatile.acidity),</span>
+<span id="cb15-4"><a href="análisis-univariados.html#cb15-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(volatile.acidity),</span>
+<span id="cb15-5"><a href="análisis-univariados.html#cb15-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(volatile.acidity),</span>
+<span id="cb15-6"><a href="análisis-univariados.html#cb15-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(volatile.acidity),</span>
+<span id="cb15-7"><a href="análisis-univariados.html#cb15-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(volatile.acidity),</span>
+<span id="cb15-8"><a href="análisis-univariados.html#cb15-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(volatile.acidity),</span>
+<span id="cb15-9"><a href="análisis-univariados.html#cb15-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(volatile.acidity, <span class="fl">0.25</span>),</span>
+<span id="cb15-10"><a href="análisis-univariados.html#cb15-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(volatile.acidity, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.528 0.179    0.52  0.25   0.12   1.58  0.39  0.64</code></pre>
+<p>La variable volatile acidity, que en este contexto se refiere a la cantidad de ácidos volátiles presentes en el vino y que en exceso pueden generar aromas y sabores indeseados, fue analizada a partir de 1.599 observaciones.Se obtuvo un promedio de 0,528 g/L (DS = 0,179 g/L), donde el 50% de los valores se encuentran por debajo de 0,52 g/L. El 25% más bajo está por debajo de 0,39 g/L y el 25% más alto supera los 0,64 g/L, evidenciando una dispersión moderada.El valor mínimo registrado fue de 0,12 g/L y el máximo de 1,58 g/L, lo que indica un rango de 1,46 g/L.</p>
+<div id="histograma-de-volatile.acidity" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Histograma de volatile.acidity<a href="análisis-univariados.html#histograma-de-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="análisis-univariados.html#cb17-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="análisis-univariados.html#cb17-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> volatile.acidity))<span class="sc">+</span></span>
+<span id="cb17-3"><a href="análisis-univariados.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb17-4"><a href="análisis-univariados.html#cb17-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb17-5"><a href="análisis-univariados.html#cb17-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-9-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-volatile.acidity" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Boxplot de volatile.acidity<a href="análisis-univariados.html#boxplot-de-volatile.acidity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="análisis-univariados.html#cb18-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="análisis-univariados.html#cb18-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> volatile.acidity))<span class="sc">+</span></span>
+<span id="cb18-3"><a href="análisis-univariados.html#cb18-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb18-4"><a href="análisis-univariados.html#cb18-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-10-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La variable acidez volátil en los vinos tintos presenta una distribución mayormente concentrada entre 0,20 g/L y 0,80 g/L, con un pico en torno a 0,5 g/L, lo que indica que la mayoría de los vinos tienen niveles moderados. La mediana es de 0,52 g/L y el rango intercuartílico se encuentra entre 0,39 g/L y 0,64 g/L, reflejando que el 50 % central de las observaciones se concentra en un intervalo relativamente estrecho. Sin embargo, el diagrama de caja revela la presencia de múltiples valores atípicos por encima del límite superior, alcanzando un máximo de 1,58 g/L, lo que evidencia que, aunque la acidez volátil es moderada en la mayoría de los casos, existen vinos con niveles excepcionalmente altos. Estos outliers pueden afectar las medidas como la media y la desviación estándar y, desde el punto de vista enológico, niveles muy elevados de acidez volátil pueden generar aromas desagradables (como notas avinagradas), mientras que niveles moderados aportan frescura y complejidad al vino.</p>
+</div>
+</div>
+<div id="variable-citric.acid" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Variable citric.acid<a href="análisis-univariados.html#variable-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="análisis-univariados.html#cb19-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="análisis-univariados.html#cb19-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(citric.acid),</span>
+<span id="cb19-3"><a href="análisis-univariados.html#cb19-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(citric.acid),</span>
+<span id="cb19-4"><a href="análisis-univariados.html#cb19-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(citric.acid),</span>
+<span id="cb19-5"><a href="análisis-univariados.html#cb19-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(citric.acid),</span>
+<span id="cb19-6"><a href="análisis-univariados.html#cb19-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(citric.acid),</span>
+<span id="cb19-7"><a href="análisis-univariados.html#cb19-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(citric.acid),</span>
+<span id="cb19-8"><a href="análisis-univariados.html#cb19-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(citric.acid),</span>
+<span id="cb19-9"><a href="análisis-univariados.html#cb19-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(citric.acid, <span class="fl">0.25</span>),</span>
+<span id="cb19-10"><a href="análisis-univariados.html#cb19-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(citric.acid, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.271 0.195    0.26  0.33      0      1  0.09  0.42</code></pre>
+<p>La variable citric acid, que en este contexto corresponde a la cantidad de ácido cítrico presente en el vino, un ácido orgánico que aporta frescura, realza la percepción frutal y contribuye al equilibrio general del sabor, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,27 g/L (DS = 0,19 g/L), donde el 50% de los valores se encuentran por debajo de 0,26 g/L, mientras que el 25% más bajo está por debajo de 0,09 g/L y el 25% más alto supera los 0,42 g/L, lo que evidencia una dispersión moderada. El valor mínimo registrado fue de 0 g/L, asociado posiblemente a vinos sin aporte perceptible de este ácido, y el máximo de 1 g/L, representando un nivel alto y poco común dentro del conjunto de datos.</p>
+<div id="histograma-de-citric.acid" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Histograma de citric.acid<a href="análisis-univariados.html#histograma-de-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="análisis-univariados.html#cb21-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="análisis-univariados.html#cb21-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> citric.acid))<span class="sc">+</span></span>
+<span id="cb21-3"><a href="análisis-univariados.html#cb21-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb21-4"><a href="análisis-univariados.html#cb21-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb21-5"><a href="análisis-univariados.html#cb21-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-12-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-citric.acid" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Boxplot de citric.acid<a href="análisis-univariados.html#boxplot-de-citric.acid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="análisis-univariados.html#cb22-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="análisis-univariados.html#cb22-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> , <span class="at">y=</span> citric.acid))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="análisis-univariados.html#cb22-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb22-4"><a href="análisis-univariados.html#cb22-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-13-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>El histograma y la curva de densidad indican que la distribución de citric acid es asimétrica hacia la derecha (sesgo positivo), con una mayor concentración de vinos en valores bajos, especialmente cercanos a 0 g/L, lo que sugiere que en muchos casos el aporte de ácido cítrico es reducido o nulo. Sin embargo, se observan picos intermedios, particularmente alrededor de 0,25 y 0,5 g/L, lo que podría reflejar distintos estilos de vinificación. Los valores más altos (cercanos a 1 g/L) son poco frecuentes y podrían corresponder a vinos con una acidez cítrica marcadamente perceptible.</p>
+</div>
+</div>
+<div id="variable-residual.sugar" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Variable residual.sugar<a href="análisis-univariados.html#variable-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="análisis-univariados.html#cb23-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="análisis-univariados.html#cb23-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(residual.sugar),</span>
+<span id="cb23-3"><a href="análisis-univariados.html#cb23-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(residual.sugar),</span>
+<span id="cb23-4"><a href="análisis-univariados.html#cb23-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(residual.sugar),</span>
+<span id="cb23-5"><a href="análisis-univariados.html#cb23-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(residual.sugar),</span>
+<span id="cb23-6"><a href="análisis-univariados.html#cb23-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(residual.sugar),</span>
+<span id="cb23-7"><a href="análisis-univariados.html#cb23-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(residual.sugar),</span>
+<span id="cb23-8"><a href="análisis-univariados.html#cb23-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(residual.sugar),</span>
+<span id="cb23-9"><a href="análisis-univariados.html#cb23-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(residual.sugar, <span class="fl">0.25</span>),</span>
+<span id="cb23-10"><a href="análisis-univariados.html#cb23-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(residual.sugar, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  2.54  1.41     2.2   0.7    0.9   15.5   1.9   2.6</code></pre>
+<p>La variable residual.sugar, que en este contexto corresponde a la cantidad de azúcar residual presente en el vino (es decir, los azúcares que no se han fermentado completamente), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 2,54 g/L (DS = 1,41 g/L), donde el 50% de los valores se encuentran por debajo de 2,2 g/L, mientras que el 25% más bajo está por debajo de 1,9 g/L y el 25% más alto supera los 2,6 g/L, lo que evidencia una dispersión baja a moderada. El valor mínimo registrado fue de 0,9 g/L, correspondiente a vinos con una fermentación más completa o estilo seco, y el máximo de 15,5 g/L, representando un nivel inusualmente alto de azúcar residual dentro del conjunto de datos.</p>
+<div id="histograma-de-residual.sugar" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Histograma de residual.sugar<a href="análisis-univariados.html#histograma-de-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="análisis-univariados.html#cb25-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="análisis-univariados.html#cb25-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> residual.sugar))<span class="sc">+</span></span>
+<span id="cb25-3"><a href="análisis-univariados.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb25-4"><a href="análisis-univariados.html#cb25-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb25-5"><a href="análisis-univariados.html#cb25-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-15-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-residual.sugar" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Boxplot de residual.sugar<a href="análisis-univariados.html#boxplot-de-residual.sugar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="análisis-univariados.html#cb26-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="análisis-univariados.html#cb26-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> residual.sugar))<span class="sc">+</span></span>
+<span id="cb26-3"><a href="análisis-univariados.html#cb26-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb26-4"><a href="análisis-univariados.html#cb26-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-16-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de residual.sugar es altamente asimétrica, con una fuerte concentración de valores bajos y una cantidad significativa de valores extremos altos. Esto indica que, aunque la mayoría de los vinos presentan niveles moderados de azúcar residual, existen algunos con concentraciones excepcionalmente altas que influyen notablemente en estadísticos como la media y la desviación estándar.</p>
+</div>
+</div>
+<div id="variable-chlorides" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Variable chlorides<a href="análisis-univariados.html#variable-chlorides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="análisis-univariados.html#cb27-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="análisis-univariados.html#cb27-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(chlorides),</span>
+<span id="cb27-3"><a href="análisis-univariados.html#cb27-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(chlorides),</span>
+<span id="cb27-4"><a href="análisis-univariados.html#cb27-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(chlorides),</span>
+<span id="cb27-5"><a href="análisis-univariados.html#cb27-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(chlorides),</span>
+<span id="cb27-6"><a href="análisis-univariados.html#cb27-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(chlorides),</span>
+<span id="cb27-7"><a href="análisis-univariados.html#cb27-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(chlorides),</span>
+<span id="cb27-8"><a href="análisis-univariados.html#cb27-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(chlorides),</span>
+<span id="cb27-9"><a href="análisis-univariados.html#cb27-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(chlorides, <span class="fl">0.25</span>),</span>
+<span id="cb27-10"><a href="análisis-univariados.html#cb27-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(chlorides, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n   prom     ds mediana    RIC minimo maximo    Q1    Q3
+##   &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.0875 0.0471   0.079 0.0200  0.012  0.611  0.07  0.09</code></pre>
+<p>La variable chlorides, que en este contexto representa la concentración de cloruros en el vino que son compuestos que influyen en la percepción de salinidad y, en algunos casos, en la estabilidad microbiológica.Fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,087 g/L (DS = 0,047 g/L), con una mediana de 0,079 g/L, lo que indica una leve asimetría positiva en la distribución. El 25% de los valores más bajos se sitúa por debajo de 0,070 g/L, mientras que el 25% más alto supera los 0,090 g/L, lo cual refleja una dispersión baja en la mayoría de los casos, con una amplitud intercuartílica (RIC) de 0,02 g/L.El valor mínimo registrado fue de 0,012 g/L, típico en vinos con bajo contenido mineral, mientras que el valor máximo alcanzó los 0,611 g/L, considerablemente superior al resto y posibl-emente correspondiente a un valor atípico. Este rango sugiere que, aunque los niveles de cloruros suelen ser bajos y consistentes, existen casos excepcionales que pueden afectar medidas como la media y la desviación estándar.</p>
+<div id="histograma-de-chlorides" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Histograma de chlorides<a href="análisis-univariados.html#histograma-de-chlorides" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="análisis-univariados.html#cb29-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="análisis-univariados.html#cb29-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> chlorides))<span class="sc">+</span></span>
+<span id="cb29-3"><a href="análisis-univariados.html#cb29-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb29-4"><a href="análisis-univariados.html#cb29-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb29-5"><a href="análisis-univariados.html#cb29-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-18-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-chlorides" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Boxplot de chlorides<a href="análisis-univariados.html#boxplot-de-chlorides" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="análisis-univariados.html#cb30-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="análisis-univariados.html#cb30-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> chlorides))<span class="sc">+</span></span>
+<span id="cb30-3"><a href="análisis-univariados.html#cb30-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb30-4"><a href="análisis-univariados.html#cb30-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-19-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La variable chlorides presenta una distribución asimétrica positiva, con una clara concentración de valores bajos y una cola larga hacia valores altos, como se observa tanto en el histograma con curva de densidad como en el boxplot. La presencia de múltiples valores atípicos elevados, junto con un valor máximo considerablemente superior al resto (0,611 g/L), indica que, aunque la mayoría de los vinos tienen concentraciones bajas y consistentes de cloruros, existe un pequeño grupo con niveles anómalamente altos que distorsionan la media (0,087 g/L) respecto a la mediana (0,079 g/L). Esta distribución sugiere que medidas como la media y la desviación estándar pueden no representar adecuadamente la tendencia central del conjunto de datos.</p>
+</div>
+</div>
+<div id="variable-free.sulfur.dioxide" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Variable free.sulfur.dioxide<a href="análisis-univariados.html#variable-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="análisis-univariados.html#cb31-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="análisis-univariados.html#cb31-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(free.sulfur.dioxide),</span>
+<span id="cb31-3"><a href="análisis-univariados.html#cb31-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(free.sulfur.dioxide),</span>
+<span id="cb31-4"><a href="análisis-univariados.html#cb31-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(free.sulfur.dioxide),</span>
+<span id="cb31-5"><a href="análisis-univariados.html#cb31-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(free.sulfur.dioxide),</span>
+<span id="cb31-6"><a href="análisis-univariados.html#cb31-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(free.sulfur.dioxide),</span>
+<span id="cb31-7"><a href="análisis-univariados.html#cb31-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(free.sulfur.dioxide),</span>
+<span id="cb31-8"><a href="análisis-univariados.html#cb31-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(free.sulfur.dioxide),</span>
+<span id="cb31-9"><a href="análisis-univariados.html#cb31-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(free.sulfur.dioxide, <span class="fl">0.25</span>),</span>
+<span id="cb31-10"><a href="análisis-univariados.html#cb31-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(free.sulfur.dioxide, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  15.9  10.5      14    14      1     72     7    21</code></pre>
+<p>La variable free.sulfur.dioxide, que representa la cantidad de dióxido de azufre libre en el vino,un conservante clave en la prevención de oxidación y proliferación microbiana, fue analizada a partir de 1.599 observaciones. La media fue de 15,87 mg/L (DS = 10,46 mg/L), mientras que la mediana se situó en 14 mg/L, lo que indica una ligera asimetría positiva. El 25% inferior de los valores se encuentra por debajo de 7 mg/L, y el 25% superior supera los 21 mg/L, con un rango intercuartílico (RIC) de 14 mg/L, lo que refleja una dispersión moderada. El valor mínimo observado fue de 1 mg/L y el máximo de 72 mg/L, lo que sugiere la presencia de valores extremos altos que podrían estar influyendo en la media, aunque sin distorsionarla de forma significativa respecto a la mediana.</p>
+<div id="histograma-de-free.sulfur.dioxide" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Histograma de free.sulfur.dioxide<a href="análisis-univariados.html#histograma-de-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="análisis-univariados.html#cb33-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="análisis-univariados.html#cb33-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> free.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb33-3"><a href="análisis-univariados.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb33-4"><a href="análisis-univariados.html#cb33-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb33-5"><a href="análisis-univariados.html#cb33-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-21-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-free.sulfur.dioxide" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Boxplot de free.sulfur.dioxide<a href="análisis-univariados.html#boxplot-de-free.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="análisis-univariados.html#cb34-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="análisis-univariados.html#cb34-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> free.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb34-3"><a href="análisis-univariados.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb34-4"><a href="análisis-univariados.html#cb34-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-22-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de la variable free.sulfur.dioxide muestra una asimetría positiva moderada, con una alta concentración de observaciones en niveles bajos y una cola extendida hacia valores altos. Esto se evidencia tanto en el histograma con curva de densidad como en el boxplot, donde se observan varios valores atípicos superiores. Aunque la media (15,87 mg/L) supera ligeramente a la mediana (14 mg/L), lo que sugiere cierto sesgo, esta diferencia no es extrema. Sin embargo, el valor máximo de 72 mg/L, muy superior al tercer cuartil (21 mg/L), indica la presencia de casos puntuales con concentraciones notablemente altas de dióxido de azufre libre, que influyen en las medidas de tendencia central y dispersión.</p>
+</div>
+</div>
+<div id="variable-total.sulfur.dioxide" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Variable total.sulfur.dioxide<a href="análisis-univariados.html#variable-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="análisis-univariados.html#cb35-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="análisis-univariados.html#cb35-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(total.sulfur.dioxide),</span>
+<span id="cb35-3"><a href="análisis-univariados.html#cb35-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(total.sulfur.dioxide),</span>
+<span id="cb35-4"><a href="análisis-univariados.html#cb35-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(total.sulfur.dioxide),</span>
+<span id="cb35-5"><a href="análisis-univariados.html#cb35-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(total.sulfur.dioxide),</span>
+<span id="cb35-6"><a href="análisis-univariados.html#cb35-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(total.sulfur.dioxide),</span>
+<span id="cb35-7"><a href="análisis-univariados.html#cb35-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(total.sulfur.dioxide),</span>
+<span id="cb35-8"><a href="análisis-univariados.html#cb35-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(total.sulfur.dioxide),</span>
+<span id="cb35-9"><a href="análisis-univariados.html#cb35-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(total.sulfur.dioxide, <span class="fl">0.25</span>),</span>
+<span id="cb35-10"><a href="análisis-univariados.html#cb35-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(total.sulfur.dioxide, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  46.5  32.9      38    40      6    289    22    62</code></pre>
+<p>La variable total.sulfur.dioxide, analizada a partir de 1.599 observaciones, presenta una distribución asimétrica hacia la derecha, con una clara tendencia a valores bajos y algunos registros considerablemente altos que influyen en los estadísticos descriptivos. La media es de 46,47 mg/L, superior a la mediana de 38 mg/L, lo que indica cierta influencia de valores extremos elevados. El rango intercuartílico (RIC) es de 40 mg/L, con un primer cuartil (Q1) en 22 mg/L y un tercer cuartil (Q3) en 62 mg/L, reflejando una dispersión amplia. El valor mínimo observado fue de 6 mg/L, mientras que el máximo alcanzó los 289 mg/L, una cifra atípica que contribuye significativamente a la alta desviación estándar (32,90 mg/L). Esto sugiere la presencia de un subconjunto de vinos con adiciones inusualmente altas de dióxido de azufre total.</p>
+<div id="histograma-de-total.sulfur.dioxide" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Histograma de total.sulfur.dioxide<a href="análisis-univariados.html#histograma-de-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-univariados.html#cb37-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="análisis-univariados.html#cb37-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb37-3"><a href="análisis-univariados.html#cb37-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb37-4"><a href="análisis-univariados.html#cb37-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb37-5"><a href="análisis-univariados.html#cb37-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-24-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-total.sulfur.dioxide" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Boxplot de total.sulfur.dioxide<a href="análisis-univariados.html#boxplot-de-total.sulfur.dioxide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="análisis-univariados.html#cb38-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="análisis-univariados.html#cb38-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> total.sulfur.dioxide))<span class="sc">+</span></span>
+<span id="cb38-3"><a href="análisis-univariados.html#cb38-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb38-4"><a href="análisis-univariados.html#cb38-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-25-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La variable total.sulfur.dioxide presenta una distribución asimétrica hacia la derecha (positivamente sesgada), con una mediana de 38 y una media mayor (46.47), lo que refuerza la presencia de valores altos que influyen en el promedio. El rango intercuartílico (RIC) es de 40, indicando dispersión moderada, y se observan varios valores atípicos por encima del tercer cuartil (Q3 = 62), llegando hasta un máximo de 289. Esto, junto con la forma de la distribución, sugiere que, aunque la mayoría de los datos se concentran en valores bajos o medios, hay casos extremos que deben considerarse en los análisis.</p>
+</div>
+</div>
+<div id="variable-density" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Variable density<a href="análisis-univariados.html#variable-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="análisis-univariados.html#cb39-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="análisis-univariados.html#cb39-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(density),</span>
+<span id="cb39-3"><a href="análisis-univariados.html#cb39-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(density),</span>
+<span id="cb39-4"><a href="análisis-univariados.html#cb39-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(density),</span>
+<span id="cb39-5"><a href="análisis-univariados.html#cb39-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(density),</span>
+<span id="cb39-6"><a href="análisis-univariados.html#cb39-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(density),</span>
+<span id="cb39-7"><a href="análisis-univariados.html#cb39-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(density),</span>
+<span id="cb39-8"><a href="análisis-univariados.html#cb39-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(density),</span>
+<span id="cb39-9"><a href="análisis-univariados.html#cb39-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(density, <span class="fl">0.25</span>),</span>
+<span id="cb39-10"><a href="análisis-univariados.html#cb39-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(density, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom      ds mediana     RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.997 0.00189   0.997 0.00223  0.990   1.00 0.996 0.998</code></pre>
+<p>La variable density presenta una distribución con un promedio de aproximadamente 0.9967 y una desviación estándar muy baja de 0.0019, lo que indica una dispersión mínima de los datos respecto a la media; además, la mediana (0.99675) es prácticamente igual al promedio, lo que sugiere simetría en la distribución. El rango intercuartílico (RIC) es de 0.0022, con un valor mínimo de 0.99007 y máximo de 1.00369, mientras que el primer y tercer cuartil (Q1 y Q3) son 0.9956 y 0.9978, respectivamente; en conjunto, estos valores muestran una alta concentración de los datos dentro de un rango muy estrecho, sin evidencias visibles de valores atípicos ni sesgos pronunciados.</p>
+<div id="histograma-de-density" class="section level3 hasAnchor" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Histograma de density<a href="análisis-univariados.html#histograma-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-univariados.html#cb41-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="análisis-univariados.html#cb41-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> density))<span class="sc">+</span></span>
+<span id="cb41-3"><a href="análisis-univariados.html#cb41-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb41-4"><a href="análisis-univariados.html#cb41-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb41-5"><a href="análisis-univariados.html#cb41-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-27-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-density" class="section level3 hasAnchor" number="4.8.2">
+<h3><span class="header-section-number">4.8.2</span> Boxplot de density<a href="análisis-univariados.html#boxplot-de-density" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="análisis-univariados.html#cb42-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="análisis-univariados.html#cb42-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> density))<span class="sc">+</span></span>
+<span id="cb42-3"><a href="análisis-univariados.html#cb42-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb42-4"><a href="análisis-univariados.html#cb42-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-28-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La variable density tiene una distribución normal, con valores muy concentrados alrededor del promedio y ligeros outliers en los extremos. Esto sugiere una alta homogeneidad en esta característica dentro del conjunto de datos analizado.</p>
+</div>
+</div>
+<div id="variable-ph" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Variable pH<a href="análisis-univariados.html#variable-ph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análisis-univariados.html#cb43-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="análisis-univariados.html#cb43-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(pH),</span>
+<span id="cb43-3"><a href="análisis-univariados.html#cb43-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(pH),</span>
+<span id="cb43-4"><a href="análisis-univariados.html#cb43-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(pH),</span>
+<span id="cb43-5"><a href="análisis-univariados.html#cb43-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(pH),</span>
+<span id="cb43-6"><a href="análisis-univariados.html#cb43-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(pH),</span>
+<span id="cb43-7"><a href="análisis-univariados.html#cb43-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(pH),</span>
+<span id="cb43-8"><a href="análisis-univariados.html#cb43-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(pH),</span>
+<span id="cb43-9"><a href="análisis-univariados.html#cb43-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(pH, <span class="fl">0.25</span>),</span>
+<span id="cb43-10"><a href="análisis-univariados.html#cb43-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(pH, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  3.31 0.154    3.31  0.19   2.74   4.01  3.21   3.4</code></pre>
+<p>La variable pH, que en este contexto se refiere a la medida de acidez o alcalinidad del vino (donde valores bajos indican mayor acidez), fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 3,311 (DS = 0,154), donde el 50% de los valores se encuentran por debajo de 3,31. El 25% más bajo está por debajo de 3,21 y el 25% más alto supera los 3,40, evidenciando una baja dispersión. El valor mínimo registrado fue de 2,74 y el máximo de 4,01, lo que indica un rango de 1,27.</p>
+<div id="histograma-de-ph" class="section level3 hasAnchor" number="4.9.1">
+<h3><span class="header-section-number">4.9.1</span> Histograma de pH<a href="análisis-univariados.html#histograma-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-univariados.html#cb45-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="análisis-univariados.html#cb45-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> pH))<span class="sc">+</span></span>
+<span id="cb45-3"><a href="análisis-univariados.html#cb45-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb45-4"><a href="análisis-univariados.html#cb45-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb45-5"><a href="análisis-univariados.html#cb45-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-30-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-ph" class="section level3 hasAnchor" number="4.9.2">
+<h3><span class="header-section-number">4.9.2</span> Boxplot de pH<a href="análisis-univariados.html#boxplot-de-ph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="análisis-univariados.html#cb46-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="análisis-univariados.html#cb46-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> pH))<span class="sc">+</span></span>
+<span id="cb46-3"><a href="análisis-univariados.html#cb46-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb46-4"><a href="análisis-univariados.html#cb46-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-31-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de pH es simétrica; sin embargo, presenta una fuerte concentración de datos en valores intermedios y una cantidad significativa de valores extremos, tanto altos como bajos. Esto indica que, aunque la mayoría de los vinos tintos tienen una acidez moderada, existen algunos con valores excepcionalmente altos o bajos que influyen de forma notable en estadísticos como la media y la desviación estándar.</p>
+</div>
+</div>
+<div id="variable-sulphates" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Variable sulphates<a href="análisis-univariados.html#variable-sulphates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análisis-univariados.html#cb47-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="análisis-univariados.html#cb47-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(sulphates),</span>
+<span id="cb47-3"><a href="análisis-univariados.html#cb47-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(sulphates),</span>
+<span id="cb47-4"><a href="análisis-univariados.html#cb47-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(sulphates),</span>
+<span id="cb47-5"><a href="análisis-univariados.html#cb47-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(sulphates),</span>
+<span id="cb47-6"><a href="análisis-univariados.html#cb47-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(sulphates),</span>
+<span id="cb47-7"><a href="análisis-univariados.html#cb47-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(sulphates),</span>
+<span id="cb47-8"><a href="análisis-univariados.html#cb47-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(sulphates),</span>
+<span id="cb47-9"><a href="análisis-univariados.html#cb47-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(sulphates, <span class="fl">0.25</span>),</span>
+<span id="cb47-10"><a href="análisis-univariados.html#cb47-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(sulphates, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599 0.658 0.170    0.62  0.18   0.33      2  0.55  0.73</code></pre>
+<p>La variable sulphates, que en este contexto se refiere a las sales de ácido sulfúrico presentes en el vino y que contribuyen a la estabilidad microbiológica y a realzar ciertos sabores, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 0,658 g/L (DS = 0,170 g/L), donde el 50% de los valores se encuentran por debajo de 0,62 g/L. El 25% más bajo está por debajo de 0,55 g/L y el 25% más alto supera los 0,73 g/L, evidenciando una baja dispersión.
+El valor mínimo registrado fue de 0,33 g/L y el máximo de 2,00 g/L, lo que indica un amplio rango de 1,67 g/L.</p>
+<div id="histograma-de-sulphates" class="section level3 hasAnchor" number="4.10.1">
+<h3><span class="header-section-number">4.10.1</span> Histograma de sulphates<a href="análisis-univariados.html#histograma-de-sulphates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análisis-univariados.html#cb49-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="análisis-univariados.html#cb49-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> sulphates))<span class="sc">+</span></span>
+<span id="cb49-3"><a href="análisis-univariados.html#cb49-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb49-4"><a href="análisis-univariados.html#cb49-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb49-5"><a href="análisis-univariados.html#cb49-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-33-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-sulphates" class="section level3 hasAnchor" number="4.10.2">
+<h3><span class="header-section-number">4.10.2</span> Boxplot de sulphates<a href="análisis-univariados.html#boxplot-de-sulphates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análisis-univariados.html#cb50-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="análisis-univariados.html#cb50-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> sulphates))<span class="sc">+</span></span>
+<span id="cb50-3"><a href="análisis-univariados.html#cb50-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb50-4"><a href="análisis-univariados.html#cb50-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-34-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de sulphates presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos de este compuesto. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 1,0 g/L. Dichos valores podrían sesgar la media hacia valores mayores.</p>
+</div>
+</div>
+<div id="variable-alcohol" class="section level2 hasAnchor" number="4.11">
+<h2><span class="header-section-number">4.11</span> Variable alcohol<a href="análisis-univariados.html#variable-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="análisis-univariados.html#cb51-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="análisis-univariados.html#cb51-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span> <span class="fu">length</span>(alcohol),</span>
+<span id="cb51-3"><a href="análisis-univariados.html#cb51-3" tabindex="-1"></a>            <span class="at">prom=</span> <span class="fu">mean</span>(alcohol),</span>
+<span id="cb51-4"><a href="análisis-univariados.html#cb51-4" tabindex="-1"></a>            <span class="at">ds=</span> <span class="fu">sd</span>(alcohol),</span>
+<span id="cb51-5"><a href="análisis-univariados.html#cb51-5" tabindex="-1"></a>            <span class="at">mediana=</span> <span class="fu">median</span>(alcohol),</span>
+<span id="cb51-6"><a href="análisis-univariados.html#cb51-6" tabindex="-1"></a>            <span class="at">RIC=</span> <span class="fu">IQR</span>(alcohol),</span>
+<span id="cb51-7"><a href="análisis-univariados.html#cb51-7" tabindex="-1"></a>            <span class="at">minimo=</span> <span class="fu">min</span>(alcohol),</span>
+<span id="cb51-8"><a href="análisis-univariados.html#cb51-8" tabindex="-1"></a>            <span class="at">maximo=</span> <span class="fu">max</span>(alcohol),</span>
+<span id="cb51-9"><a href="análisis-univariados.html#cb51-9" tabindex="-1"></a>            <span class="at">Q1=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.25</span>),</span>
+<span id="cb51-10"><a href="análisis-univariados.html#cb51-10" tabindex="-1"></a>            <span class="at">Q3=</span> <span class="fu">quantile</span>(alcohol, <span class="fl">0.75</span>),</span>
+<span id="cb51-11"><a href="análisis-univariados.html#cb51-11" tabindex="-1"></a>            <span class="co">#mayores_13_5 = sum(alcohol &gt;= 13.5)</span></span>
+<span id="cb51-12"><a href="análisis-univariados.html#cb51-12" tabindex="-1"></a>            </span>
+<span id="cb51-13"><a href="análisis-univariados.html#cb51-13" tabindex="-1"></a>            )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 9
+##       n  prom    ds mediana   RIC minimo maximo    Q1    Q3
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1599  10.4  1.07    10.2   1.6    8.4   14.9   9.5  11.1</code></pre>
+<p>La variable alcohol, que en este contexto se refiere a la proporción de etanol presente en el vino expresada en g/L, fue analizada a partir de 1.599 observaciones. Se obtuvo un promedio de 10,42 g/L (DS= 1.065 g/L) y una mediana de 10,2 g/L. El 50% central de los datos se encuentra entre 9,5 g/L (Q1) y 11,1 g/L (Q3), con un rango intercuartílico (RIC) de 1,6 g/L, lo que sugiere una dispersión moderada. Los valores mínimo y máximo registrados fueron 8,4 g/L y 14,9 g/L,con un rango 6,5 g/L respectivamente. La presencia de valores extremos podría elevar ligeramente el promedio con respecto a la mediana.</p>
+<div id="histograma-de-alcohol" class="section level3 hasAnchor" number="4.11.1">
+<h3><span class="header-section-number">4.11.1</span> Histograma de alcohol<a href="análisis-univariados.html#histograma-de-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="análisis-univariados.html#cb53-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="análisis-univariados.html#cb53-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb53-3"><a href="análisis-univariados.html#cb53-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">after_stat</span>(density)), <span class="at">fill =</span> <span class="st">&quot;#C95E78&quot;</span>)<span class="sc">+</span></span>
+<span id="cb53-4"><a href="análisis-univariados.html#cb53-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span> <span class="st">&#39;darkred&#39;</span>)<span class="sc">+</span></span>
+<span id="cb53-5"><a href="análisis-univariados.html#cb53-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-36-1.png" width="2100" style="display: block; margin: auto;" /></p>
+</div>
+<div id="boxplot-de-alcohol" class="section level3 hasAnchor" number="4.11.2">
+<h3><span class="header-section-number">4.11.2</span> Boxplot de alcohol<a href="análisis-univariados.html#boxplot-de-alcohol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="análisis-univariados.html#cb54-1" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="análisis-univariados.html#cb54-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> alcohol))<span class="sc">+</span></span>
+<span id="cb54-3"><a href="análisis-univariados.html#cb54-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb54-4"><a href="análisis-univariados.html#cb54-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-37-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>La distribución de alcohol presenta una ligera asimetría positiva, lo que sugiere la presencia de valores inusualmente altos. Este patrón se confirma con el análisis de outliers mediante el rango intercuartílico, que detecta valores extremos superiores a 13,45g/L. En consecuencia, el máximo identificado se clasifica como un valor atípico alto, dichos valores podrían sesgar la media hacia valores mayores</p>
+</div>
+</div>
+<div id="variable-objetivo-quality" class="section level2 hasAnchor" number="4.12">
+<h2><span class="header-section-number">4.12</span> Variable Objetivo: quality<a href="análisis-univariados.html#variable-objetivo-quality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="análisis-univariados.html#cb55-1" tabindex="-1"></a>tabla_vino_tinto<span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="análisis-univariados.html#cb55-2" tabindex="-1"></a>  <span class="fu">count</span>(quality, <span class="at">name =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="análisis-univariados.html#cb55-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(Frecuencia <span class="sc">/</span> <span class="fu">sum</span>(Frecuencia) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb55-4"><a href="análisis-univariados.html#cb55-4" tabindex="-1"></a>         <span class="at">Etiqueta =</span> <span class="fu">paste0</span>(Frecuencia, <span class="st">&quot; (&quot;</span>, Porcentaje, <span class="st">&quot;%)&quot;</span>))</span>
+<span id="cb55-5"><a href="análisis-univariados.html#cb55-5" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="análisis-univariados.html#cb55-6" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_vino_tinto, <span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> Frecuencia)) <span class="sc">+</span></span>
+<span id="cb55-7"><a href="análisis-univariados.html#cb55-7" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb55-8"><a href="análisis-univariados.html#cb55-8" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Etiqueta), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb55-9"><a href="análisis-univariados.html#cb55-9" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> <span class="st">&quot;Distribución de la variable calidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-10"><a href="análisis-univariados.html#cb55-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb55-11"><a href="análisis-univariados.html#cb55-11" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>))) <span class="sc">+</span></span>
+<span id="cb55-12"><a href="análisis-univariados.html#cb55-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Calidad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia (Porcentaje)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-13"><a href="análisis-univariados.html#cb55-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb55-14"><a href="análisis-univariados.html#cb55-14" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb55-15"><a href="análisis-univariados.html#cb55-15" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb55-16"><a href="análisis-univariados.html#cb55-16" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&#39;gray80&#39;</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb55-17"><a href="análisis-univariados.html#cb55-17" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
+<span id="cb55-18"><a href="análisis-univariados.html#cb55-18" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="rbook_Wine_files/figure-html/unnamed-chunk-38-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<p>En el gráfico, la variable <em>calidad</em> muestra una distribución que está claramente centrada en los <em>valores intermedios</em>. La tendencia de la calidad media del producto evaluado se muestra en que la mayor parte de las observaciones se encuentra en las categorías 5 (681 casos, 42.6%) y 6 (638 casos, 39.9%), lo que indica que la calidad promedio del producto evaluado tiende a ser media. Las categorías extremas son poco frecuentes: valores bajos como 3 (10 casos, 0.6 %) y 4 (53 casos, 3.3 %), así como valores altos como 7 (199 casos, 12.4 %) y 8 (18 casos, 1.1 %), tienen una presencia marginal en comparación con el núcleo central.Esta concentración indica que la variable no se distribuye de manera uniforme, sino que tiene un patrón caracterizado por calificaciones moderadas en predominancia, mientras que las calificaciones extremadamente altas o bajas son excepcionales, lo cual podría reflejar una consistencia en la calidad percibida del producto, con pocas desviaciones extremas.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="carga-y-estructura-de-los-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-bivariados.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/valeriaflorezs/rbook_dataviz/edit/BRANCH/wine_quality.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["rbook_Wine.pdf", "rbook_Wine.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "toolbar": {
+    "position": "fixed"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
