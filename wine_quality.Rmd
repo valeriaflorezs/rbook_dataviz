@@ -637,7 +637,7 @@ Las comparaciones múltiples de Dunn confirman diferencias altamente significati
 rstatix::kruskal_effsize(datos, alcohol ~ quality)
 ```
 
-El tamaño del efecto (η² de Kruskal–Wallis) se interpreta como **moderado a grande**, indicando que la calidad explica una proporción relevante de la variabilidad del contenido de alcohol.
+El tamaño del efecto (η² de Kruskal–Wallis) se interpreta como **moderado**, indicando que la calidad explica una proporción relevante de la variabilidad del contenido de alcohol.
 
 ## density vs quality
 
