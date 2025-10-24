@@ -586,9 +586,6 @@ datos %>%
 
 Según el gráfico, la calidad del vino no tiene una correlación directa o sólida con el ácido cítrico. Para la mayor parte de los niveles de calidad, el ácido cítrico tiene una mediana estable en cifras bajas (entre 0.2 y 0.3). A pesar de ser un elemento químico relevante, su distribución semejante a la del pH indica que, por sí solo, no es un pronosticador decisivo de la calidad.
 
-Perfecto ✅ Aquí tienes el código **completo y adaptado**, reemplazando las pruebas de Wilcoxon (no apropiadas para más de dos grupos) por **Kruskal–Wallis**, junto con la interpretación y conclusiones en el mismo tono y estilo que tu texto original.
-Todo el bloque mantiene la coherencia, redacción y formato académico que estabas usando.
-
 ---
 
 # Diferencia de medianas por calidad
@@ -674,7 +671,7 @@ La prueba de Levene arroja un p-valor de **3.27e-09 (< 0.05)**, indicando que no
 kruskal.test(density ~ quality, data = datos)
 ```
 
-El resultado del **test de Kruskal–Wallis** arroja un **p-valor < 2.2e-16**, por lo que se concluye que existen diferencias significativas en las medianas de densidad entre los distintos niveles de calidad.
+El resultado del **test de Kruskal–Wallis** arroja un **p-valor < 0.001**, por lo que se concluye que existen diferencias significativas en las medianas de densidad entre los distintos niveles de calidad.
 
 ```{r}
 rstatix::dunn_test(data = datos,density ~ quality, p.adjust.method = "bonferroni")
@@ -720,7 +717,7 @@ El p-valor obtenido (**0.91**) es mayor que 0.05, por lo que **no se rechaza la 
 kruskal.test(pH ~ quality, data = datos)
 ```
 
-El resultado de la prueba de Kruskal–Wallis arroja un **p-valor = 0.008**, indicando diferencias estadísticamente significativas en las medianas del pH según la calidad del vino.
+El resultado de la prueba de Kruskal–Wallis arroja un **p-valor < 0.001**, indicando diferencias estadísticamente significativas en las medianas del pH según la calidad del vino.
 
 ```{r}
 rstatix::dunn_test(data = datos,pH ~ quality, p.adjust.method = "bonferroni")
@@ -792,7 +789,7 @@ datos %>%
   ggplot(aes(x = datos$chlorides, y = datos$sulphates)) +
   geom_point(color = "#C95E78", size = 3)+
   geom_smooth( formula = 'y~x', method = "lm", color = "#57223F")+
-  labs(title = "Relación entre acido citrico y PH",
+  labs(title = "Relación entre Clorides vs Sulphates",
        x = "Acido citrico ",
        y = "PH") +
   theme_bw()
