@@ -1,21 +1,23 @@
 ---
 title: "Factores que Influyen en la Calidad del Vino"
-author: "Katherin Barrera López, Valeria Flórez Sarmiento y Laura Rivera Figueredo"
+author: "Katherin Barrera Lopez, Valeria Florez Sarmiento & Laura Rivera Figueredo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 cover-image: portada.png
-description: |
-  Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo "Vinho Verde" de Portugal, utilizando técnicas de análisis de datos y visualización.
-  Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
-  Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). *Modeling wine preferences by data mining from physicochemical properties*. Decision Support Systems, 47(4), 547–553. Elsevier. https://doi.org/10.1016/j.dss.2009.05.016  
-  Enlace al dataset: [Wine Quality Dataset - UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/186/wine+quality)
-
-link-citations: false
-github-repo: valeriaflorezs/rbook_dataviz
+description: "Análisis de factores que influyen en la calidad del vino tinto"
+link-citations: yes
 ---
 
 # Introducción
+
+ Este libro analiza los factores que influyen en la calidad de los vinos tintos del tipo "Vinho Verde" de Portugal, utilizando técnicas de análisis de datos y visualización.
+ 
+  Los datos provienen del UCI Machine Learning Repository y fueron presentados originalmente por:
+  Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). *Modeling wine preferences by data mining from physicochemical properties*. Decision Support Systems, 47(4), 547–553. Elsevier. https://doi.org/10.1016/j.dss.2009.05.016  
+  
+  Enlace al dataset: [Wine Quality Dataset - UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/186/wine+quality)
+  
 Este libro fue elaborado con **Bookdown** y tiene como objetivo explorar los factores que influyen en la calidad del vino tinto “Vinho Verde”.  
 A lo largo del libro se aplican técnicas de análisis y visualización de datos utilizando R, con base en el conjunto de datos publicado por Cortez et al. (2009) y disponible públicamente en el repositorio UCI.
 
